@@ -36,7 +36,7 @@
                 android:id="@+id/bread_bar"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:background="@color/currency_header_background"
+                android:background="@color/finger_gradient_end"
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:contentInsetLeft="0dp"
@@ -238,13 +238,14 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/recycler_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_toolbar_layout1"
         android:layout_below="@+id/toolbar_layout"
         android:animateLayoutChanges="true"
+        android:background="@color/finger_gradient_end"
         android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
@@ -253,7 +254,14 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/notransation"
+            android:adjustViewBounds="true"/>
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -268,7 +276,7 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:background="@color/extra_light_blue_background"
+        android:background="@color/finger_gradient_end"
         android:elevation="0dp"
         android:orientation="horizontal"
         android:weightSum="3">

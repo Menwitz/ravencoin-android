@@ -27,8 +27,11 @@ import com.ravencoin.tools.animation.SlideDetector;
 import com.ravencoin.tools.util.Utils;
 import com.platform.HTTPServer;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 import static com.platform.HTTPServer.URL_SUPPORT;
 
@@ -124,6 +127,23 @@ public class FragmentSupport extends Fragment {
         Log.d(TAG, "onCreate: theUrl: " + theUrl + ", articleId: " + articleId);
         webView.loadUrl(theUrl);
 
+
+        //read url content
+        try {
+            URL url = new URL(theUrl);
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            url.openStream()));
+
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null)
+                System.out.println(inputLine);
+
+            in.close();
+        } catch (Exception e) {
+
+        }
         return rootView;
     }
 

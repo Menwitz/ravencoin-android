@@ -293,7 +293,6 @@ public class WalletActivity extends BRActivity implements InternetManager.Connec
             mSendButton.setLayoutParams(param);
             mReceiveButton.setLayoutParams(param2);
             mBuyButton.setVisibility(View.GONE);
-
         }
 
 

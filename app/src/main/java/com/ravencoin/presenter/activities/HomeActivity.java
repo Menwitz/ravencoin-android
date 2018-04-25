@@ -100,6 +100,7 @@ public class HomeActivity extends BRActivity implements InternetManager.Connecti
         mSupport = findViewById(R.id.support_row);
         mDonation = findViewById(R.id.donation_row);
         mTutorial = findViewById(R.id.tutorial_row);
+        mAdressBook = findViewById(R.id.addressb_row);
         mNotificationBar = findViewById(R.id.notification_bar);
 
         mPromptCard = findViewById(R.id.prompt_card);
@@ -157,15 +158,25 @@ public class HomeActivity extends BRActivity implements InternetManager.Connecti
         mDonation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(HomeActivity.this, null);
+                Intent intent = new Intent(HomeActivity.this, DonationActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }
         });
         mTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(HomeActivity.this, null);
+                Intent intent = new Intent(HomeActivity.this, SecurityCenterActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
+            }
+        });
+        mAdressBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AddressBookActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }
         });
 

@@ -160,6 +160,16 @@
 
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".presenter.activities.DonationActivity"
+            android:launchMode="singleTask"
+
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presenter.activities.AddressBookActivity"
+            android:launchMode="singleTask"
+
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".presenter.activities.settings.ShareDataActivity"
             android:launchMode="singleTask"
 

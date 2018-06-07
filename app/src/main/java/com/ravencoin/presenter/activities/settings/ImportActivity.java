@@ -8,12 +8,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.util.BRConstants;
 
 
-public class ImportActivity extends BRActivity {
+public class ImportActivity extends RActivity {
     private Button scan;
     private static final String TAG = ImportActivity.class.getName();
     public static boolean appVisible = false;

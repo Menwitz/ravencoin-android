@@ -174,7 +174,7 @@ public abstract class AppIntroBase extends AppCompatActivity implements
      * Check {@link View} to null pointer. Log error when view is {@code null}.
      *
      * @param view     view for check on {@code null}.
-     * @param viewName text representation of {@link View}.
+     * @param viewName address representation of {@link View}.
      */
     private void checkButton(@Nullable View view, @Nullable String viewName) {
         if (view == null) {
@@ -202,7 +202,7 @@ public abstract class AppIntroBase extends AppCompatActivity implements
             public void run() {
                 Fragment fragment = mPagerAdapter.getItem(pager.getCurrentItem());
 
-                // Fragment is null when no slides are passed to AppIntro
+                // Fragment is null when no slides are passed to AppIntro3
                 if (fragment != null) {
                     handleSlideChanged(null, mPagerAdapter.getItem(pager.getCurrentItem()));
                 } else {
@@ -216,6 +216,10 @@ public abstract class AppIntroBase extends AppCompatActivity implements
 
         setProgressButtonEnabled(progressButtonEnabled);
         initController();
+    }
+
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -712,7 +716,7 @@ public abstract class AppIntroBase extends AppCompatActivity implements
     }
 
     /**
-     * Set a custom {@link IndicatorController} to use a custom indicator view for the {@link AppIntro} instead of the
+     * Set a custom {@link IndicatorController} to use a custom indicator view for the {@link AppIntro3} instead of the
      * default one.
      *
      * @param controller The controller to use

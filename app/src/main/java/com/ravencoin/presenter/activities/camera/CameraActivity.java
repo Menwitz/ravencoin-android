@@ -42,9 +42,9 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.threads.executor.BRExecutor;
 import com.platform.middlewares.plugins.CameraPlugin;
 
@@ -83,7 +83,7 @@ import java.util.concurrent.TimeUnit;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-public class CameraActivity extends BRActivity implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
+public class CameraActivity extends RActivity implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
     private static final String TAG = CameraActivity.class.getName();
     public static boolean appVisible = false;
     private static CameraActivity app;
@@ -895,7 +895,7 @@ public class CameraActivity extends BRActivity implements View.OnClickListener, 
                         public void run() {
                             try {
                                 Thread.sleep(1000);
-                                CameraPlugin.handleCameraImageTaken(BreadApp.getBreadContext(), bytes);
+                                CameraPlugin.handleCameraImageTaken(RavenApp.getBreadContext(), bytes);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.ravencoin.R;
 import com.ravencoin.core.BRCoreAddress;
 import com.ravencoin.core.BRCorePaymentProtocolRequest;
@@ -71,7 +71,7 @@ public class PaymentProtocolTask extends AsyncTask<String, String, String> {
     //params[0] = uri, params[1] = label
     @Override
     protected String doInBackground(String... params) {
-        app = (Activity) BreadApp.getBreadContext();
+        app = (Activity) RavenApp.getBreadContext();
         InputStream in;
         try {
             Log.e(TAG, "the uri: " + params[0]);

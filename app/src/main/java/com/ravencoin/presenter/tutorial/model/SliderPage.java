@@ -3,11 +3,6 @@ package com.ravencoin.presenter.tutorial.model;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 
-/**
- * Created by tatianasolonets on 3/19/17.
- * Slide Page Model
- */
-
 public class SliderPage {
     private CharSequence title;
     private CharSequence description;

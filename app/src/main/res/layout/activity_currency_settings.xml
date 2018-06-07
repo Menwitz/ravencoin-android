@@ -22,7 +22,7 @@
                 android:background="@drawable/ic_chevron_left" />
 
 
-            <com.ravencoin.presenter.customviews.BRText
+            <com.ravencoin.presenter.customviews.RText
                 android:id="@+id/nav_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         app:customTFont="CircularPro-Bold.otf"
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content">
 
 
-        <com.ravencoin.presenter.customviews.BRText
+        <com.ravencoin.presenter.customviews.RText
             android:id="@+id/redeem_key"
             android:text="Redeem Private Key"
             android:textSize="16sp"
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content">
 
 
-        <com.ravencoin.presenter.customviews.BRText
+        <com.ravencoin.presenter.customviews.RText
             android:id="@+id/rescan"
             android:text="Rescan Blockchain"
             android:textSize="16sp"

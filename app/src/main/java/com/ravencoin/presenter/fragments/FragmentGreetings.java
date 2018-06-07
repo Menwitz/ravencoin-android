@@ -11,7 +11,7 @@ import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.customviews.BRButton;
+import com.ravencoin.presenter.customviews.RButton;
 import com.ravencoin.tools.animation.BRAnimator;
 
 /**
@@ -42,7 +42,7 @@ import com.ravencoin.tools.animation.BRAnimator;
 public class FragmentGreetings extends Fragment {
     private static final String TAG = FragmentGreetings.class.getName();
 
-    private BRButton ok;
+    private RButton ok;
     private ConstraintLayout mainLayout;
     private RelativeLayout background;
 
@@ -53,7 +53,7 @@ public class FragmentGreetings extends Fragment {
         // properly.
 
         View rootView = inflater.inflate(R.layout.fragment_greetings, container, false);
-        ok = (BRButton) rootView.findViewById(R.id.ok);
+        ok = (RButton) rootView.findViewById(R.id.ok);
         mainLayout = (ConstraintLayout) rootView.findViewById(R.id.signal_layout);
         background = (RelativeLayout) rootView.findViewById(R.id.layout);
 

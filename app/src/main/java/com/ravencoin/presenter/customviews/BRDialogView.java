@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -62,8 +61,8 @@ public class BRDialogView extends DialogFragment {
     private BRDialogView.BROnClickListener helpListener;
     private DialogInterface.OnDismissListener dismissListener;
     private int iconRes = 0;
-    private BRButton negativeButton;
-    private BRButton positiveButton;
+    private RButton negativeButton;
+    private RButton positiveButton;
     private LinearLayout buttonsLayout;
     private ImageButton helpButton;
 
@@ -81,7 +80,7 @@ public class BRDialogView extends DialogFragment {
         View view = inflater.inflate(R.layout.bread_alert_dialog, null);
         TextView titleText = (TextView) view.findViewById(R.id.dialog_title);
         TextView messageText = (TextView) view.findViewById(R.id.dialog_text);
-        BRButton positiveButton = view.findViewById(R.id.pos_button);
+        RButton positiveButton = view.findViewById(R.id.pos_button);
         negativeButton = view.findViewById(R.id.neg_button);
 //        ImageView icon = (ImageView) view.findViewById(R.id.dialog_icon);
         mainLayout = (ConstraintLayout) view.findViewById(R.id.main_layout);
@@ -89,14 +88,14 @@ public class BRDialogView extends DialogFragment {
         helpButton = view.findViewById(R.id.help_icon);
 
 
-        // Resize the title text if it is greater than 4 lines
+        // Resize the title address if it is greater than 4 lines
         titleText.setText(title);
         if (titleText.getLineCount() > 4) {
             titleText.setTextSize(16);
         }
 
 
-        // Resize the message text if it is greater than 4 lines
+        // Resize the message address if it is greater than 4 lines
         messageText.setText(message);
         if (messageText.getLineCount() > 4) {
             messageText.setTextSize(16);

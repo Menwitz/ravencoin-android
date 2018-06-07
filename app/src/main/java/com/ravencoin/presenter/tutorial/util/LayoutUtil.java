@@ -17,18 +17,17 @@ public class LayoutUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             try {
                 ApplicationInfo info = ctx.getPackageManager().getApplicationInfo(ctx.getPackageName(), PackageManager.GET_META_DATA);
-                return (info.flags &= ApplicationInfo.FLAG_SUPPORTS_RTL) != 0;
+                return /*(info.flags &= ApplicationInfo.FLAG_SUPPORTS_RTL) != 0*/false;
             } catch (PackageManager.NameNotFoundException e) {
-                return defaultIsRtlBehavior();
+                return defaultIsLtrBehavior();
             }
         }
 
         return false;
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private static boolean defaultIsRtlBehavior() {
-        return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
+    private static boolean defaultIsLtrBehavior() {
+        return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_LTR;
     }
 }

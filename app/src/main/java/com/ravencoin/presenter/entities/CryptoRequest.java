@@ -50,6 +50,8 @@ public class CryptoRequest {
     public String cn;
     public boolean isAmountRequested;
 
+    public boolean pasteScanViews;
+
     public CryptoRequest(BRCoreTransaction tx, String certificationName, boolean isAmountRequested, String message, String address, BigDecimal amount) {
         this.isAmountRequested = isAmountRequested;
         this.tx = tx;
@@ -57,6 +59,10 @@ public class CryptoRequest {
         this.address = address;
         this.amount = amount;
         this.message = message;
+    }
+    public CryptoRequest(String address, boolean pasteScanViews) {
+        this.address = address;
+        this.pasteScanViews = pasteScanViews;
     }
 
     public CryptoRequest() {

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="#222222">
 
-    <com.github.paolorotolo.appintro.AppIntroViewPager
+    <com.ravencoin.presenter.tutorial.AppIntroViewPager
         android:id="@+id/view_pager"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"

@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRDialogView;
 import com.ravencoin.presenter.fragments.FragmentPhraseWord;
 import com.ravencoin.tools.animation.BRAnimator;
@@ -28,7 +28,7 @@ import com.ravencoin.tools.util.Utils;
 import java.util.Locale;
 
 
-public class PaperKeyActivity extends BRActivity {
+public class PaperKeyActivity extends RActivity {
     private static final String TAG = PaperKeyActivity.class.getName();
     private ViewPager wordViewPager;
     private Button nextButton;

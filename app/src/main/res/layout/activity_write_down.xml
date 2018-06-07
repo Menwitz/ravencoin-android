@@ -16,7 +16,7 @@
         android:background="@drawable/write_down_gradient"
         >
 
-        <com.ravencoin.presenter.customviews.BRText
+        <com.ravencoin.presenter.customviews.RText
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
 
     </FrameLayout>
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
         android:textColor="@color/almost_black"
         android:textSize="18sp"/>
 
-    <com.ravencoin.presenter.customviews.BRButton
+    <com.ravencoin.presenter.customviews.RButton
         android:id="@+id/button_write_down"
         android:layout_width="match_parent"
         android:layout_height="@dimen/big_button_height"

@@ -26,7 +26,7 @@ public class TransactionStorageManager {
 
         }
 
-        if (iso.equalsIgnoreCase("RVN")/* || iso.equalsIgnoreCase("bch")*/) {
+        if (iso.equalsIgnoreCase("RVN")) {
             BRTransactionEntity result = RvnTransactionDataStore.getInstance(app).putTransaction(app, iso, tx);
             return result != null;
         }
@@ -43,7 +43,7 @@ public class TransactionStorageManager {
 
         }
 
-        if (iso.equalsIgnoreCase("RVN")/* || iso.equalsIgnoreCase("bch")*/) {
+        if (iso.equalsIgnoreCase("RVN")) {
             return RvnTransactionDataStore.getInstance(app).getAllTransactions(app, iso);
         }
 
@@ -59,7 +59,7 @@ public class TransactionStorageManager {
 
         }
 
-        if (iso.equalsIgnoreCase("RVN")/* || iso.equalsIgnoreCase("bch")*/) {
+        if (iso.equalsIgnoreCase("RVN")) {
             return RvnTransactionDataStore.getInstance(app).updateTransaction(app, iso, tx);
 
         }
@@ -76,7 +76,7 @@ public class TransactionStorageManager {
 
         }
 
-        if (iso.equalsIgnoreCase("RVN")/* || iso.equalsIgnoreCase("bch")*/) {
+        if (iso.equalsIgnoreCase("RVN")) {
             RvnTransactionDataStore.getInstance(app).deleteTxByHash(app, iso, hash);
             return true;
         }

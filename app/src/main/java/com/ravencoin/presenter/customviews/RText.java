@@ -36,31 +36,31 @@ import com.ravencoin.tools.util.Utils;
  * THE SOFTWARE.
  */
 @SuppressLint("AppCompatCustomView") // we don't need to support older versions
-public class BRText extends TextView {
-    private static final String TAG = BRText.class.getName();
+public class RText extends TextView {
+    private static final String TAG = RText.class.getName();
 
-    public BRText(Context context) {
+    public RText(Context context) {
         super(context);
     }
 
-    public BRText(Context context, @Nullable AttributeSet attrs) {
+    public RText(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public BRText(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public RText(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
-    public BRText(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public RText(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
 
     private void init(Context ctx, AttributeSet attrs) {
-        TypedArray a = ctx.obtainStyledAttributes(attrs, R.styleable.BRText);
-        String customFont = a.getString(R.styleable.BRText_customTFont);
+        TypedArray a = ctx.obtainStyledAttributes(attrs, R.styleable.RText);
+        String customFont = a.getString(R.styleable.RText_customTFont);
         FontManager.setCustomFont(ctx, this, Utils.isNullOrEmpty(customFont) ? "CircularPro-Book.otf" : customFont);
         a.recycle();
         setLineSpacing(0, 1.3f);

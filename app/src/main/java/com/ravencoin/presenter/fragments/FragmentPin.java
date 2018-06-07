@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRKeyboard;
 import com.ravencoin.presenter.interfaces.BRAuthCompletion;
 import com.ravencoin.tools.animation.DecelerateOvershootInterpolator;
@@ -132,7 +132,7 @@ public class FragmentPin extends Fragment {
             customMessage = messageString;
             message.setText(customMessage);
         }
-        keyboard.setTranslationY(keyboardTrY + BRActivity.screenParametersPoint.y / 3);
+        keyboard.setTranslationY(keyboardTrY + RActivity.screenParametersPoint.y / 3);
         keyboard.animate()
                 .translationY(keyboardTrY)
                 .setDuration(400)

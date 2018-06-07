@@ -1,18 +1,10 @@
 package com.ravencoin.tools.sqlite;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import com.ravencoin.BuildConfig;
-import com.ravencoin.presenter.entities.BRTransactionEntity;
-import com.ravencoin.tools.manager.BRReportsManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * BreadWallet
@@ -39,20 +31,20 @@ import java.util.List;
  * THE SOFTWARE.
  */
 
-public class BRSQLiteHelper extends SQLiteOpenHelper {
-    private static final String TAG = BRSQLiteHelper.class.getName();
-    private static BRSQLiteHelper instance;
+public class RSQLiteHelper extends SQLiteOpenHelper {
+    private static final String TAG = RSQLiteHelper.class.getName();
+    private static RSQLiteHelper instance;
 
-    private BRSQLiteHelper(Context context) {
+    private RSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static BRSQLiteHelper getInstance(Context context) {
-        if (instance == null) instance = new BRSQLiteHelper(context);
+    public static RSQLiteHelper getInstance(Context context) {
+        if (instance == null) instance = new RSQLiteHelper(context);
         return instance;
     }
 
-    public static final String DATABASE_NAME = "breadwallet.db";
+    public static final String DATABASE_NAME = "breadwallet.db"; //TODO
     private static final int DATABASE_VERSION = 15;
 
     /**
@@ -127,6 +119,24 @@ public class BRSQLiteHelper extends SQLiteOpenHelper {
             "PRIMARY KEY (" + CURRENCY_CODE + ", " + CURRENCY_ISO + ")" +
             ");";
 
+    /**
+     * Address table
+     */
+
+    public static final String ADDRESS_TABLE_NAME = "addressTable";
+    public static final String ADDRESS_COLUMN_ID = "_id";
+    public static final String ADDRESS_TITLE = "transactionBuff";
+    public static final String ADDRESS = "transactionBlockHeight";
+    public static final String ADDRESS_TIME_STAMP = "addressTimeStamp";
+    public static final String ADDRESS_ISO = "addressISO";
+
+    private static final String ADDRESS_DATABASE_CREATE = "create table if not exists " + ADDRESS_TABLE_NAME + " (" +
+            ADDRESS_COLUMN_ID + " text, " +
+            ADDRESS_TITLE + " text, " +
+            ADDRESS + " text, " +
+            ADDRESS_TIME_STAMP + " integer, " +
+            ADDRESS_ISO + " text DEFAULT 'RVN' );";
+
 
     @Override
     public void onCreate(SQLiteDatabase database) {
@@ -136,10 +146,12 @@ public class BRSQLiteHelper extends SQLiteOpenHelper {
         Log.e(TAG, "onCreate: " + TX_DATABASE_CREATE);
         Log.e(TAG, "onCreate: " + PEER_DATABASE_CREATE);
         Log.e(TAG, "onCreate: " + CURRENCY_DATABASE_CREATE);
+        Log.e(TAG, "onCreate: " + ADDRESS_DATABASE_CREATE);
         database.execSQL(MB_DATABASE_CREATE);
         database.execSQL(TX_DATABASE_CREATE);
         database.execSQL(PEER_DATABASE_CREATE);
         database.execSQL(CURRENCY_DATABASE_CREATE);
+        database.execSQL(ADDRESS_DATABASE_CREATE);
 
 //        printTableStructures(database, MB_TABLE_NAME);
 //        printTableStructures(database, TX_TABLE_NAME);

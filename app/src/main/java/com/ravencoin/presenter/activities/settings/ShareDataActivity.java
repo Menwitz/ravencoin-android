@@ -5,10 +5,10 @@ import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 
-public class ShareDataActivity extends BRActivity {
+public class ShareDataActivity extends RActivity {
     private static final String TAG = ShareDataActivity.class.getName();
     private ToggleButton toggleButton;
     public static boolean appVisible = false;

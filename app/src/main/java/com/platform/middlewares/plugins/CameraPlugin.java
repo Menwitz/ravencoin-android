@@ -12,7 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 import android.util.Log;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.camera.CameraActivity;
 import com.ravencoin.presenter.customviews.BRDialogView;
@@ -89,7 +89,7 @@ public class CameraPlugin implements Plugin {
 
         if (target.startsWith("/_camera/take_picture")) {
             Log.i(TAG, "handling: " + target + " " + baseRequest.getMethod());
-            final Context app = BreadApp.getBreadContext();
+            final Context app = RavenApp.getBreadContext();
             if (app == null) {
                 Log.e(TAG, "handle: context is null: " + target + " " + baseRequest.getMethod());
 
@@ -149,7 +149,7 @@ public class CameraPlugin implements Plugin {
             return true;
         } else if (target.startsWith("/_camera/picture/")) {
             Log.i(TAG, "handling: " + target + " " + baseRequest.getMethod());
-            final Context app = BreadApp.getBreadContext();
+            final Context app = RavenApp.getBreadContext();
             if (app == null) {
                 Log.e(TAG, "handle: context is null: " + target + " " + baseRequest.getMethod());
                 return BRHTTPHelper.handleError(404, "context is null", baseRequest, response);
@@ -164,7 +164,7 @@ public class CameraPlugin implements Plugin {
             String b64opt = request.getParameter("base64");
             String contentType = "image/jpeg";
             if (b64opt != null && !b64opt.isEmpty()) {
-                contentType = "text/plain";
+                contentType = "address/plain";
                 String b64 = "data:image/jpeg;base64," + Base64.encodeToString(pictureBytes, Base64.NO_WRAP);
                 try {
                     imgBytes = b64.getBytes("UTF-8");

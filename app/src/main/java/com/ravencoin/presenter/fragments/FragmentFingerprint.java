@@ -37,7 +37,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.interfaces.BRAuthCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.DecelerateOvershootInterpolator;
@@ -237,7 +237,7 @@ public class FragmentFingerprint extends Fragment
     private void animateSignalSlide(final boolean reverse) {
         float layoutTY = fingerPrintLayout.getTranslationY();
         if (!reverse) {
-            fingerPrintLayout.setTranslationY(layoutTY + BRActivity.screenParametersPoint.y);
+            fingerPrintLayout.setTranslationY(layoutTY + RActivity.screenParametersPoint.y);
             fingerPrintLayout.animate()
                     .translationY(layoutTY)
                     .setDuration(ANIMATION_DURATION + 200)

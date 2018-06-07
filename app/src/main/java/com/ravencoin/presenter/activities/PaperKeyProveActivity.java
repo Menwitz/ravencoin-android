@@ -7,7 +7,6 @@ import android.support.constraint.ConstraintSet;
 import android.support.transition.TransitionManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,8 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.ActivityUTILS;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRDialogView;
 import com.ravencoin.presenter.interfaces.BROnSignalCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
@@ -35,7 +33,7 @@ import java.util.Locale;
 import java.util.Random;
 
 
-public class PaperKeyProveActivity extends BRActivity {
+public class PaperKeyProveActivity extends RActivity {
     private static final String TAG = PaperKeyProveActivity.class.getName();
     private Button submit;
     private EditText wordEditFirst;

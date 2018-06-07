@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.entities.BRSettingsItem;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.List;
 import static com.ravencoin.R.layout.settings_list_item;
 import static com.ravencoin.R.layout.settings_list_section;
 
-public class AdvancedActivity extends BRActivity {
+public class AdvancedActivity extends RActivity {
     private static final String TAG = AdvancedActivity.class.getName();
     private ListView listView;
     public List<BRSettingsItem> items;

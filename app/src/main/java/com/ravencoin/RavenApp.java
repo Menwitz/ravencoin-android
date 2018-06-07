@@ -2,9 +2,7 @@ package com.ravencoin;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Application;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.Point;
@@ -16,11 +14,12 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import com.crashlytics.android.core.CrashlyticsCore;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.listeners.SyncReceiver;
 import com.ravencoin.tools.manager.InternetManager;
 import com.ravencoin.tools.util.Utils;
 import com.crashlytics.android.Crashlytics;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,8 +58,8 @@ import static com.platform.APIClient.BREAD_POINT;
  * THE SOFTWARE.
  */
 
-public class BreadApp extends Application {
-    private static final String TAG = BreadApp.class.getName();
+public class RavenApp extends Application {
+    private static final String TAG = RavenApp.class.getName();
     public static int DISPLAY_HEIGHT_PX;
     FingerprintManager mFingerprintManager;
     // host is the server(s) on which the API is hosted
@@ -81,6 +80,8 @@ public class BreadApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        initLeakCanary();
 
         // Set up Crashlytics, disabled for debug builds
         Crashlytics crashlyticsKit = new Crashlytics.Builder()
@@ -119,6 +120,16 @@ public class BreadApp extends Application {
 //            }
 //        });
 
+    }
+
+    public void initLeakCanary() {
+        super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     @TargetApi(Build.VERSION_CODES.N)
@@ -162,7 +173,7 @@ public class BreadApp extends Application {
     }
 
     //call onStop on evert activity so
-    public static void onStop(final BRActivity app) {
+    public static void onStop(final RActivity app) {
         if (isBackgroundChecker != null) isBackgroundChecker.cancel();
         isBackgroundChecker = new Timer();
         TimerTask backgroundCheck = new TimerTask() {

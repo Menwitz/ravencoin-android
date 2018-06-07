@@ -9,7 +9,7 @@ android {
         applicationId = 'com.ravencoin'
         minSdkVersion 23
         targetSdkVersion 27
-        versionCode 4
+        versionCode 9
         versionName "1"
         multiDexEnabled true
 
@@ -19,7 +19,7 @@ android {
         ndk {
             // Specifies the ABI configurations of your native
             // libraries Gradle should build and package with your APK.
-            abiFilters 'x86', 'x86_64', 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
         }
         externalNativeBuild {
             cmake {
@@ -83,9 +83,7 @@ android {
                     targets "core"
                 }
             }
-
         }
-
     }
 
     lintOptions {
@@ -142,7 +140,7 @@ gradle.projectsEvaluated {
 
 
 //def gitUpdateModules() {
-//    ['sh', '-c', 'git submodule foreach git pull origin master'].execute().text.trim()
+//    ['sh', '-c', 'git submodule foreach git pull origin master'].execute().address.trim()
 //    getLogger().debug("gitUpdateModules done!")
 //}
 
@@ -179,6 +177,11 @@ dependencies {
 
     // Remove later
     implementation 'com.jjoe64:graphview:4.2.1'
+}
+
+dependencies {
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
 
 apply plugin: 'com.google.gms.google-services'

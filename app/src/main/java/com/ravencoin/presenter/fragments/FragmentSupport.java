@@ -20,8 +20,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.ravencoin.R;
+import com.ravencoin.presenter.customviews.BREdit;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.SlideDetector;
 import com.ravencoin.tools.util.Utils;
@@ -71,7 +73,6 @@ public class FragmentSupport extends Fragment {
     private String onCloseUrl;
 
     @Override
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_support, container, false);
@@ -164,7 +165,6 @@ public class FragmentSupport extends Fragment {
                 });
             }
         });
-
     }
 
     @Override

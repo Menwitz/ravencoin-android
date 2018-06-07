@@ -4,33 +4,26 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.settings.SecurityCenterActivity;
 import com.ravencoin.presenter.activities.settings.SettingsActivity;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
-import com.ravencoin.presenter.activities.util.BRActivity;
-import com.ravencoin.presenter.customviews.BRButton;
-import com.ravencoin.presenter.customviews.BRDialogView;
-import com.ravencoin.presenter.customviews.BRNotificationBar;
-import com.ravencoin.presenter.customviews.BRText;
+import com.ravencoin.presenter.activities.util.RActivity;
+import com.ravencoin.presenter.customviews.RButton;
+import com.ravencoin.presenter.customviews.RNotificationBar;
+import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.adapter.WalletListAdapter;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
 import com.ravencoin.tools.listeners.RecyclerItemClickListener;
 import com.ravencoin.tools.manager.BREventManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
@@ -39,7 +32,6 @@ import com.ravencoin.tools.manager.PromptManager;
 import com.ravencoin.tools.manager.SyncManager;
 import com.ravencoin.tools.sqlite.CurrencyDataSource;
 import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -47,30 +39,26 @@ import com.ravencoin.wallet.abstracts.BaseWalletManager;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-/**
- * Home activity that will show a list of a user's wallets
- */
-
-public class HomeActivity extends BRActivity implements InternetManager.ConnectionReceiverListener, SyncManager.OnProgressUpdate {
+public class HomeActivity extends RActivity implements InternetManager.ConnectionReceiverListener, SyncManager.OnProgressUpdate {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
     private RecyclerView mWalletRecycler;
     private WalletListAdapter mAdapter;
-    private BRText mFiatTotal;
+    private RText mFiatTotal;
     private RelativeLayout mSettings;
     private RelativeLayout mSecurity;
     private RelativeLayout mSupport;
     private RelativeLayout mDonation;
     private RelativeLayout mTutorial;
-    private RelativeLayout mAdressBook;
+    private RelativeLayout mAddressBook;
     private PromptManager.PromptItem mCurrentPrompt;
-    public BRNotificationBar mNotificationBar;
+    public RNotificationBar mNotificationBar;
 
-    private BRText mPromptTitle;
-    private BRText mPromptDescription;
-    private BRButton mPromptContinue;
-    private BRButton mPromptDismiss;
+    private RText mPromptTitle;
+    private RText mPromptDescription;
+    private RButton mPromptContinue;
+    private RButton mPromptDismiss;
     private CardView mPromptCard;
 
     private static HomeActivity app;
@@ -100,7 +88,7 @@ public class HomeActivity extends BRActivity implements InternetManager.Connecti
         mSupport = findViewById(R.id.support_row);
         mDonation = findViewById(R.id.donation_row);
         mTutorial = findViewById(R.id.tutorial_row);
-        mAdressBook = findViewById(R.id.addressb_row);
+        mAddressBook = findViewById(R.id.addressb_row);
         mNotificationBar = findViewById(R.id.notification_bar);
 
         mPromptCard = findViewById(R.id.prompt_card);
@@ -119,7 +107,6 @@ public class HomeActivity extends BRActivity implements InternetManager.Connecti
             public void onItemClick(View view, int position, float x, float y) {
                 if (position >= mAdapter.getItemCount() || position < 0) return;
                 BRSharedPrefs.putCurrentWalletIso(HomeActivity.this, mAdapter.getItemAt(position).getIso(HomeActivity.this));
-//                Log.d("HomeActivity", "Saving current wallet ISO as " + mAdapter.getItemAt(position).getIso(HomeActivity.this));
 
                 Intent newIntent = new Intent(HomeActivity.this, WalletActivity.class);
                 startActivity(newIntent);
@@ -166,12 +153,12 @@ public class HomeActivity extends BRActivity implements InternetManager.Connecti
         mTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, SecurityCenterActivity.class);
+                Intent intent = new Intent(HomeActivity.this, TutorialActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }
         });
-        mAdressBook.setOnClickListener(new View.OnClickListener() {
+        mAddressBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AddressBookActivity.class);
@@ -265,28 +252,12 @@ public class HomeActivity extends BRActivity implements InternetManager.Connecti
         InternetManager.addConnectionListener(this);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    protected void changeStatusBarColor() {
-        Window window = app.getWindow();
-
-        // clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-        // change the color
-        window.setStatusBarColor(ContextCompat.getColor(app, R.color.extra_light_blue_background));
-
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
         app = this;
 
-        ActivityUTILS.changeStatusBarColor(app);
+        ActivityUTILS.changeStatusBarColor(app, R.color.extra_light_blue_background);
 
         showNextPromptIfNeeded();
 
@@ -298,7 +269,6 @@ public class HomeActivity extends BRActivity implements InternetManager.Connecti
         }, 500);
 
         setupNetworking();
-
 
         InternetManager.addConnectionListener(new InternetManager.ConnectionReceiverListener() {
             @Override
@@ -370,20 +340,15 @@ public class HomeActivity extends BRActivity implements InternetManager.Connecti
                     }
                 }
             });
-
         } else {
             if (mNotificationBar != null)
                 mNotificationBar.setVisibility(View.VISIBLE);
-
         }
-
-
     }
 
     public void closeNotificationBar() {
         mNotificationBar.setVisibility(View.INVISIBLE);
     }
-
 
     @Override
     public boolean onProgressUpdated(double progress) {

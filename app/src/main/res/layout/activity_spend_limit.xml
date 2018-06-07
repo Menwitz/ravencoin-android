@@ -9,7 +9,7 @@
     android:background="@color/extra_light_blue_background"
     tools:context="com.ravencoin.presenter.activities.SetPinActivity">
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

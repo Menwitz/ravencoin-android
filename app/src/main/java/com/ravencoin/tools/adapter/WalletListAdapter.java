@@ -21,7 +21,7 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.ravencoin.R;
 import com.ravencoin.core.BRCorePeer;
-import com.ravencoin.presenter.customviews.BRText;
+import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.manager.SyncManager;
 import com.ravencoin.tools.threads.executor.BRExecutor;
@@ -31,10 +31,6 @@ import com.ravencoin.wallet.abstracts.BaseWalletManager;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-
-/**
- * Created by byfieldj on 1/31/18.
- */
 
 public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.WalletItemViewHolder> {
 
@@ -74,9 +70,9 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
         WalletItem item = mWalletItems.get(position);
         final BaseWalletManager wallet = item.walletManager;
         String name = wallet.getName(mContext);
-        String exchangeRate     = CurrencyUtils.getFormattedAmount(mContext, BRSharedPrefs.getPreferredFiatIso(mContext), wallet.getFiatExchangeRate(mContext));
-        String fiatBalance      = CurrencyUtils.getFormattedAmount(mContext, BRSharedPrefs.getPreferredFiatIso(mContext), wallet.getFiatBalance(mContext));
-        String cryptoBalance    = CurrencyUtils.getFormattedAmount(mContext, wallet.getIso(mContext), new BigDecimal(wallet.getCachedBalance(mContext)));
+        String exchangeRate = CurrencyUtils.getFormattedAmount(mContext, BRSharedPrefs.getPreferredFiatIso(mContext), wallet.getFiatExchangeRate(mContext));
+        String fiatBalance = CurrencyUtils.getFormattedAmount(mContext, BRSharedPrefs.getPreferredFiatIso(mContext), wallet.getFiatBalance(mContext));
+        String cryptoBalance = CurrencyUtils.getFormattedAmount(mContext, wallet.getIso(mContext), new BigDecimal(wallet.getCachedBalance(mContext)));
 
         final String iso = wallet.getIso(mContext);
 
@@ -90,7 +86,8 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
         holder.mSyncingProgressBar.setVisibility(item.mShowSyncing ? View.VISIBLE : View.INVISIBLE);
         holder.mSyncingProgressBar.setProgress(item.mProgress);
         holder.mSyncingLabel.setVisibility(item.mShowSyncingLabel ? View.VISIBLE : View.INVISIBLE);
-        holder.mSyncingLabel.setText(String.format("%s %d%%", item.mLabelText, item.mProgress));
+//        holder.mSyncingLabel.setText(String.format("%s %d%%", item.mLabelText, item.mProgress));
+        holder.mSyncingLabel.setText(item.mLabelText);
         holder.mWalletBalanceCurrency.setVisibility(item.mShowBalance ? View.VISIBLE : View.INVISIBLE);
 
         Drawable drawable = mContext.getResources().getDrawable(R.drawable.crypto_card_shape, null);
@@ -116,7 +113,7 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
 
     @NonNull
     private LineGraphSeries<DataPoint> getDataPointLineGraphSeries() {
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0, 1),
                 new DataPoint(1, 5),
                 new DataPoint(2, 3),
@@ -190,14 +187,11 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
                             @Override
                             public void run() {
                                 for (WalletItem item : mWalletItems) {
-
                                     item.updateData(false, false, true, 100, "Done");
                                     notifyDataSetChanged();
-
                                 }
                             }
                         });
-
                         return;
                     }
 
@@ -251,7 +245,6 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
             //start from beginning
             startObserving();
             return false;
-
         }
         return true;
     }
@@ -284,12 +277,12 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
 
     public class WalletItemViewHolder extends RecyclerView.ViewHolder {
 
-        public BRText mWalletName;
-        public BRText mTradePrice;
-        public BRText mWalletBalanceUSD;
-        public BRText mWalletBalanceCurrency;
+        public RText mWalletName;
+        public RText mTradePrice;
+        public RText mWalletBalanceUSD;
+        public RText mWalletBalanceCurrency;
         public RelativeLayout mParent;
-        public BRText mSyncingLabel;
+        public RText mSyncingLabel;
         public ProgressBar mSyncingProgressBar;
         public GraphView mGraph;
 

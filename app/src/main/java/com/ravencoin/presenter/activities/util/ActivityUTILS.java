@@ -84,28 +84,29 @@ public class ActivityUTILS {
         return false;
     }
 
-    public static boolean isMainThread(){
+    public static boolean isMainThread() {
         boolean isMain = Looper.myLooper() == Looper.getMainLooper();
-        if(isMain){
+        if (isMain) {
             Log.e(TAG, "IS MAIN UI THREAD!");
         }
         return isMain;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public static void changeStatusBarColor(Activity app) {
+    public static void changeStatusBarColor(Activity app, int colorID) {
         Window window = app.getWindow();
 
         // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
         // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(app, R.color.extra_light_blue_background));
-
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        window.setStatusBarColor(ContextCompat.getColor(app, colorID));
+        if (R.color.extra_light_blue_background == colorID)
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        else
+            window.getDecorView().setSystemUiVisibility(0);
     }
+
 
 }

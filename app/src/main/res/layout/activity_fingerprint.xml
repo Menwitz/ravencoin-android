@@ -26,7 +26,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.ravencoin.presenter.customviews.BRText
+            <com.ravencoin.presenter.customviews.RText
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
 
     </LinearLayout>
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header" />
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/enable_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
         android:layout_marginTop="16dp"
         android:background="@color/extra_light_gray" />
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/limit_exchange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
         android:textColor="@color/almost_black"
         android:textSize="18sp" />
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/limit_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

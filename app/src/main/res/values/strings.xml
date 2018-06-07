@@ -139,7 +139,7 @@
   <!-- Economy fee -->
   <string name="FeeSelector.economy">Economy</string>
   <!-- E.g. [This transaction is predicted to complete in] 1-24 hours -->
-  <string name="FeeSelector.economyTime">1-24 hours</string>
+  <string name="FeeSelector.economyTime">10-120 hours</string>
   <!-- Warning message for economy fee -->
   <string name="FeeSelector.economyWarning">This option is not recommended for time-sensitive transactions.</string>
   <!-- E.g. Estimated delivery: 10-60 minutes -->
@@ -147,10 +147,10 @@
   <!-- Regular fee -->
   <string name="FeeSelector.regular">Regular</string>
   <!-- E.g. [This transaction is predicted to complete in] 10-60 minutes -->
-  <string name="FeeSelector.regularTime">10-60 minutes</string>
+  <string name="FeeSelector.regularTime">1-60 minutes</string>
   <!-- Fee Selector title -->
   <string name="FeeSelector.title">Processing Speed</string>
-  <!-- Checking private key balance progress view text -->
+  <!-- Checking private key balance progress view address -->
   <string name="Import.checking">Checking private key balance...</string>
   <!-- Sweep private key confirmation message -->
   <string name="Import.confirm">Send %1$s from this private key into your wallet? The Raven network will receive a fee of %2$s.</string>
@@ -174,7 +174,7 @@
   <string name="Import.message">Importing a wallet transfers all the money from your other wallet into your Ravencoin Wallet using a single transaction.</string>
   <!-- Enter password alert view title -->
   <string name="Import.password">This private key is password protected.</string>
-  <!-- password textfield placeholder -->
+  <!-- password text field placeholder -->
   <string name="Import.passwordPlaceholder">password</string>
   <!-- Caption for graphics -->
   <string name="Import.rightCaption">Your Ravencoin Wallet</string>
@@ -208,7 +208,7 @@
   <string name="LocationPlugin.notAuthorized">Ravencoin Wallet does not have permission to access location services.</string>
   <!-- Wallet creation date prefix -->
   <string name="ManageWallet.creationDatePrefix">You created your wallet on %1$s</string>
-  <!-- Manage wallet description text -->
+  <!-- Manage wallet description address -->
   <string name="ManageWallet.description">Your wallet name only appears in your account transaction history and cannot be seen by anyone else.</string>
   <!-- Change Wallet name textfield label -->
   <string name="ManageWallet.textFeildLabel">Wallet Name</string>
@@ -326,11 +326,11 @@
   <string name="Receive.request">Request an Amount</string>
   <!-- Share button label -->
   <string name="Receive.share">Share</string>
-  <!-- Share via text message (SMS) -->
+  <!-- Share via address message (SMS) -->
   <string name="Receive.textButton">Text Message</string>
   <!-- Receive modal title -->
   <string name="Receive.title">Receive</string>
-  <!-- Done button text -->
+  <!-- Done button address -->
   <string name="RecoverWallet.done">Done</string>
   <!-- Recover wallet header -->
   <string name="RecoverWallet.header">Recover Wallet</string>
@@ -393,7 +393,7 @@
   <!-- Security Center Info -->
   <string name="SecurityCenter.info">Enable all security features for maximum protection.</string>
   <!-- Paper Key button description -->
-  <string name="SecurityCenter.paperKeyDescription">The only way to access your bitcoin if you lose or upgrade your phone.</string>
+  <string name="SecurityCenter.paperKeyDescription">The only way to access your Ravencoin if you lose or upgrade your phone.</string>
   <!-- Paper Key button title -->
   <string name="SecurityCenter.paperKeyTitle">Paper Key</string>
   <!-- PIN button description -->
@@ -415,6 +415,11 @@
   <!-- Instructions how to allow the camera access for the app -->
   <string name="Send.cameraUnavailabeMessage.android">Allow camera access in \"Settings\" &gt; \"Apps\" &gt; \"Ravencoin Wallet\" &gt; \"Permissions\"</string>
   <string name="Simplex.allowFileSystemAccess">Please allow Storage permission in \"Settings\" &gt; \"Apps\" &gt; \"Ravencoin Wallet\" &gt; \"Permissions\"</string>
+
+  <!-- Address Book Center Title -->
+  <string name="AddressBook.title">Address Book</string>
+  <!-- Address Book Center Info -->
+  <string name="AddressBook.info">Send Ravencoin and make Payment to previously saved addresses.</string>
 
   <!-- Permission required to access camera -->
   <string name="Send.cameraUnavailabeTitle.android">Ravencoin Wallet is not allowed to access the camera</string>
@@ -519,7 +524,7 @@
   <string name="ShareData.toggleLabel">Share Anonymous Data?</string>
   <!-- button label -->
   <string name="StartPaperPhrase.againButtonTitle">Write Down Paper Key Again</string>
-  <!-- Paper key explanation text. -->
+  <!-- Paper key explanation address. -->
   <string name="StartPaperPhrase.body">Your paper key is the only way to restore your Ravencoin Wallet if your phone is lost, stolen, broken, or upgraded.\n\nWe will show you a list of words to write down on a piece of paper and keep safe.</string>
   <!-- button label -->
   <string name="StartPaperPhrase.buttonTitle">Write Down Paper Key</string>
@@ -527,13 +532,13 @@
   <string name="StartPaperPhrase.date">You last wrote down your paper key on %1$s</string>
   <!-- Start view message -->
   <string name="StartViewController.message">The easy and secure way to use Ravencoin.</string>
-  <!-- Syncing view connectiong state header text -->
+  <!-- Syncing view connectiong state header address -->
   <string name="SyncingView.connecting">Connecting</string>
-  <!-- Syncing view header text -->
+  <!-- Syncing view header address -->
   <string name="SyncingView.header">Syncing</string>
   <!-- Retry button label -->
   <string name="SyncingView.retry">Retry</string>
-  <!-- Syncing view syncing state header text -->
+  <!-- Syncing view syncing state header address -->
   <string name="SyncingView.syncing">Syncing</string>
   <!-- 6 d (6 days) -->
   <string name="TimeSince.days">%1$s d</string>
@@ -577,7 +582,7 @@
   <string name="TouchIdSpendingLimit.title">Touch ID Spending Limit</string>
   <!-- name of spending limit when using fingerprint authorization -->
   <string name="TouchIdSpendingLimit.title.android">Fingerprint Authorization Spending Limit</string>
-  <!-- Availability status text -->
+  <!-- Availability status address -->
   <string name="Transaction.available">Available to Spend</string>
   <!-- Transaction complete label -->
   <string name="Transaction.complete">Complete</string>
@@ -593,9 +598,9 @@
   <string name="Transaction.invalid">INVALID</string>
   <!-- Timestamp label for event that just happened -->
   <string name="Transaction.justNow">just now</string>
-  <!-- Receive status text: 'In progress: 20%' -->
+  <!-- Receive status address: 'In progress: 20%' -->
   <string name="Transaction.receivedStatus">In progress: %1$s</string>
-  <!-- Send status text: 'In progress: 20%' -->
+  <!-- Send status address: 'In progress: 20%' -->
   <string name="Transaction.sendingStatus">In progress: %1$s</string>
   <!-- eg. Starting balance: $50.00 -->
   <string name="Transaction.starting">Starting balance: %1$s</string>
@@ -653,7 +658,7 @@
   <string name="UnlockScreen.subheader">Enter PIN</string>
   <!-- Instruction to touch the sensor for fingerprint authentication -->
   <string name="UnlockScreen.touchIdInstructions.android">Touch Sensor</string>
-  <!-- TouchID prompt text -->
+  <!-- TouchID prompt address -->
   <string name="UnlockScreen.touchIdPrompt">Unlock your Ravencoin Wallet.</string>
   <!-- Device authentication body -->
   <string name="UnlockScreen.touchIdPrompt.android">Please unlock your Android device to continue.</string>
@@ -663,7 +668,7 @@
   <string name="UnlockScreen.touchIdTitle.android">Authentication required</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Wallet Unlocked</string>
-  <!-- Update PIN caption text -->
+  <!-- Update PIN caption address -->
   <string name="UpdatePin.caption">Remember this PIN. If you forget it, you won\'t be able to access your bitcoin.</string>
   <!-- PIN creation info. -->
   <string name="UpdatePin.createInstruction">Your PIN will be used to unlock your Ravencoin Wallet and send money.</string>
@@ -707,7 +712,7 @@
   <string name="Webview.errorMessage">There was an error loading the content. Please try again.</string>
   <!-- Updating webview message -->
   <string name="Webview.updating">Updating...</string>
-  <!-- Welcome screen text. (?) will be replaced with the help icon users should look for. -->
+  <!-- Welcome screen address. (?) will be replaced with the help icon users should look for. -->
   <string name="Welcome.body">Ravencoin Wallet has changed its name to RVN, with a brand new look and some new features.\n\nIf you need help, look for the (?) in the top right of most screens.</string>
   <!-- Top title of welcome screen -->
   <string name="Welcome.title">Welcome to Ravencoin Wallet!</string>
@@ -759,5 +764,7 @@
 
   <string name="app_intro_skip_button">SKIP</string>
   <string name="app_intro_done_button">DONE</string>
+  <string name="notification_channel_name">receiveNotification</string>
+  <string name="notificatin_channel_description">Create on status bar notification channel for android O</string>
 
 </resources>

@@ -70,7 +70,7 @@ public class BRClipboardManager {
 
             // If the contents of the clipboard wasn't a reference to a
             // note, then
-            // this converts whatever it is to text.
+            // this converts whatever it is to address.
             text = coerceToText(item).toString();
 
             return text;
@@ -85,7 +85,7 @@ public class BRClipboardManager {
         if (text != null) {
             return text;
         } else {
-            return "no text";
+            return "no address";
         }
 
     }

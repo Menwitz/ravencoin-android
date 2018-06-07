@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="80dp"
         android:background="@color/logo_gradient_end"
         android:orientation="vertical">
 
@@ -32,7 +32,7 @@
                 android:layout_margin="@dimen/bread_margin"
                 android:background="@drawable/ic_close_white_24dp" />
 
-            <com.ravencoin.presenter.customviews.BRText
+            <com.ravencoin.presenter.customviews.RText
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/SecurityCenter.title"
+                android:text="@string/AddressBook.title"
                 android:textColor="@color/white"
                 android:textSize="@dimen/header"
                 app:customTFont="CircularPro-Bold.otf" />
@@ -56,15 +56,9 @@
 
         </RelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:src="@drawable/ic_shield_white" />
-
     </LinearLayout>
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,12 +66,12 @@
         android:layout_below="@+id/linearLayout"
         android:layout_margin="@dimen/bread_margin"
         android:lineSpacingMultiplier="1.3"
-        android:text="@string/SecurityCenter.info"
+        android:text="@string/AddressBook.info"
         android:textColor="@color/almost_black"
         android:textSize="@dimen/sub_header" />
 
     <ListView
-        android:id="@+id/menu_listview"
+        android:id="@+id/address_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView10"
@@ -86,5 +80,4 @@
         android:headerDividersEnabled="true">
 
     </ListView>
-
 </com.ravencoin.presenter.customviews.BRRelativeLayout>

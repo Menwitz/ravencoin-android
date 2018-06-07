@@ -19,11 +19,9 @@ import android.widget.TextView;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.CurrencySettingsActivity;
 import com.ravencoin.presenter.activities.UpdatePinActivity;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.entities.BRSettingsItem;
-import com.ravencoin.presenter.interfaces.BRAuthCompletion;
 import com.ravencoin.tools.manager.BRSharedPrefs;
-import com.ravencoin.tools.security.AuthManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,7 @@ import java.util.List;
 import static com.ravencoin.R.layout.settings_list_item;
 import static com.ravencoin.R.layout.settings_list_section;
 
-public class SettingsActivity extends BRActivity {
+public class SettingsActivity extends RActivity {
     private static final String TAG = SettingsActivity.class.getName();
     private ListView listView;
     public List<BRSettingsItem> items;

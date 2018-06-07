@@ -9,7 +9,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.ravencoin.BuildConfig;
 import com.ravencoin.R;
 import com.ravencoin.core.BRCoreAddress;
@@ -33,9 +33,8 @@ import com.ravencoin.presenter.entities.TxUiHolder;
 import com.ravencoin.presenter.interfaces.BROnSignalCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.BRDialog;
-import com.ravencoin.tools.manager.BRApiManager;
 import com.ravencoin.tools.manager.BREventManager;
-import com.ravencoin.tools.manager.BRNotificationManager;
+import com.ravencoin.tools.manager.RNotificationManager;
 import com.ravencoin.tools.manager.BRReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.manager.InternetManager;
@@ -205,13 +204,13 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
     @Override
     public void updateFee(Context app) {
         if (app == null) {
-            app = BreadApp.getBreadContext();
+            app = RavenApp.getBreadContext();
             if (app == null) {
                 Log.e(TAG, "updateFee: FAILED, app is null");
                 return;
             }
         }
-//        String jsonString = /*BRApiManager.urlGET(app, "https://" + BreadApp.HOST + "/fee-per-kb?currency=" + getIso(app));*/
+//        String jsonString = /*BRApiManager.urlGET(app, "https://" + RavenApp.HOST + "/fee-per-kb?currency=" + getIso(app));*/
         String jsonString = "{fee_per_kb : 10000,fee_per_kb_economy : 10000}";
         if (jsonString == null || jsonString.isEmpty()) {
             Log.e(TAG, "updateFeePerKb: failed to update fee, response string: " + jsonString);
@@ -555,7 +554,7 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
     @Override
     public void txPublished(final String error) {
         super.txPublished(error);
-        final Context app = BreadApp.getBreadContext();
+        final Context app = RavenApp.getBreadContext();
         BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
             public void run() {
@@ -577,7 +576,7 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
     @Override
     public void balanceChanged(long balance) {
         super.balanceChanged(balance);
-        Context app = BreadApp.getBreadContext();
+        Context app = RavenApp.getBreadContext();
         setCashedBalance(app, balance);
         for (OnTxListModified list : txModifiedListeners)
             if (list != null) list.txListModified(null);
@@ -596,7 +595,7 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
             public void run() {
                 long blockHeight = getPeerManager().getLastBlockHeight();
 
-                final Context ctx = BreadApp.getBreadContext();
+                final Context ctx = RavenApp.getBreadContext();
                 if (ctx == null) return;
                 BRSharedPrefs.putLastBlockHeight(ctx, getIso(ctx), (int) blockHeight);
             }
@@ -609,7 +608,7 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
     public void saveBlocks(boolean replace, BRCoreMerkleBlock[] blocks) {
         super.saveBlocks(replace, blocks);
 
-        Context app = BreadApp.getBreadContext();
+        Context app = RavenApp.getBreadContext();
         if (app == null) return;
         if (replace) MerkleBlockDataSource.getInstance(app).deleteAllBlocks(app, getIso(app));
         BlockEntity[] entities = new BlockEntity[blocks.length];
@@ -623,7 +622,7 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
     @Override
     public void savePeers(boolean replace, BRCorePeer[] peers) {
         super.savePeers(replace, peers);
-        Context app = BreadApp.getBreadContext();
+        Context app = RavenApp.getBreadContext();
         if (app == null) return;
         if (replace) PeerDataSource.getInstance(app).deleteAllPeers(app, getIso(app));
         PeerEntity[] entities = new PeerEntity[peers.length];
@@ -636,14 +635,14 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
 
     @Override
     public boolean networkIsReachable() {
-        Context app = BreadApp.getBreadContext();
+        Context app = RavenApp.getBreadContext();
         return InternetManager.getInstance().isConnected(app);
     }
 
 
     @Override
     public BRCoreTransaction[] loadTransactions() {
-        Context app = BreadApp.getBreadContext();
+        Context app = RavenApp.getBreadContext();
 
         List<BRTransactionEntity> txs = RvnTransactionDataStore.getInstance(app).getAllTransactions(app, getIso(app));
         if (txs == null || txs.size() == 0) return new BRCoreTransaction[0];
@@ -657,7 +656,7 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
 
     @Override
     public BRCoreMerkleBlock[] loadBlocks() {
-        Context app = BreadApp.getBreadContext();
+        Context app = RavenApp.getBreadContext();
         List<BRMerkleBlockEntity> blocks = MerkleBlockDataSource.getInstance(app).getAllMerkleBlocks(app, getIso(app));
         if (blocks == null || blocks.size() == 0) return new BRCoreMerkleBlock[0];
         BRCoreMerkleBlock arr[] = new BRCoreMerkleBlock[blocks.size()];
@@ -670,7 +669,7 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
 
     @Override
     public BRCorePeer[] loadPeers() {
-        Context app = BreadApp.getBreadContext();
+        Context app = RavenApp.getBreadContext();
         List<BRPeerEntity> peers = PeerDataSource.getInstance(app).getAllPeers(app, getIso(app));
         if (peers == null || peers.size() == 0) return new BRCorePeer[0];
         BRCorePeer arr[] = new BRCorePeer[peers.size()];
@@ -685,7 +684,7 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
     public void syncStarted() {
         super.syncStarted();
         Log.d(TAG, "syncStarted: ");
-        final Context app = BreadApp.getBreadContext();
+        final Context app = RavenApp.getBreadContext();
         if (Utils.isEmulatorOrDebug(app))
             BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                 @Override
@@ -703,11 +702,12 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
     public void syncStopped(final String error) {
         super.syncStopped(error);
         Log.d(TAG, "syncStopped: " + error);
-        final Context app = BreadApp.getBreadContext();
+        final Context app = RavenApp.getBreadContext();
         if (Utils.isNullOrEmpty(error))
             BRSharedPrefs.putAllowSpend(app, getIso(app), true);
         for (SyncListener list : syncListeners)
             if (list != null) list.syncStopped(error);
+        // Todo fix sync stopped issue
         if (Utils.isEmulatorOrDebug(app))
             BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                 @Override
@@ -742,13 +742,12 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
                 });
             }
         }
-
     }
 
     @Override
     public void onTxAdded(BRCoreTransaction transaction) {
         super.onTxAdded(transaction);
-        final Context ctx = BreadApp.getBreadContext();
+        final Context ctx = RavenApp.getBreadContext();
         final WalletsMaster master = WalletsMaster.getInstance(ctx);
 
         TxMetaData metaData = KVStoreManager.getInstance().createMetadata(ctx, this, transaction);
@@ -771,7 +770,8 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
                             if (!BRToast.isToastShown()) {
                                 if (Utils.isEmulatorOrDebug(ctx))
                                     BRToast.showCustomToast(ctx, strToShow,
-                                            BreadApp.DISPLAY_HEIGHT_PX / 2, Toast.LENGTH_LONG, R.drawable.toast_layout_black);
+                                            RavenApp.DISPLAY_HEIGHT_PX / 2, Toast.LENGTH_LONG, R.drawable.toast_layout_black);
+
                                 AudioManager audioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
                                 if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
                                     final MediaPlayer mp = MediaPlayer.create(ctx, R.raw.coinflip);
@@ -781,10 +781,12 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
                                         Log.e(TAG, "run: ", ex);
                                     }
                                 }
-                                if (ctx instanceof Activity && BRSharedPrefs.getShowNotification(ctx))
-                                    BRNotificationManager.sendNotification((Activity) ctx, R.drawable.notification_icon, ctx.getString(R.string.app_name), strToShow, 1);
-                                else
-                                    Log.e(TAG, "onTxAdded: ctx is not activity");
+
+//                                if (ctx instanceof Activity && BRSharedPrefs.getShowNotification(ctx))
+                                // TODO move this string to xml
+                                    RNotificationManager.sendNotification((Activity) ctx, R.drawable.notification_icon2, "You have received some funds!", strToShow, 1);
+//                                else
+//                                    Log.e(TAG, "onTxAdded: ctx is not activity");
                             }
                         }
                     }, 1000);
@@ -805,7 +807,7 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
     public void onTxDeleted(final String hash, int notifyUser, int recommendRescan) {
         super.onTxDeleted(hash, notifyUser, recommendRescan);
         Log.e(TAG, "onTxDeleted: " + String.format("hash: %s, notifyUser: %d, recommendRescan: %d", hash, notifyUser, recommendRescan));
-        final Context ctx = BreadApp.getBreadContext();
+        final Context ctx = RavenApp.getBreadContext();
         if (ctx != null) {
             if (recommendRescan != 0)
                 BRSharedPrefs.putScanRecommended(ctx, getIso(ctx), true);
@@ -828,7 +830,7 @@ public class RvnWalletManager extends BRCoreWalletManager implements BaseWalletM
     public void onTxUpdated(String hash, int blockHeight, int timeStamp) {
         super.onTxUpdated(hash, blockHeight, timeStamp);
         Log.d(TAG, "onTxUpdated: " + String.format("hash: %s, blockHeight: %d, timestamp: %d", hash, blockHeight, timeStamp));
-        Context ctx = BreadApp.getBreadContext();
+        Context ctx = RavenApp.getBreadContext();
         if (ctx != null) {
             TransactionStorageManager.updateTransaction(ctx, getIso(ctx), new BRTransactionEntity(null, blockHeight, timeStamp, hash, getIso(ctx)));
 

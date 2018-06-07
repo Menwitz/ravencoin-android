@@ -37,7 +37,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialog_header" />
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/dialog_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@id/dialog_header" />
 
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/dialog_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_text">
 
-        <com.ravencoin.presenter.customviews.BRButton
+        <com.ravencoin.presenter.customviews.RButton
             android:id="@+id/neg_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             app:hasShadow="false"
             app:isBreadButton="true" />
 
-        <com.ravencoin.presenter.customviews.BRButton
+        <com.ravencoin.presenter.customviews.RButton
             android:id="@+id/pos_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

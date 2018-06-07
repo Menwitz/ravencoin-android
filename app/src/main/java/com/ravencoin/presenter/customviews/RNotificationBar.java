@@ -9,7 +9,7 @@ import android.view.View;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.HomeActivity;
 import com.ravencoin.presenter.activities.WalletActivity;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 
 /**
  * BreadWallet
@@ -35,43 +35,43 @@ import com.ravencoin.presenter.activities.util.BRActivity;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-public class BRNotificationBar extends android.support.v7.widget.Toolbar {
+public class RNotificationBar extends android.support.v7.widget.Toolbar {
 
-    private static final String TAG = BRNotificationBar.class.getName();
+    private static final String TAG = RNotificationBar.class.getName();
 
-    private BRActivity activity;
-    private BRText description;
-    private BRButton close;
+    private RActivity activity;
+    private RText description;
+    private RButton close;
 
     public boolean[] filterSwitches = new boolean[4];
 
-    public BRNotificationBar(Context context) {
+    public RNotificationBar(Context context) {
         super(context);
         init(null);
     }
 
-    public BRNotificationBar(Context context, @Nullable AttributeSet attrs) {
+    public RNotificationBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public BRNotificationBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public RNotificationBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
 
     private void init(AttributeSet attrs) {
         inflate(getContext(), R.layout.notification_bar, this);
-        activity = (BRActivity) getContext();
-        description = (BRText) findViewById(R.id.description);
-        close = (BRButton) findViewById(R.id.cancel_button);
+        activity = (RActivity) getContext();
+        description = (RText) findViewById(R.id.description);
+        close = (RButton) findViewById(R.id.cancel_button);
 
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.BRNotificationBar);
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.RNotificationBar);
         final int N = a.getIndexCount();
         for (int i = 0; i < N; ++i) {
             int attr = a.getIndex(i);
             switch (attr) {
-                case R.styleable.BRNotificationBar_breadText:
+                case R.styleable.RNotificationBar_breadText:
                     String text = a.getString(0);
                     description.setText(text);
                     break;

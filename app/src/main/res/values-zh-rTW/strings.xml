@@ -166,7 +166,7 @@
   <string name="FeeSelector.regularTime">10-60 分鐘</string>
   <!-- Fee Selector title -->
   <string name="FeeSelector.title">處理速度</string>
-  <!-- Checking private key balance progress view text -->
+  <!-- Checking private key balance progress view address -->
   <string name="Import.checking">正在檢查私密金鑰餘額…</string>
   <!-- Sweep private key confirmation message -->
   <string name="Import.confirm">要從這個私密金鑰寄出 %1$s 到您的電子錢包嗎？比特幣網路會收到 %2$s 的費用。</string>
@@ -226,7 +226,7 @@
   <string name="LocationPlugin.notAuthorized">RVN 沒有存取定位服務的權限。</string>
   <!-- Wallet creation date prefix -->
   <string name="ManageWallet.creationDatePrefix">您在 %1$s 建立了電子錢包</string>
-  <!-- Manage wallet description text -->
+  <!-- Manage wallet description address -->
   <string name="ManageWallet.description">您的錢包名稱只會出現在您的帳戶交易記錄中，任何其他人都看不到。</string>
   <!-- Change Wallet name textfield label -->
   <string name="ManageWallet.textFeildLabel">電子錢包名稱</string>
@@ -336,11 +336,11 @@
   <string name="Receive.request">要求帳戶</string>
   <!-- Share button label -->
   <string name="Receive.share">分享</string>
-  <!-- Share via text message (SMS) -->
+  <!-- Share via address message (SMS) -->
   <string name="Receive.textButton">簡訊</string>
   <!-- Receive modal title -->
   <string name="Receive.title">收取</string>
-  <!-- Done button text -->
+  <!-- Done button address -->
   <string name="RecoverWallet.done">完成</string>
   <!-- Recover wallet header -->
   <string name="RecoverWallet.header">復原電子錢包</string>
@@ -516,7 +516,7 @@
   <string name="ShareData.toggleLabel">分享匿名資料？</string>
   <!-- button label -->
   <string name="StartPaperPhrase.againButtonTitle">再寫一次紙本金鑰</string>
-  <!-- Paper key explanation text. -->
+  <!-- Paper key explanation address. -->
   <string name="StartPaperPhrase.body">您的手機遺失、損壞或升級時，紙本金鑰是復原\n RVN 唯一的方式。\n\n我們會向您出示一個字串，請寫在紙上並妥善保管。</string>
   <!-- button label -->
   <string name="StartPaperPhrase.buttonTitle">寫下紙本金鑰</string>
@@ -524,13 +524,13 @@
   <string name="StartPaperPhrase.date">您最近一次在 %1$s 寫下了您的紙本金鑰</string>
   <!-- Start view message -->
   <string name="StartViewController.message">使用比特幣最安全、最有保障的方式。</string>
-  <!-- Syncing view connectiong state header text -->
+  <!-- Syncing view connectiong state header address -->
   <string name="SyncingView.connecting">正在連線</string>
-  <!-- Syncing view header text -->
+  <!-- Syncing view header address -->
   <string name="SyncingView.header">正在同步</string>
   <!-- Retry button label -->
   <string name="SyncingView.retry">重試</string>
-  <!-- Syncing view syncing state header text -->
+  <!-- Syncing view syncing state header address -->
   <string name="SyncingView.syncing">正在同步</string>
   <!-- 6 d (6 days) -->
   <string name="TimeSince.days">%1$s 天</string>
@@ -574,7 +574,7 @@
   <string name="TouchIdSpendingLimit.title">Touch ID 花費上限</string>
   <!-- name of spending limit when using fingerprint authorization -->
   <string name="TouchIdSpendingLimit.title.android">指紋授權花費限制</string>
-  <!-- Availability status text -->
+  <!-- Availability status address -->
   <string name="Transaction.available">可花用</string>
   <!-- Transaction complete label -->
   <string name="Transaction.complete">完成</string>
@@ -590,9 +590,9 @@
   <string name="Transaction.invalid">無效</string>
   <!-- Timestamp label for event that just happened -->
   <string name="Transaction.justNow">剛剛</string>
-  <!-- Receive status text: 'In progress: 20%' -->
+  <!-- Receive status address: 'In progress: 20%' -->
   <string name="Transaction.receivedStatus">處理中：%1$s</string>
-  <!-- Send status text: 'In progress: 20%' -->
+  <!-- Send status address: 'In progress: 20%' -->
   <string name="Transaction.sendingStatus">處理中：%1$s</string>
   <!-- eg. Starting balance: $50.00 -->
   <string name="Transaction.starting">開始餘額：%1$s</string>
@@ -650,7 +650,7 @@
   <string name="UnlockScreen.subheader">輸入 PIN 碼</string>
   <!-- Instruction to touch the sensor for fingerprint authentication -->
   <string name="UnlockScreen.touchIdInstructions.android">觸控感測器</string>
-  <!-- TouchID prompt text -->
+  <!-- TouchID prompt address -->
   <string name="UnlockScreen.touchIdPrompt">解鎖您的 RVN。</string>
   <!-- Device authentication body -->
   <string name="UnlockScreen.touchIdPrompt.android">請解除鎖定您的 Android 裝置來繼續。</string>
@@ -660,7 +660,7 @@
   <string name="UnlockScreen.touchIdTitle.android">需要驗證</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">錢包已解鎖</string>
-  <!-- Update PIN caption text -->
+  <!-- Update PIN caption address -->
   <string name="UpdatePin.caption">請記住此 PIN 碼。如果忘記，會無法存取您的比特幣。</string>
   <!-- PIN creation info. -->
   <string name="UpdatePin.createInstruction">您的 PIN 碼會用於解鎖 RVN 及送出款項。</string>
@@ -704,7 +704,7 @@
   <string name="Webview.errorMessage">載入內容時發生錯誤。請重試一次。</string>
   <!-- Updating webview message -->
   <string name="Webview.updating">正在更新……</string>
-  <!-- Welcome screen text. (?) will be replaced with the help icon users should look for. -->
+  <!-- Welcome screen address. (?) will be replaced with the help icon users should look for. -->
   <string name="Welcome.body">Breadwallet 已經改名爲 RVN，有嶄新的面貌和一些新功能。\n\n如果需要協助，就在大部分畫面的右上角尋找(?)。</string>
   <!-- Top title of welcome screen -->
   <string name="Welcome.title">歡迎使用 RVN！</string>

@@ -39,19 +39,19 @@ import com.ravencoin.tools.util.BRConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PeerDataSource implements BRDataSourceInterface {
+public class PeerDataSource implements DataSourceInterface {
     private static final String TAG = PeerDataSource.class.getName();
 
 
     // Database fields
     private SQLiteDatabase database;
-    private final BRSQLiteHelper dbHelper;
+    private final RSQLiteHelper dbHelper;
     private final String[] allColumns = {
-            BRSQLiteHelper.PEER_COLUMN_ID,
-            BRSQLiteHelper.PEER_ADDRESS,
-            BRSQLiteHelper.PEER_PORT,
-            BRSQLiteHelper.PEER_TIMESTAMP,
-            BRSQLiteHelper.PEER_ISO
+            RSQLiteHelper.PEER_COLUMN_ID,
+            RSQLiteHelper.PEER_ADDRESS,
+            RSQLiteHelper.PEER_PORT,
+            RSQLiteHelper.PEER_TIMESTAMP,
+            RSQLiteHelper.PEER_ISO
     };
 
     private static PeerDataSource instance;
@@ -64,7 +64,7 @@ public class PeerDataSource implements BRDataSourceInterface {
     }
 
     private PeerDataSource(Context context) {
-        dbHelper = BRSQLiteHelper.getInstance(context);
+        dbHelper = RSQLiteHelper.getInstance(context);
     }
 
     public void putPeers(Context app, String iso, PeerEntity[] peerEntities) {
@@ -75,11 +75,11 @@ public class PeerDataSource implements BRDataSourceInterface {
             for (PeerEntity p : peerEntities) {
 //                Log.e(TAG,"sqlite peer saved: " + Arrays.toString(p.getPeerTimeStamp()));
                 ContentValues values = new ContentValues();
-                values.put(BRSQLiteHelper.PEER_ADDRESS, p.getPeerAddress());
-                values.put(BRSQLiteHelper.PEER_PORT, p.getPeerPort());
-                values.put(BRSQLiteHelper.PEER_TIMESTAMP, p.getPeerTimeStamp());
-                values.put(BRSQLiteHelper.PEER_ISO, iso.toUpperCase());
-                database.insert(BRSQLiteHelper.PEER_TABLE_NAME, null, values);
+                values.put(RSQLiteHelper.PEER_ADDRESS, p.getPeerAddress());
+                values.put(RSQLiteHelper.PEER_PORT, p.getPeerPort());
+                values.put(RSQLiteHelper.PEER_TIMESTAMP, p.getPeerTimeStamp());
+                values.put(RSQLiteHelper.PEER_ISO, iso.toUpperCase());
+                database.insert(RSQLiteHelper.PEER_TABLE_NAME, null, values);
             }
 
             database.setTransactionSuccessful();
@@ -99,8 +99,8 @@ public class PeerDataSource implements BRDataSourceInterface {
             database = openDatabase();
             long id = peerEntity.getId();
             Log.e(TAG, "Peer deleted with id: " + id);
-            database.delete(BRSQLiteHelper.PEER_TABLE_NAME, BRSQLiteHelper.PEER_COLUMN_ID
-                    + " = ? AND " + BRSQLiteHelper.PEER_ISO + " = ?", new String[]{String.valueOf(id), iso.toUpperCase()});
+            database.delete(RSQLiteHelper.PEER_TABLE_NAME, RSQLiteHelper.PEER_COLUMN_ID
+                    + " = ? AND " + RSQLiteHelper.PEER_ISO + " = ?", new String[]{String.valueOf(id), iso.toUpperCase()});
         } finally {
             closeDatabase();
         }
@@ -110,7 +110,7 @@ public class PeerDataSource implements BRDataSourceInterface {
     public void deleteAllPeers(Context app, String iso) {
         try {
             database = dbHelper.getWritableDatabase();
-            database.delete(BRSQLiteHelper.PEER_TABLE_NAME, BRSQLiteHelper.PEER_ISO + " = ?", new String[]{iso.toUpperCase()});
+            database.delete(RSQLiteHelper.PEER_TABLE_NAME, RSQLiteHelper.PEER_ISO + " = ?", new String[]{iso.toUpperCase()});
         } finally {
             closeDatabase();
         }
@@ -122,8 +122,8 @@ public class PeerDataSource implements BRDataSourceInterface {
         try {
             database = openDatabase();
 
-            cursor = database.query(BRSQLiteHelper.PEER_TABLE_NAME,
-                    allColumns, BRSQLiteHelper.PEER_ISO + " = ?", new String[]{iso.toUpperCase()}, null, null, null);
+            cursor = database.query(RSQLiteHelper.PEER_TABLE_NAME,
+                    allColumns, RSQLiteHelper.PEER_ISO + " = ?", new String[]{iso.toUpperCase()}, null, null, null);
 
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {

@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.ravencoin.R;
 import com.ravencoin.core.BRCorePeer;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.threads.executor.BRExecutor;
@@ -28,7 +28,7 @@ import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.wallets.raven.RvnWalletManager;
 
-public class NodesActivity extends BRActivity {
+public class NodesActivity extends RActivity {
     private static final String TAG = NodesActivity.class.getName();
     private Button switchButton;
     private TextView nodeStatus;

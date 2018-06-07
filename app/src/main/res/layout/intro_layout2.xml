@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#222222">
+    android:background="@color/write_phrase_gradient_end">
 
     <FrameLayout
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.github.paolorotolo.appintro.AppIntroViewPager
+    <com.ravencoin.presenter.tutorial.AppIntroViewPager
         android:id="@+id/view_pager"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"

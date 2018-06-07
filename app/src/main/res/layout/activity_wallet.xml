@@ -53,7 +53,7 @@
                     android:clipToPadding="false">
 
 
-                    <com.ravencoin.presenter.customviews.BRText
+                    <com.ravencoin.presenter.customviews.RText
                         android:id="@+id/currency_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/currency_image" />
 
-                    <com.ravencoin.presenter.customviews.BRText
+                    <com.ravencoin.presenter.customviews.RText
                         android:id="@+id/currency_usd_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                         app:layout_constraintTop_toBottomOf="@id/currency_image" />
 
 
-                    <com.ravencoin.presenter.customviews.BRText
+                    <com.ravencoin.presenter.customviews.RText
                         android:id="@+id/balance_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintRight_toRightOf="parent" />
 
-                    <com.ravencoin.presenter.customviews.BRText
+                    <com.ravencoin.presenter.customviews.RText
                         android:id="@+id/syncing_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
                         app:layout_constraintEnd_toEndOf="parent" />
 
 
-                    <com.ravencoin.presenter.customviews.BRText
+                    <com.ravencoin.presenter.customviews.RText
                         android:id="@+id/balance_primary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                         app:layout_constraintRight_toLeftOf="@id/balance_primary"
                         app:layout_constraintVertical_bias="0.492" />
 
-                    <com.ravencoin.presenter.customviews.BRText
+                    <com.ravencoin.presenter.customviews.RText
                         android:id="@+id/balance_secondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -218,7 +218,7 @@
                 app:contentInsetLeft="0dp"
                 app:contentInsetStart="0dp" />
 
-            <com.ravencoin.presenter.customviews.BRNotificationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+            <com.ravencoin.presenter.customviews.RNotificationBar xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/notification_bar"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
@@ -248,18 +248,18 @@
         android:background="@color/finger_gradient_end"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/tx_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false" />
-
         <ImageView
             android:id="@+id/view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/notransation"
             android:adjustViewBounds="true"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/tx_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false" />
 
     </RelativeLayout>
 
@@ -282,7 +282,7 @@
         android:weightSum="3">
 
 
-        <com.ravencoin.presenter.customviews.BRButton
+        <com.ravencoin.presenter.customviews.RButton
             android:id="@+id/send_button"
             android:layout_width="0dp"
             android:layout_height="65dp"
@@ -302,7 +302,7 @@
             app:isBreadButton="true" />
 
 
-        <com.ravencoin.presenter.customviews.BRButton
+        <com.ravencoin.presenter.customviews.RButton
             android:id="@+id/receive_button"
             android:layout_width="0dp"
             android:layout_height="65dp"
@@ -320,7 +320,7 @@
             app:hasShadow="false"
             app:isBreadButton="true" />
 
-        <com.ravencoin.presenter.customviews.BRButton
+        <com.ravencoin.presenter.customviews.RButton
             android:id="@+id/buy_button"
             android:layout_width="0dp"
             android:layout_height="65dp"

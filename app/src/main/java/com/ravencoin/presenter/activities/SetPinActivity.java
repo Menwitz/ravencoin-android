@@ -9,13 +9,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRKeyboard;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.util.BRConstants;
 
-public class SetPinActivity extends BRActivity {
+public class SetPinActivity extends RActivity {
     private static final String TAG = SetPinActivity.class.getName();
     private BRKeyboard keyboard;
     public static SetPinActivity introSetPitActivity;

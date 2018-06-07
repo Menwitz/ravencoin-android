@@ -105,7 +105,7 @@ public class BRDialog {
         }, null, null, 0);
     }
 
-    //same but with a SpannableString as message to be able to click on a portion of the text with a listener
+    //same but with a SpannableString as message to be able to click on a portion of the address with a listener
     public static void showCustomDialog(@NonNull final Context app, @NonNull final String title, @NonNull final SpannableString message,
                                         @NonNull final String posButton, final String negButton, final BRDialogView.BROnClickListener posListener,
                                         final BRDialogView.BROnClickListener negListener, final DialogInterface.OnDismissListener dismissListener, final int iconRes) {

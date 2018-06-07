@@ -25,16 +25,16 @@ import android.util.TypedValue;
 import android.widget.TextView;
 
 /**
- * Text view that auto adjusts text size to fit within the view.
- * If the text size equals the minimum text size and still does not
+ * Text view that auto adjusts address size to fit within the view.
+ * If the address size equals the minimum address size and still does not
  * fit, append with an ellipsis.
  *
  * @author Chase Colburn
  * @since Apr 4, 2011
  */
-public class AutoResizeTextView extends BRText {
+public class AutoResizeTextView extends RText {
 
-    // Minimum text size for this text view
+    // Minimum address size for this address view
     private static final float MIN_TEXT_SIZE = 20;
 
     // Interface for resize notifications
@@ -48,16 +48,16 @@ public class AutoResizeTextView extends BRText {
     // Registered resize listener
     private OnTextResizeListener mTextResizeListener;
 
-    // Flag for text and/or size changes to force a resize
+    // Flag for address and/or size changes to force a resize
     private boolean mNeedsResize = false;
 
     // Text size that is set from code. This acts as a starting point for resizing
     private float mTextSize;
 
-    // Temporary upper bounds on the starting text size
+    // Temporary upper bounds on the starting address size
     private float mMaxTextSize = 0;
 
-    // Lower bounds for text size
+    // Lower bounds for address size
     private float mMinTextSize = MIN_TEXT_SIZE;
 
     // Text view line spacing multiplier
@@ -66,7 +66,7 @@ public class AutoResizeTextView extends BRText {
     // Text view additional line spacing
     private float mSpacingAdd = 0.0f;
 
-    // Add ellipsis to text that overflows at the smallest text size
+    // Add ellipsis to address that overflows at the smallest address size
     private boolean mAddEllipsis = true;
 
     // Default constructor override
@@ -86,17 +86,17 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * When text changes, set the force resize flag to true and reset the text size.
+     * When address changes, set the force resize flag to true and reset the address size.
      */
     @Override
     protected void onTextChanged(final CharSequence text, final int start, final int before, final int after) {
         mNeedsResize = true;
-        // Since this view may be reused, it is good to reset the text size
+        // Since this view may be reused, it is good to reset the address size
         resetTextSize();
     }
 
     /**
-     * If the text view size changed, set the force resize flag to true
+     * If the address view size changed, set the force resize flag to true
      */
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -114,7 +114,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Override the set text size to update our internal reference values
+     * Override the set address size to update our internal reference values
      */
     @Override
     public void setTextSize(float size) {
@@ -123,7 +123,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Override the set text size to update our internal reference values
+     * Override the set address size to update our internal reference values
      */
     @Override
     public void setTextSize(int unit, float size) {
@@ -142,7 +142,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Set the upper text size limit and invalidate the view
+     * Set the upper address size limit and invalidate the view
      * @param maxTextSize
      */
     public void setMaxTextSize(float maxTextSize) {
@@ -152,7 +152,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Return upper text size limit
+     * Return upper address size limit
      * @return
      */
     public float getMaxTextSize() {
@@ -160,7 +160,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Set the lower text size limit and invalidate the view
+     * Set the lower address size limit and invalidate the view
      * @param minTextSize
      */
     public void setMinTextSize(float minTextSize) {
@@ -170,7 +170,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Return lower text size limit
+     * Return lower address size limit
      * @return
      */
     public float getMinTextSize() {
@@ -178,7 +178,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Set flag to add ellipsis to text that overflows at the smallest text size
+     * Set flag to add ellipsis to address that overflows at the smallest address size
      * @param addEllipsis
      */
     public void setAddEllipsis(boolean addEllipsis) {
@@ -186,7 +186,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Return flag to add ellipsis to text that overflows at the smallest text size
+     * Return flag to add ellipsis to address that overflows at the smallest address size
      * @return
      */
     public boolean getAddEllipsis() {
@@ -194,7 +194,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Reset the text to the original size
+     * Reset the address to the original size
      */
     private void resetTextSize() {
         if (mTextSize > 0) {
@@ -204,7 +204,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Resize text after measuring
+     * Resize address after measuring
      */
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -217,7 +217,7 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Resize the text size with default width and height
+     * Resize the address size with default width and height
      */
     public void resizeText() {
 
@@ -227,13 +227,13 @@ public class AutoResizeTextView extends BRText {
     }
 
     /**
-     * Resize the text size with specified width and height
+     * Resize the address size with specified width and height
      * @param width
      * @param height
      */
     private void resizeText(int width, int height) {
         CharSequence text = getText();
-        // Do not resize if the view does not have dimensions or there is no text
+        // Do not resize if the view does not have dimensions or there is no address
         if (text == null || text.length() == 0 || height <= 0 || width <= 0 || mTextSize == 0) {
             return;
         }
@@ -242,36 +242,36 @@ public class AutoResizeTextView extends BRText {
             text = getTransformationMethod().getTransformation(text, this);
         }
 
-        // Get the text view's paint object
+        // Get the address view's paint object
         TextPaint textPaint = getPaint();
 
-        // Store the current text size
+        // Store the current address size
         float oldTextSize = textPaint.getTextSize();
-        // If there is a max text size set, use the lesser of that and the default text size
+        // If there is a max address size set, use the lesser of that and the default address size
         float targetTextSize = mMaxTextSize > 0 ? Math.min(mTextSize, mMaxTextSize) : mTextSize;
 
-        // Get the required text height
+        // Get the required address height
         int textHeight = getTextHeight(text, textPaint, width, targetTextSize);
 
-        // Until we either fit within our text view or we had reached our min text size, incrementally try smaller sizes
+        // Until we either fit within our address view or we had reached our min address size, incrementally try smaller sizes
         while (textHeight > height && targetTextSize > mMinTextSize) {
             targetTextSize = Math.max(targetTextSize - 2, mMinTextSize);
             textHeight = getTextHeight(text, textPaint, width, targetTextSize);
         }
 
-        // If we had reached our minimum text size and still don't fit, append an ellipsis
+        // If we had reached our minimum address size and still don't fit, append an ellipsis
         if (mAddEllipsis && targetTextSize == mMinTextSize && textHeight > height) {
             // Draw using a static layout
             // modified: use a copy of TextPaint for measuring
             TextPaint paint = new TextPaint(textPaint);
             // Draw using a static layout
             StaticLayout layout = new StaticLayout(text, paint, width, Alignment.ALIGN_NORMAL, mSpacingMult, mSpacingAdd, false);
-            // Check that we have a least one line of rendered text
+            // Check that we have a least one line of rendered address
             if (layout.getLineCount() > 0) {
                 // Since the line at the specific vertical position would be cut off,
                 // we must trim up to the previous line
                 int lastLine = layout.getLineForVertical(height) - 1;
-                // If the text would not even fit on a single line, clear it
+                // If the address would not even fit on a single line, clear it
                 if (lastLine < 0) {
                     setText("");
                 }
@@ -305,13 +305,13 @@ public class AutoResizeTextView extends BRText {
         mNeedsResize = false;
     }
 
-    // Set the text size of the text paint object and use a static layout to render text off screen before measuring
+    // Set the address size of the address paint object and use a static layout to render address off screen before measuring
     private int getTextHeight(CharSequence source, TextPaint paint, int width, float textSize) {
         // modified: make a copy of the original TextPaint object for measuring
         // (apparently the object gets modified while measuring, see also the
         // docs for TextView.getPaint() (which states to access it read-only)
         TextPaint paintCopy = new TextPaint(paint);
-        // Update the text paint object
+        // Update the address paint object
         paintCopy.setTextSize(textSize);
         // Measure using a static layout
         StaticLayout layout = new StaticLayout(source, paintCopy, width, Alignment.ALIGN_NORMAL, mSpacingMult, mSpacingAdd, true);

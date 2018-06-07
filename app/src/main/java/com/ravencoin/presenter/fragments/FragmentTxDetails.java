@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.customviews.BRText;
+import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.presenter.entities.CurrencyEntity;
 import com.ravencoin.presenter.entities.TxUiHolder;
 import com.ravencoin.tools.manager.BRClipboardManager;
@@ -43,22 +43,22 @@ public class FragmentTxDetails extends DialogFragment {
 
     private TxUiHolder mTransaction;
 
-    private BRText mTxAction;
-    private BRText mTxAmount;
-    private BRText mTxStatus;
-    private BRText mTxDate;
-    private BRText mToFrom;
-    private BRText mToFromAddress;
-    private BRText mMemoText;
+    private RText mTxAction;
+    private RText mTxAmount;
+    private RText mTxStatus;
+    private RText mTxDate;
+    private RText mToFrom;
+    private RText mToFromAddress;
+    private RText mMemoText;
 
-    private BRText mStartingBalance;
-    private BRText mEndingBalance;
-    private BRText mExchangeRate;
-    private BRText mConfirmedInBlock;
-    private BRText mTransactionId;
-    private BRText mShowHide;
-    private BRText mAmountWhenSent;
-    private BRText mAmountNow;
+    private RText mStartingBalance;
+    private RText mEndingBalance;
+    private RText mExchangeRate;
+    private RText mConfirmedInBlock;
+    private RText mTransactionId;
+    private RText mShowHide;
+    private RText mAmountWhenSent;
+    private RText mAmountNow;
 
     private ImageButton mCloseButton;
     private RelativeLayout mDetailsContainer;
@@ -227,7 +227,7 @@ public class FragmentTxDetails extends DialogFragment {
             if (!sent)
                 mTxAmount.setTextColor(getContext().getColor(R.color.transaction_amount_received_color));
 
-            // Set the memo text if one is available
+            // Set the memo address if one is available
             String memo;
             TxMetaData txMetaData = KVStoreManager.getInstance().getTxMetaData(getActivity(), mTransaction.getTxHash());
 

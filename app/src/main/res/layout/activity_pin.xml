@@ -88,7 +88,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:showAlphabet="true"/>
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/enter_pin_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.ravencoin.presenter.customviews.BRButton
+        <com.ravencoin.presenter.customviews.RButton
             android:id="@+id/left_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
             app:isBreadButton="false"
             />
 
-        <com.ravencoin.presenter.customviews.BRButton
+        <com.ravencoin.presenter.customviews.RButton
             android:id="@+id/right_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/unlocked_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -52,7 +52,7 @@ public class FragmentPhraseWord extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_word_item, container, false);
         TextView b = (TextView) rootView.findViewById(R.id.word_button);
-        b.setText(getArguments().getString("text"));
+        b.setText(getArguments().getString("address"));
 
         return rootView;
     }
@@ -61,7 +61,7 @@ public class FragmentPhraseWord extends Fragment {
 
         FragmentPhraseWord f = new FragmentPhraseWord();
         Bundle b = new Bundle();
-        b.putString("text", text);
+        b.putString("address", text);
 
         f.setArguments(b);
 

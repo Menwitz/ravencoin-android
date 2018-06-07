@@ -8,7 +8,7 @@
     android:background="@drawable/crypto_card_shape">
     <!-- Height was 84-->
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/wallet_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:textSize="18sp"
         app:customTFont="CircularPro-Bold.otf" />
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/wallet_trade_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:textSize="16sp"
         app:customTFont="CircularPro-Book.otf" />
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/wallet_balance_usd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:textSize="18sp"
         app:customTFont="CircularPro-Bold.otf" />
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/syncing_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
         android:progressDrawable="@drawable/wallet_sync_progress_bar"
         android:progressTint="#ffffff" />
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/wallet_balance_currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
         android:layout_marginBottom="16dp"
         android:gravity="center">
 
-        <com.ravencoin.presenter.customviews.BRText
+        <com.ravencoin.presenter.customviews.RText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16sp"

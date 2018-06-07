@@ -1,128 +1,35 @@
 package com.ravencoin.presenter.tutorial;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.support.annotation.ColorInt;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.tutorial.util.CustomFontCache;
 import com.ravencoin.presenter.tutorial.util.LogHelper;
+
+import java.util.ArrayList;
 
 public abstract class AppIntro extends AppIntroBase {
     private static final String TAG = LogHelper.makeLogTag(AppIntro.class);
 
+    protected View customBackgroundView;
+    protected FrameLayout backgroundFrame;
+    private ArrayList<Integer> transitionColors;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        backgroundFrame = findViewById(R.id.background);
+    }
+
     @Override
     protected int getLayoutId() {
-        return R.layout.intro_layout;
-    }
-
-    /**
-     * Override viewpager bar color
-     *
-     * @param color your color resource
-     */
-    public void setBarColor(@ColorInt final int color) {
-        LinearLayout bottomBar = findViewById(R.id.bottom);
-        bottomBar.setBackgroundColor(color);
-    }
-
-    /**
-     * Override next button arrow color
-     *
-     * @param color your color
-     */
-    public void setNextArrowColor(@ColorInt final int color) {
-        ImageButton nextButton = findViewById(R.id.next);
-        nextButton.setColorFilter(color);
-    }
-
-    /**
-     * Override separator color
-     *
-     * @param color your color resource
-     */
-    public void setSeparatorColor(@ColorInt final int color) {
-        TextView separator = findViewById(R.id.bottom_separator);
-        separator.setBackgroundColor(color);
-    }
-
-    /**
-     * Override skip text
-     *
-     * @param text your text
-     */
-    public void setSkipText(@Nullable final CharSequence text) {
-        TextView skipText = findViewById(R.id.skip);
-        skipText.setText(text);
-    }
-
-    /**
-     * Override skip text typeface
-     *
-     * @param typeURL URL of font file located in Assets folder
-     */
-    public void setSkipTextTypeface(@Nullable final String typeURL) {
-        TextView skipText = findViewById(R.id.skip);
-        if (CustomFontCache.get(typeURL, this) != null) {
-            skipText.setTypeface(CustomFontCache.get(typeURL, this));
-        }
-    }
-
-    /**
-     * Override done text
-     *
-     * @param text your text
-     */
-    public void setDoneText(@Nullable final CharSequence text) {
-        TextView doneText = findViewById(R.id.done);
-        doneText.setText(text);
-    }
-
-    /**
-     * Override done text typeface
-     *
-     * @param typeURL your text
-     */
-    public void setDoneTextTypeface(@Nullable final String typeURL) {
-        TextView doneText = findViewById(R.id.done);
-        if (CustomFontCache.get(typeURL, this) != null) {
-            doneText.setTypeface(CustomFontCache.get(typeURL, this));
-        }
-    }
-
-    /**
-     * Override done button text color
-     *
-     * @param colorDoneText your color resource
-     */
-    public void setColorDoneText(@ColorInt final int colorDoneText) {
-        TextView doneText = findViewById(R.id.done);
-        doneText.setTextColor(colorDoneText);
-    }
-
-    /**
-     * Override skip button color
-     *
-     * @param colorSkipButton your color resource
-     */
-    public void setColorSkipButton(@ColorInt final int colorSkipButton) {
-        TextView skip = findViewById(R.id.skip);
-        skip.setTextColor(colorSkipButton);
-    }
-
-    /**
-     * Override Next button
-     *
-     * @param imageNextButton your drawable resource
-     */
-    public void setImageNextButton(final Drawable imageNextButton) {
-        final ImageView nextButton = findViewById(R.id.next);
-        nextButton.setImageDrawable(imageNextButton);
+        return R.layout.intro_layout2;
     }
 
     /**
@@ -134,20 +41,42 @@ public abstract class AppIntro extends AppIntroBase {
     public void showDoneButton(boolean showDone) {
         setProgressButtonEnabled(showDone);
     }
+    
+    /**
+     * Override viewpager bar color
+     *
+     * @param color your color resource
+     */
+    public void setBarColor(@ColorInt final int color) {
+        LinearLayout bottomBar = findViewById(R.id.bottom);
+        bottomBar.setBackgroundColor(color);
+    }
 
     /**
-     * Show or hide the Separator line.
-     * This is a static setting and Separator state is maintained across slides
-     * until explicitly changed.
+     * Override Next button
      *
-     * @param showSeparator Set : true to display. false to hide.
+     * @param imageSkipButton your drawable resource
      */
-    public void showSeparator(boolean showSeparator) {
-        TextView bottomSeparator = findViewById(R.id.bottom_separator);
-        if(showSeparator) {
-            bottomSeparator.setVisibility(View.VISIBLE);
-        } else {
-            bottomSeparator.setVisibility(View.INVISIBLE);
+    public void setImageSkipButton(final Drawable imageSkipButton) {
+        final ImageButton nextButton = findViewById(R.id.skip);
+        nextButton.setImageDrawable(imageSkipButton);
+
+    }
+
+    public void setBackgroundView(View view) {
+        customBackgroundView = view;
+        if (customBackgroundView != null) {
+            backgroundFrame.addView(customBackgroundView);
         }
+    }
+
+    /**
+     * For color transition, will be shown only if color values are properly set;
+     * Size of the color array must be equal to the number of slides added
+     *
+     * @param colors Set color values
+     */
+    public void setAnimationColors(ArrayList<Integer> colors) {
+        transitionColors = colors;
     }
 }

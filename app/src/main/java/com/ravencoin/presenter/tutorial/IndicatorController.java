@@ -6,12 +6,12 @@ import android.view.View;
 
 /**
  * A controller that is used to provide custom indicator implementations and to control their behaviour.
- * This is used for {@link AppIntro#setCustomIndicator(IndicatorController)} and
- * {@link AppIntro2#setCustomIndicator(IndicatorController)}
+ * This is used for {@link AppIntro3#setCustomIndicator(IndicatorController)} and
+ * {@link AppIntro#setCustomIndicator(IndicatorController)}
  */
 public interface IndicatorController {
     /**
-     * Create a new instance of the view to be inserted in the AppIntro layout.
+     * Create a new instance of the view to be inserted in the AppIntro3 layout.
      * This method is only called once for each creation of the activity.
      * <p/>
      * {@link IndicatorController#initialize(int)} is called after this.
@@ -28,7 +28,7 @@ public interface IndicatorController {
      * <p/>
      * {@link IndicatorController#newInstance(Context)} is called before this.
      *
-     * @param slideCount The amount of slides present in the AppIntro
+     * @param slideCount The amount of slides present in the AppIntro3
      */
     void initialize(int slideCount);
 

@@ -5,25 +5,22 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.SpringAnimator;
-import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.security.AuthManager;
-import com.ravencoin.tools.security.BRKeyStore;
 import com.ravencoin.tools.util.BRConstants;
 
 import java.util.Locale;
 
 
-public class DisabledActivity extends BRActivity {
+public class DisabledActivity extends RActivity {
     private static final String TAG = DisabledActivity.class.getName();
     private TextView untilLabel;
     private TextView disabled;

@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.ravencoin.R;
 import com.ravencoin.core.BRCoreAddress;
 import com.ravencoin.core.BRCoreKey;
@@ -111,7 +111,7 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
         String decoratedAddress = wm.decorateAddress(app, tmpAddress);
 
         //automatically uses testnet if x-testnet is true
-        String fullUrl = String.format("https://%s/q/addr/%s/utxo?currency=%s", BreadApp.HOST, decoratedAddress, iso);
+        String fullUrl = String.format("https://%s/q/addr/%s/utxo?currency=%s", RavenApp.HOST, decoratedAddress, iso);
         mTransaction = createSweepingTx(app, fullUrl);
         if (mTransaction == null) {
             app.runOnUiThread(new Runnable() {
@@ -279,7 +279,7 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
 //                    builder.setTitle("password protected key");
 
                     final View input = ((Activity) ctx).getLayoutInflater().inflate(R.layout.view_bip38password_dialog, null);
-                    // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                    // Specify the type of input expected; this, for example, sets the input as a password, and will mask the address
                     builder.setView(input);
 
                     final EditText editText = (EditText) input.findViewById(R.id.bip38password_edittext);
@@ -304,7 +304,7 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
                                     }
                                 });
                             if (editText == null) {
-                                Log.e(TAG, "onClick: edit text is null!");
+                                Log.e(TAG, "onClick: edit address is null!");
                                 return;
                             }
 

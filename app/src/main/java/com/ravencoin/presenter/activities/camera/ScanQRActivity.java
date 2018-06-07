@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.SpringAnimator;
 import com.ravencoin.tools.qrcode.QRCodeReaderView;
 import com.ravencoin.wallet.WalletsMaster;
@@ -48,7 +48,7 @@ import com.platform.tools.BRBitId;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-public class ScanQRActivity extends BRActivity implements ActivityCompat.OnRequestPermissionsResultCallback, QRCodeReaderView.OnQRCodeReadListener {
+public class ScanQRActivity extends RActivity implements ActivityCompat.OnRequestPermissionsResultCallback, QRCodeReaderView.OnQRCodeReadListener {
     private static final String TAG = ScanQRActivity.class.getName();
     private ImageView cameraGuide;
     private TextView descriptionText;

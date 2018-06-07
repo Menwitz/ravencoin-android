@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRKeyboard;
 import com.ravencoin.presenter.interfaces.BROnSignalCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
@@ -19,7 +19,7 @@ import com.ravencoin.tools.security.PostAuth;
 import com.ravencoin.tools.util.BRConstants;
 import com.ravencoin.tools.util.Utils;
 
-public class ReEnterPinActivity extends BRActivity {
+public class ReEnterPinActivity extends RActivity {
     private static final String TAG = ReEnterPinActivity.class.getName();
     private BRKeyboard keyboard;
     public static ReEnterPinActivity reEnterPinActivity;

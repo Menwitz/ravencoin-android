@@ -2952,7 +2952,7 @@ public class BRWalletManager extends BRCoreWalletManager {
                 "tent",
                 "term",
                 "test",
-                "text",
+                "address",
                 "thank",
                 "that",
                 "theme",

@@ -1,13 +1,11 @@
 package com.platform.middlewares;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.platform.APIClient;
 import com.platform.BRHTTPHelper;
-import com.platform.HTTPServer;
 import com.platform.interfaces.Middleware;
 
 import junit.framework.Assert;
@@ -51,7 +49,7 @@ public class HTTPIndexMiddleware implements Middleware {
     @Override
     public boolean handle(String target, org.eclipse.jetty.server.Request baseRequest, HttpServletRequest request, HttpServletResponse response) {
         Log.i(TAG, "handling: " + target + " " + baseRequest.getMethod());
-        Context app = BreadApp.getBreadContext();
+        Context app = RavenApp.getBreadContext();
         if (app == null) {
             Log.e(TAG, "handle: app is null!");
             return true;
@@ -70,7 +68,7 @@ public class HTTPIndexMiddleware implements Middleware {
             Assert.assertNotNull(body);
             Assert.assertNotSame(body.length, 0);
             response.setHeader("Content-Length", String.valueOf(body.length));
-            return BRHTTPHelper.handleSuccess(200, body, baseRequest, response, "text/html;charset=utf-8");
+            return BRHTTPHelper.handleSuccess(200, body, baseRequest, response, "address/html;charset=utf-8");
         } catch (IOException e) {
             e.printStackTrace();
             Log.d(TAG, "handle: error sending response: " + target + " " + baseRequest.getMethod());

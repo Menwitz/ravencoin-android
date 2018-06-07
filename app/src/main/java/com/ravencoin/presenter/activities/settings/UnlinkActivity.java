@@ -8,12 +8,12 @@ import android.widget.ImageButton;
 
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.InputWordsActivity;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.util.BRConstants;
 
 
-public class UnlinkActivity extends BRActivity {
+public class UnlinkActivity extends RActivity {
     private Button nextButton;
     private ImageButton close;
     public static boolean appVisible = false;

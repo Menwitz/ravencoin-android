@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
 import com.ravencoin.presenter.entities.CurrencyEntity;
 import com.ravencoin.tools.sqlite.CurrencyDataSource;
@@ -132,7 +132,7 @@ public class BRApiManager {
                         BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                             @Override
                             public void run() {
-                                if (BreadApp.isAppInBackground(context)) {
+                                if (RavenApp.isAppInBackground(context)) {
                                     Log.e(TAG, "doInBackground: Stopping timer, no activity on.");
                                     stopTimerTask();
                                 }
@@ -254,7 +254,7 @@ public class BRApiManager {
             Log.e(TAG, "urlGET: network on main thread");
             throw new RuntimeException("network on main thread");
         }
-        Map<String, String> headers = BreadApp.getBreadHeaders();
+        Map<String, String> headers = RavenApp.getBreadHeaders();
 
         Request.Builder builder = new Request.Builder()
                 .url(myURL)

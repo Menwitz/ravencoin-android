@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRDialogView;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.BRDialog;
@@ -16,7 +16,7 @@ import com.ravencoin.tools.util.BRConstants;
 import com.ravencoin.wallet.WalletsMaster;
 
 
-public class SyncBlockchainActivity extends BRActivity {
+public class SyncBlockchainActivity extends RActivity {
     private static final String TAG = SyncBlockchainActivity.class.getName();
     private Button scanButton;
     public static boolean appVisible = false;

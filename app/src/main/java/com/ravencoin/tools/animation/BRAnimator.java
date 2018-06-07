@@ -154,6 +154,9 @@ public class BRAnimator {
         } finally {
 
         }
+    }
+
+    public static void showSupportFragment(Activity app, String articleId, String sendToAddress) {
 
     }
 
@@ -183,7 +186,6 @@ public class BRAnimator {
         } finally {
 
         }
-
     }
 
     public static void popBackStackTillEntry(Activity app, int entryIndex) {

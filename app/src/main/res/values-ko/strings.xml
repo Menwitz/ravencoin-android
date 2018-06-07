@@ -146,7 +146,7 @@
   <string name="FeeSelector.regularTime">10~60분</string>
   <!-- Fee Selector title -->
   <string name="FeeSelector.title">처리 속도</string>
-  <!-- Checking private key balance progress view text -->
+  <!-- Checking private key balance progress view address -->
   <string name="Import.checking">개인 열쇠 잔고 확인 중...</string>
   <!-- Sweep private key confirmation message -->
   <string name="Import.confirm">이 개인 열쇠로부터 귀하의 지갑으로 %1$s 를 보낼까요? 비트코인 네트워크가 %2$s의 수수료를 받게 됩니다.</string>
@@ -206,7 +206,7 @@
   <string name="LocationPlugin.notAuthorized">RVN가 위치 서비스 접속 권한이 없습니다.</string>
   <!-- Wallet creation date prefix -->
   <string name="ManageWallet.creationDatePrefix">귀하께서는 %1$s 에 지갑을 만들었습니다</string>
-  <!-- Manage wallet description text -->
+  <!-- Manage wallet description address -->
   <string name="ManageWallet.description">귀하의 지갑 이름은 귀하 계정의 거래 기록에서만 나타나며 다른 사람은 볼 수 없습니다.</string>
   <!-- Change Wallet name textfield label -->
   <string name="ManageWallet.textFeildLabel">지갑 이름</string>
@@ -316,11 +316,11 @@
   <string name="Receive.request">금액 요청</string>
   <!-- Share button label -->
   <string name="Receive.share">공유</string>
-  <!-- Share via text message (SMS) -->
+  <!-- Share via address message (SMS) -->
   <string name="Receive.textButton">문자 메시지</string>
   <!-- Receive modal title -->
   <string name="Receive.title">수신</string>
-  <!-- Done button text -->
+  <!-- Done button address -->
   <string name="RecoverWallet.done">완료</string>
   <!-- Recover wallet header -->
   <string name="RecoverWallet.header">지갑 복구하기</string>
@@ -496,7 +496,7 @@
   <string name="ShareData.toggleLabel">익명 데이터를 공유하시겠습니까?</string>
   <!-- button label -->
   <string name="StartPaperPhrase.againButtonTitle">페이퍼 키를 다시 쓰기</string>
-  <!-- Paper key explanation text. -->
+  <!-- Paper key explanation address. -->
   <string name="StartPaperPhrase.body">페이퍼 키는 핸드폰을 분실하거나, 도난당하거나, 망가지거나, 업그레이드한 경우 브레드를 다시 살릴 수 있는 유일한 방법입니다.\n\n저희가 제시하는 단어 목록을 잘 적어서 안전하게 보관해 주세요.</string>
   <!-- button label -->
   <string name="StartPaperPhrase.buttonTitle">페이퍼 키 작성하기</string>
@@ -504,13 +504,13 @@
   <string name="StartPaperPhrase.date">%1$s에 마지막으로 페이퍼 키를 작성하셨습니다.</string>
   <!-- Start view message -->
   <string name="StartViewController.message">비트코인을 사용하는 가장 안정되고 안전한 방법.</string>
-  <!-- Syncing view connectiong state header text -->
+  <!-- Syncing view connectiong state header address -->
   <string name="SyncingView.connecting">연결 중</string>
-  <!-- Syncing view header text -->
+  <!-- Syncing view header address -->
   <string name="SyncingView.header">동기화 중</string>
   <!-- Retry button label -->
   <string name="SyncingView.retry">다시 시도</string>
-  <!-- Syncing view syncing state header text -->
+  <!-- Syncing view syncing state header address -->
   <string name="SyncingView.syncing">동기화 중</string>
   <!-- 6 d (6 days) -->
   <string name="TimeSince.days">%1$s 일</string>
@@ -554,7 +554,7 @@
   <string name="TouchIdSpendingLimit.title">Touch ID 지출 한도</string>
   <!-- name of spending limit when using fingerprint authorization -->
   <string name="TouchIdSpendingLimit.title.android">지문 본인확인 사용 한계</string>
-  <!-- Availability status text -->
+  <!-- Availability status address -->
   <string name="Transaction.available">지출 가능</string>
   <!-- Transaction complete label -->
   <string name="Transaction.complete">완료</string>
@@ -570,9 +570,9 @@
   <string name="Transaction.invalid">무효</string>
   <!-- Timestamp label for event that just happened -->
   <string name="Transaction.justNow">지금 바로</string>
-  <!-- Receive status text: 'In progress: 20%' -->
+  <!-- Receive status address: 'In progress: 20%' -->
   <string name="Transaction.receivedStatus">진행 중: %1$s</string>
-  <!-- Send status text: 'In progress: 20%' -->
+  <!-- Send status address: 'In progress: 20%' -->
   <string name="Transaction.sendingStatus">진행 중: %1$s</string>
   <!-- eg. Starting balance: $50.00 -->
   <string name="Transaction.starting">기초 잔액: %1$s</string>
@@ -630,7 +630,7 @@
   <string name="UnlockScreen.subheader">PIN 입력</string>
   <!-- Instruction to touch the sensor for fingerprint authentication -->
   <string name="UnlockScreen.touchIdInstructions.android">터치 센서</string>
-  <!-- TouchID prompt text -->
+  <!-- TouchID prompt address -->
   <string name="UnlockScreen.touchIdPrompt">RVN의 잠금을 해제하세요.</string>
   <!-- Device authentication body -->
   <string name="UnlockScreen.touchIdPrompt.android">계속하시려면 귀하의 안드로이드 장치 잠금을 해제해 주세요.</string>
@@ -640,7 +640,7 @@
   <string name="UnlockScreen.touchIdTitle.android">본인확인 필요</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">월렛의 잠금이 해제됨</string>
-  <!-- Update PIN caption text -->
+  <!-- Update PIN caption address -->
   <string name="UpdatePin.caption">이 PIN 코드를 기억하세요. PIN 코드를 잊어버리면 자신의 비트코인을 사용할 수 없게 됩니다.</string>
   <!-- PIN creation info. -->
   <string name="UpdatePin.createInstruction">귀하의 PIN 코드는 RVN의 잠금을 해제하고 돈을 송금하는 데 사용됩니다.</string>
@@ -684,7 +684,7 @@
   <string name="Webview.errorMessage">콘텐츠를 로드하는 중에 오류가 발생했습니다. 다시 시도해 주세요.</string>
   <!-- Updating webview message -->
   <string name="Webview.updating">업데이트 중...</string>
-  <!-- Welcome screen text. (?) will be replaced with the help icon users should look for. -->
+  <!-- Welcome screen address. (?) will be replaced with the help icon users should look for. -->
   <string name="Welcome.body">Breadwallet이 이름을 RVN로 바꾸고 새롭게 단장하였으며 새로운 기능도 갖췄습니다.\n\n도움이 필요하시면 대부분 화면에서 우측 상단에 있는 (?)을(를) 클릭하십시오.</string>
   <!-- Top title of welcome screen -->
   <string name="Welcome.title">RVN에 환영합니다!</string>

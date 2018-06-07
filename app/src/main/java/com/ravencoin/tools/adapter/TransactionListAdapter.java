@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.customviews.BRText;
+import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.presenter.entities.TxUiHolder;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.threads.executor.BRExecutor;
@@ -376,11 +376,11 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         public TextView comment;
         public ImageView arrowIcon;
 
-        public BRText transactionDate;
-        public BRText transactionAmount;
-        public BRText transactionDetail;
+        public RText transactionDate;
+        public RText transactionAmount;
+        public RText transactionDetail;
         public Button transactionFailed;
-        public BRText transactionAction;
+        public RText transactionAction;
         public ProgressBar transactionProgress;
 
 

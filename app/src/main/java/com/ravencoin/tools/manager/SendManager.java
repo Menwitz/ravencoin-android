@@ -435,7 +435,7 @@ public class SendManager {
         String formattedFee = CurrencyUtils.getFormattedAmount(ctx, iso, wallet.getFiatForSmallestCrypto(ctx, new BigDecimal(feeForTx), null));
         String formattedTotal = CurrencyUtils.getFormattedAmount(ctx, iso, wallet.getFiatForSmallestCrypto(ctx, new BigDecimal(total), null));
 
-        //formatted text
+        //formatted address
         return receiver + "\n\n"
                 + ctx.getString(R.string.Confirmation_amountLabel) + " " + formattedCryptoAmount + " (" + formattedAmount + ")"
                 + "\n" + ctx.getString(R.string.Confirmation_feeLabel) + " " + formatterCryptoFee + " (" + formattedFee + ")"

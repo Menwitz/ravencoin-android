@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.ravencoin.presenter.customviews.BRText
+                <com.ravencoin.presenter.customviews.RText
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 android:visibility="gone"
                 >
 
-                <com.ravencoin.presenter.customviews.BRText
+                <com.ravencoin.presenter.customviews.RText
                     android:id="@+id/iso_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
                     android:textSize="24sp"
                     />
 
-                <com.ravencoin.presenter.customviews.BRButton
+                <com.ravencoin.presenter.customviews.RButton
                     android:id="@+id/iso_button"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
@@ -198,7 +198,7 @@
                 android:src="@drawable/ic_check_mark_grey"
                 />
 
-            <com.ravencoin.presenter.customviews.BRText
+            <com.ravencoin.presenter.customviews.RText
                 android:id="@+id/address_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
                 app:backgroundColor="@color/dark_blue"
                 app:withStroke="false">
 
-                <com.ravencoin.presenter.customviews.BRText
+                <com.ravencoin.presenter.customviews.RText
                     android:id="@+id/copied_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -234,7 +234,7 @@
                     android:textColor="@color/white"/>
             </com.ravencoin.presenter.customviews.BRLinearLayoutWithCaret>
 
-            <com.ravencoin.presenter.customviews.BRButton
+            <com.ravencoin.presenter.customviews.RButton
                 android:id="@+id/share_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -264,7 +264,7 @@
                 app:strokeColor="@color/extra_light_gray"
                 app:withStroke="true">
 
-                <com.ravencoin.presenter.customviews.BRButton
+                <com.ravencoin.presenter.customviews.RButton
                     android:id="@+id/share_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -282,7 +282,7 @@
                     app:isBreadButton="true"
                     />
 
-                <com.ravencoin.presenter.customviews.BRButton
+                <com.ravencoin.presenter.customviews.RButton
                     android:id="@+id/share_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -308,7 +308,7 @@
                 android:layout_height="1dp"
                 android:background="@color/separator_gray"/>
 
-            <com.ravencoin.presenter.customviews.BRButton
+            <com.ravencoin.presenter.customviews.RButton
                 android:id="@+id/request_button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/big_button_height"

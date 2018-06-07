@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_intro_set_pit"
     android:layout_width="match_parent"
-    android:background="@color/extra_light_blue_background"
     android:layout_height="match_parent"
+    android:background="@color/extra_light_blue_background"
     tools:context="com.ravencoin.presenter.activities.SetPinActivity">
 
 
@@ -17,55 +16,49 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/back_button"
-                android:background="@drawable/ic_chevron_left"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_chevron_left" />
 
 
-            <com.ravencoin.presenter.customviews.BRText
+            <com.ravencoin.presenter.customviews.RText
                 android:id="@+id/nav_label"
-                android:text="Home"
-                app:customTFont="CircularPro-Bold.otf"
-                android:textSize="16sp"
-                android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Home"
+                android:textSize="16sp"
+                app:customTFont="CircularPro-Bold.otf" />
 
         </LinearLayout>
 
-
-
     </android.support.v7.widget.Toolbar>
 
-    <com.ravencoin.presenter.customviews.BRText
-        app:customTFont="CircularPro-Bold.otf"
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
-        android:layout_below="@id/toolbar"
         android:layout_alignParentRight="true"
+        android:layout_below="@id/toolbar"
+        android:layout_margin="@dimen/bread_margin"
+        android:text="Settings"
         android:textColor="@color/total_assets_usd_color"
         android:textSize="28sp"
-        android:layout_margin="@dimen/bread_margin"/>
+        app:customTFont="CircularPro-Bold.otf" />
 
     <ListView
         android:id="@+id/settings_list"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false"
-        android:background="@color/extra_light_blue_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
         android:layout_below="@id/title"
-
-        />
+        android:layout_marginTop="2dp"
+        android:background="@color/extra_light_blue_background"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false" />
 
 </RelativeLayout>

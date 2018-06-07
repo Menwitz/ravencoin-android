@@ -166,7 +166,7 @@
   <string name="FeeSelector.regularTime">10 a 60 minutos</string>
   <!-- Fee Selector title -->
   <string name="FeeSelector.title">Velocidad de procesamiento</string>
-  <!-- Checking private key balance progress view text -->
+  <!-- Checking private key balance progress view address -->
   <string name="Import.checking">Averiguando el saldo de la clave privada...</string>
   <!-- Sweep private key confirmation message -->
   <string name="Import.confirm">¿Quieres enviar %1$s desde esta clave privada a tu monedero? La red bitcoin recibirá una comisión de  %2$s.</string>
@@ -226,7 +226,7 @@
   <string name="LocationPlugin.notAuthorized">Bread no tiene permiso para acceder a los servicios de ubicación.</string>
   <!-- Wallet creation date prefix -->
   <string name="ManageWallet.creationDatePrefix">Has creado una cartera en %1$s</string>
-  <!-- Manage wallet description text -->
+  <!-- Manage wallet description address -->
   <string name="ManageWallet.description">El nombre de tu cartera solo aparece en el historial de transacciones de tu cuenta y nadie más lo puede ver.</string>
   <!-- Change Wallet name textfield label -->
   <string name="ManageWallet.textFeildLabel">Nombre de la cartera</string>
@@ -336,11 +336,11 @@
   <string name="Receive.request">Solicitar una cantidad</string>
   <!-- Share button label -->
   <string name="Receive.share">Compartir</string>
-  <!-- Share via text message (SMS) -->
+  <!-- Share via address message (SMS) -->
   <string name="Receive.textButton">Mensaje de texto</string>
   <!-- Receive modal title -->
   <string name="Receive.title">Recibir</string>
-  <!-- Done button text -->
+  <!-- Done button address -->
   <string name="RecoverWallet.done">Listo</string>
   <!-- Recover wallet header -->
   <string name="RecoverWallet.header">Recuperar cartera</string>
@@ -516,7 +516,7 @@
   <string name="ShareData.toggleLabel">¿Compartir datos anónimos?</string>
   <!-- button label -->
   <string name="StartPaperPhrase.againButtonTitle">Apunta nuevamente la clave en papel</string>
-  <!-- Paper key explanation text. -->
+  <!-- Paper key explanation address. -->
   <string name="StartPaperPhrase.body">Tu clave de papel es la única manera de restaurar tu Bread si pierdes tu teléfono, o te lo roban, se rompe o se actualiza.\n\nTe mostraremos una lista de palabras para apuntar en un trozo de papel y guardarlo en un sitio seguro.</string>
   <!-- button label -->
   <string name="StartPaperPhrase.buttonTitle">Apuntar la clave en papel</string>
@@ -524,13 +524,13 @@
   <string name="StartPaperPhrase.date">La última vez que anotaste tu clave en papel fue el %1$s</string>
   <!-- Start view message -->
   <string name="StartViewController.message">La forma más segura de usar bitcoin.</string>
-  <!-- Syncing view connectiong state header text -->
+  <!-- Syncing view connectiong state header address -->
   <string name="SyncingView.connecting">Conectando</string>
-  <!-- Syncing view header text -->
+  <!-- Syncing view header address -->
   <string name="SyncingView.header">Sincronizando</string>
   <!-- Retry button label -->
   <string name="SyncingView.retry">Reintentar</string>
-  <!-- Syncing view syncing state header text -->
+  <!-- Syncing view syncing state header address -->
   <string name="SyncingView.syncing">Sincronizando</string>
   <!-- 6 d (6 days) -->
   <string name="TimeSince.days">%1$s d</string>
@@ -574,7 +574,7 @@
   <string name="TouchIdSpendingLimit.title">Límite de gasto de Touch ID</string>
   <!-- name of spending limit when using fingerprint authorization -->
   <string name="TouchIdSpendingLimit.title.android">Límite de gasto de autorización de huella digital</string>
-  <!-- Availability status text -->
+  <!-- Availability status address -->
   <string name="Transaction.available">Disponible para gastar</string>
   <!-- Transaction complete label -->
   <string name="Transaction.complete">Completada</string>
@@ -590,9 +590,9 @@
   <string name="Transaction.invalid">INVÁLIDO</string>
   <!-- Timestamp label for event that just happened -->
   <string name="Transaction.justNow">ahora mismo</string>
-  <!-- Receive status text: 'In progress: 20%' -->
+  <!-- Receive status address: 'In progress: 20%' -->
   <string name="Transaction.receivedStatus">En curso: %1$s</string>
-  <!-- Send status text: 'In progress: 20%' -->
+  <!-- Send status address: 'In progress: 20%' -->
   <string name="Transaction.sendingStatus">En curso: %1$s</string>
   <!-- eg. Starting balance: $50.00 -->
   <string name="Transaction.starting">Saldo inicial: %1$s</string>
@@ -650,7 +650,7 @@
   <string name="UnlockScreen.subheader">Introduce tu PIN</string>
   <!-- Instruction to touch the sensor for fingerprint authentication -->
   <string name="UnlockScreen.touchIdInstructions.android">Toca el sensor</string>
-  <!-- TouchID prompt text -->
+  <!-- TouchID prompt address -->
   <string name="UnlockScreen.touchIdPrompt">Desbloquea tu Bread.</string>
   <!-- Device authentication body -->
   <string name="UnlockScreen.touchIdPrompt.android">Desbloquea tu dispositivo Android para continuar.</string>
@@ -660,7 +660,7 @@
   <string name="UnlockScreen.touchIdTitle.android">Se requiere autenticación</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Cartera desbloqueada</string>
-  <!-- Update PIN caption text -->
+  <!-- Update PIN caption address -->
   <string name="UpdatePin.caption">Recuerda este PIN. Si lo olvidas, no podrás acceder a tu bitcoin.</string>
   <!-- PIN creation info. -->
   <string name="UpdatePin.createInstruction">Tu PIN se usará para desbloquear Bread y enviar dinero.</string>
@@ -704,7 +704,7 @@
   <string name="Webview.errorMessage">Se produjo un error al cargar el contenido. Vuelve a intentarlo.</string>
   <!-- Updating webview message -->
   <string name="Webview.updating">Actualizando...</string>
-  <!-- Welcome screen text. (?) will be replaced with the help icon users should look for. -->
+  <!-- Welcome screen address. (?) will be replaced with the help icon users should look for. -->
   <string name="Welcome.body">Breadwallet ha cambiado su nombre por el de Bread, con un nuevo aspecto y algunas características nuevas.\n\nSi necesitas ayuda, busca el (?) en la parte superior derecha de la mayoría de las pantallas.</string>
   <!-- Top title of welcome screen -->
   <string name="Welcome.title">¡Bienvenido a Bread!</string>

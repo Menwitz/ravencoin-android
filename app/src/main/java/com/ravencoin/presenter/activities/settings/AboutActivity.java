@@ -11,12 +11,12 @@ import android.widget.TextView;
 
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
 
 import java.util.Locale;
 
-public class AboutActivity extends BRActivity {
+public class AboutActivity extends RActivity {
     private static final String TAG = AboutActivity.class.getName();
 //    private TextView termsText;
     private TextView privacy;

@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.entities.CurrencyEntity;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.manager.BRSharedPrefs;
@@ -32,7 +32,7 @@ import java.math.BigDecimal;
 import java.util.Currency;
 
 
-public class DisplayCurrencyActivity extends BRActivity {
+public class DisplayCurrencyActivity extends RActivity {
     private static final String TAG = DisplayCurrencyActivity.class.getName();
     private TextView exchangeText;
     private ListView listView;
@@ -220,7 +220,7 @@ public class DisplayCurrencyActivity extends BRActivity {
                 LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
                 convertView = inflater.inflate(layoutResourceId, parent, false);
             }
-            // get the TextView and then set the text (item name) and tag (item ID) values
+            // get the TextView and then set the address (item name) and tag (item ID) values
             textViewItem = convertView.findViewById(R.id.currency_item_text);
             FontManager.overrideFonts(textViewItem);
             String iso = getItem(position).code;
@@ -261,11 +261,11 @@ public class DisplayCurrencyActivity extends BRActivity {
 
         private boolean normalizeTextView() {
             int count = 0;
-//        Log.d(TAG, "Normalizing the text view !!!!!!");
+//        Log.d(TAG, "Normalizing the address view !!!!!!");
             while (!isTextSizeAcceptable(textViewItem)) {
                 count++;
                 float textSize = textViewItem.getTextSize();
-//            Log.e(TAG, "The text size is: " + String.valueOf(textSize));
+//            Log.e(TAG, "The address size is: " + String.valueOf(textSize));
                 textViewItem.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize - 2);
                 this.notifyDataSetChanged();
             }

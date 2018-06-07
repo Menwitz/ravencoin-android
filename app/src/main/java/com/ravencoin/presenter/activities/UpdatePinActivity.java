@@ -9,8 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.ActivityUTILS;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRKeyboard;
 import com.ravencoin.presenter.interfaces.BROnSignalCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
@@ -19,7 +18,7 @@ import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.BRKeyStore;
 import com.ravencoin.tools.util.BRConstants;
 
-public class UpdatePinActivity extends BRActivity {
+public class UpdatePinActivity extends RActivity {
     private static final String TAG = UpdatePinActivity.class.getName();
     private BRKeyboard keyboard;
     private View dot1;

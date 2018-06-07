@@ -39,17 +39,17 @@ import com.ravencoin.tools.util.BRConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MerkleBlockDataSource implements BRDataSourceInterface {
+public class MerkleBlockDataSource implements DataSourceInterface {
     private static final String TAG = MerkleBlockDataSource.class.getName();
 
     // Database fields
     private SQLiteDatabase database;
-    private final BRSQLiteHelper dbHelper;
+    private final RSQLiteHelper dbHelper;
     private final String[] allColumns = {
-            BRSQLiteHelper.MB_COLUMN_ID,
-            BRSQLiteHelper.MB_BUFF,
-            BRSQLiteHelper.MB_HEIGHT,
-            BRSQLiteHelper.MB_ISO
+            RSQLiteHelper.MB_COLUMN_ID,
+            RSQLiteHelper.MB_BUFF,
+            RSQLiteHelper.MB_HEIGHT,
+            RSQLiteHelper.MB_ISO
     };
 
     private static MerkleBlockDataSource instance;
@@ -62,7 +62,7 @@ public class MerkleBlockDataSource implements BRDataSourceInterface {
     }
 
     private MerkleBlockDataSource(Context context) {
-        dbHelper = BRSQLiteHelper.getInstance(context);
+        dbHelper = RSQLiteHelper.getInstance(context);
     }
 
     public void putMerkleBlocks(Context app, String iso, BlockEntity[] blockEntities) {
@@ -71,10 +71,10 @@ public class MerkleBlockDataSource implements BRDataSourceInterface {
             database.beginTransaction();
             for (BlockEntity b : blockEntities) {
                 ContentValues values = new ContentValues();
-                values.put(BRSQLiteHelper.MB_BUFF, b.getBlockBytes());
-                values.put(BRSQLiteHelper.MB_HEIGHT, b.getBlockHeight());
-                values.put(BRSQLiteHelper.MB_ISO, iso.toUpperCase());
-                database.insert(BRSQLiteHelper.MB_TABLE_NAME, null, values);
+                values.put(RSQLiteHelper.MB_BUFF, b.getBlockBytes());
+                values.put(RSQLiteHelper.MB_HEIGHT, b.getBlockHeight());
+                values.put(RSQLiteHelper.MB_ISO, iso.toUpperCase());
+                database.insert(RSQLiteHelper.MB_TABLE_NAME, null, values);
             }
             database.setTransactionSuccessful();
         } catch (Exception ex) {
@@ -90,7 +90,7 @@ public class MerkleBlockDataSource implements BRDataSourceInterface {
     public void deleteAllBlocks(Context app, String iso) {
         try {
             database = openDatabase();
-            database.delete(BRSQLiteHelper.MB_TABLE_NAME, BRSQLiteHelper.MB_ISO + "=?", new String[]{iso.toUpperCase()});
+            database.delete(RSQLiteHelper.MB_TABLE_NAME, RSQLiteHelper.MB_ISO + "=?", new String[]{iso.toUpperCase()});
         } finally {
             closeDatabase();
         }
@@ -101,8 +101,8 @@ public class MerkleBlockDataSource implements BRDataSourceInterface {
             database = openDatabase();
             long id = merkleBlock.getId();
             Log.e(TAG, "MerkleBlock deleted with id: " + id);
-            database.delete(BRSQLiteHelper.MB_TABLE_NAME, BRSQLiteHelper.MB_COLUMN_ID
-                    + " = ? AND " + BRSQLiteHelper.MB_ISO + " = ?", new String[]{String.valueOf(id), iso.toUpperCase()});
+            database.delete(RSQLiteHelper.MB_TABLE_NAME, RSQLiteHelper.MB_COLUMN_ID
+                    + " = ? AND " + RSQLiteHelper.MB_ISO + " = ?", new String[]{String.valueOf(id), iso.toUpperCase()});
         } finally {
             closeDatabase();
         }
@@ -114,8 +114,8 @@ public class MerkleBlockDataSource implements BRDataSourceInterface {
         try {
             database = openDatabase();
 
-            cursor = database.query(BRSQLiteHelper.MB_TABLE_NAME,
-                    allColumns, BRSQLiteHelper.MB_ISO + "=?", new String[]{iso.toUpperCase()},
+            cursor = database.query(RSQLiteHelper.MB_TABLE_NAME,
+                    allColumns, RSQLiteHelper.MB_ISO + "=?", new String[]{iso.toUpperCase()},
                     null, null, null);
 
             cursor.moveToFirst();

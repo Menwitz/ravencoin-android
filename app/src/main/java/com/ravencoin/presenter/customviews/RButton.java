@@ -50,8 +50,8 @@ import com.ravencoin.tools.util.Utils;
  * THE SOFTWARE.
  */
 @SuppressLint("AppCompatCustomView") // we don't need to support older versions
-public class BRButton extends Button {
-    private static final String TAG = BRButton.class.getName();
+public class RButton extends Button {
+    private static final String TAG = RButton.class.getName();
     private static int ANIMATION_DURATION = 30;
     private Bitmap shadow;
     private Rect shadowRect;
@@ -70,22 +70,22 @@ public class BRButton extends Button {
     private boolean isBreadButton; //meaning is has the special animation and shadow
     private boolean hasShadow; // allows us to add/remove the drop shadow from the button without affecting the animation
 
-    public BRButton(Context context) {
+    public RButton(Context context) {
         super(context);
         init(context, null);
     }
 
-    public BRButton(Context context, @Nullable AttributeSet attrs) {
+    public RButton(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public BRButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public RButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
-    public BRButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public RButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
@@ -96,8 +96,8 @@ public class BRButton extends Button {
         bPaintStroke = new Paint();
         shadowRect = new Rect(0, 0, 100, 100);
         bRect = new RectF(0, 0, 100, 100);
-        TypedArray a = ctx.obtainStyledAttributes(attrs, R.styleable.BRButton);
-        String customFont = a.getString(R.styleable.BRButton_customBFont);
+        TypedArray a = ctx.obtainStyledAttributes(attrs, R.styleable.RButton);
+        String customFont = a.getString(R.styleable.RButton_customBFont);
         FontManager.setCustomFont(ctx, this, Utils.isNullOrEmpty(customFont) ? "CircularPro-Medium.otf" : customFont);
         float px16 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
         //check attributes you need, for example all paddings
@@ -106,14 +106,14 @@ public class BRButton extends Button {
         TypedArray arr = ctx.obtainStyledAttributes(attrs, attributes);
         //You can check if attribute exists (in this example checking paddingRight)
 
-        isBreadButton = a.getBoolean(R.styleable.BRButton_isBreadButton, false);
+        isBreadButton = a.getBoolean(R.styleable.RButton_isBreadButton, false);
         int paddingLeft = arr.hasValue(0) ? arr.getDimensionPixelOffset(0, -1) : (int) px16;
         int paddingTop = arr.hasValue(1) ? arr.getDimensionPixelOffset(1, -1) : 0;
         int paddingRight = arr.hasValue(2) ? arr.getDimensionPixelOffset(2, -1) : (int) px16;
         int paddingBottom = arr.hasValue(3) ? arr.getDimensionPixelOffset(3, -1) + (isBreadButton ? (int) px16 : 0) : (isBreadButton ? (int) px16 : 0);
-        hasShadow = a.getBoolean(R.styleable.BRButton_hasShadow, true);
+        hasShadow = a.getBoolean(R.styleable.RButton_hasShadow, true);
 
-        int type = a.getInteger(R.styleable.BRButton_buttonType, 0);
+        int type = a.getInteger(R.styleable.RButton_buttonType, 0);
         setType(type);
 
         bPaint.setAntiAlias(true);
@@ -259,6 +259,13 @@ public class BRButton extends Button {
             bPaintStroke.setStrokeWidth(Utils.getPixelsFromDps(getContext(), 1));
             setTextColor(getContext().getColor(R.color.white));
             bPaint.setColor(getContext().getColor(R.color.currency_buttons_color));
+            bPaint.setStyle(Paint.Style.FILL);
+        } else if (type == 5) {
+            bPaintStroke.setColor(getContext().getColor(R.color.donation_buttons_color));
+            bPaintStroke.setStyle(Paint.Style.STROKE);
+            bPaintStroke.setStrokeWidth(Utils.getPixelsFromDps(getContext(), 1));
+            setTextColor(getContext().getColor(R.color.white));
+            bPaint.setColor(getContext().getColor(R.color.donation_buttons_color));
             bPaint.setStyle(Paint.Style.FILL);
         }
         invalidate();

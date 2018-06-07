@@ -1,11 +1,9 @@
-package com.ravencoin.tools.sqlite;
-
-import android.database.sqlite.SQLiteDatabase;
+package com.ravencoin.presenter.entities;
 
 /**
  * BreadWallet
  * <p/>
- * Created by Mihail Gutan on <mihail@breadwallet.com> 10/24/17.
+ * Created by Mihail Gutan on <mihail@breadwallet.com> 3/13/17.
  * Copyright (c) 2017 breadwallet LLC
  * <p/>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,8 +24,16 @@ import android.database.sqlite.SQLiteDatabase;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-public interface BRDataSourceInterface {
+public class AddressItem {
 
-    SQLiteDatabase openDatabase();
-    void closeDatabase();
+    public String iso;
+    public String title;
+    public String address;
+
+    public AddressItem(String iso, String title, String address) {
+        this.title = title;
+        this.address = address;
+        this.iso = iso;
+    }
+
 }

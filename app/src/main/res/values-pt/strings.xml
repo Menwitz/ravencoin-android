@@ -166,7 +166,7 @@
   <string name="FeeSelector.regularTime">10-60 minutos</string>
   <!-- Fee Selector title -->
   <string name="FeeSelector.title">Velocidade de processamento</string>
-  <!-- Checking private key balance progress view text -->
+  <!-- Checking private key balance progress view address -->
   <string name="Import.checking">A verificar o saldo da chave privada...</string>
   <!-- Sweep private key confirmation message -->
   <string name="Import.confirm">Enviar %1$s desta chave privada para a sua carteira? A rede bitcoin receberá uma taxa de %2$s.</string>
@@ -226,7 +226,7 @@
   <string name="LocationPlugin.notAuthorized">A RVN não tem permissão para aceder aos serviços de localização.</string>
   <!-- Wallet creation date prefix -->
   <string name="ManageWallet.creationDatePrefix">Criou a sua carteira em %1$s</string>
-  <!-- Manage wallet description text -->
+  <!-- Manage wallet description address -->
   <string name="ManageWallet.description">O nome da sua carteira só aparece no histórico de transações da sua conta e não pode ser visto por mais ninguém.</string>
   <!-- Change Wallet name textfield label -->
   <string name="ManageWallet.textFeildLabel">Nome da Carteira</string>
@@ -336,11 +336,11 @@
   <string name="Receive.request">Pedir uma Quantia</string>
   <!-- Share button label -->
   <string name="Receive.share">Partilhar</string>
-  <!-- Share via text message (SMS) -->
+  <!-- Share via address message (SMS) -->
   <string name="Receive.textButton">Mensagem de Texto</string>
   <!-- Receive modal title -->
   <string name="Receive.title">Receber</string>
-  <!-- Done button text -->
+  <!-- Done button address -->
   <string name="RecoverWallet.done">Feito</string>
   <!-- Recover wallet header -->
   <string name="RecoverWallet.header">Recuperar Carteira</string>
@@ -516,7 +516,7 @@
   <string name="ShareData.toggleLabel">Partilhar Dados Anónimos?</string>
   <!-- button label -->
   <string name="StartPaperPhrase.againButtonTitle">Escrever Novamente Chave de Papel</string>
-  <!-- Paper key explanation text. -->
+  <!-- Paper key explanation address. -->
   <string name="StartPaperPhrase.body">A chave de papel é a única forma de restaurar a sua RVN se o seu telefone for perdido, roubado, partido ou atualizado.\n\nVamos mostrar-lhe uma lista de palavras para escrever numa folha de papel e manter em segurança.</string>
   <!-- button label -->
   <string name="StartPaperPhrase.buttonTitle">Escrever Chave de Papel</string>
@@ -524,13 +524,13 @@
   <string name="StartPaperPhrase.date">A última vez que escreveu a sua chave de papel foi em %1$s</string>
   <!-- Start view message -->
   <string name="StartViewController.message">A forma mais protegida e segura de utilizar a bitcoin.</string>
-  <!-- Syncing view connectiong state header text -->
+  <!-- Syncing view connectiong state header address -->
   <string name="SyncingView.connecting">Conectando</string>
-  <!-- Syncing view header text -->
+  <!-- Syncing view header address -->
   <string name="SyncingView.header">A Sincronizar</string>
   <!-- Retry button label -->
   <string name="SyncingView.retry">Tentar Novamente</string>
-  <!-- Syncing view syncing state header text -->
+  <!-- Syncing view syncing state header address -->
   <string name="SyncingView.syncing">Sincronizando</string>
   <!-- 6 d (6 days) -->
   <string name="TimeSince.days">%1$s d</string>
@@ -574,7 +574,7 @@
   <string name="TouchIdSpendingLimit.title">Limite de Gastos Touch ID</string>
   <!-- name of spending limit when using fingerprint authorization -->
   <string name="TouchIdSpendingLimit.title.android">Limite de Gastos da Autorização por Impressão Digital</string>
-  <!-- Availability status text -->
+  <!-- Availability status address -->
   <string name="Transaction.available">Disponível para Gastar</string>
   <!-- Transaction complete label -->
   <string name="Transaction.complete">Concluída</string>
@@ -590,9 +590,9 @@
   <string name="Transaction.invalid">INVÁLIDA</string>
   <!-- Timestamp label for event that just happened -->
   <string name="Transaction.justNow">mesmo agora</string>
-  <!-- Receive status text: 'In progress: 20%' -->
+  <!-- Receive status address: 'In progress: 20%' -->
   <string name="Transaction.receivedStatus">Em progresso: %1$s</string>
-  <!-- Send status text: 'In progress: 20%' -->
+  <!-- Send status address: 'In progress: 20%' -->
   <string name="Transaction.sendingStatus">Em progresso: %1$s</string>
   <!-- eg. Starting balance: $50.00 -->
   <string name="Transaction.starting">Saldo inicial: %1$s</string>
@@ -650,7 +650,7 @@
   <string name="UnlockScreen.subheader">Introduzir PIN</string>
   <!-- Instruction to touch the sensor for fingerprint authentication -->
   <string name="UnlockScreen.touchIdInstructions.android">Sensor de Toque</string>
-  <!-- TouchID prompt text -->
+  <!-- TouchID prompt address -->
   <string name="UnlockScreen.touchIdPrompt">Desbloqueie a sua RVN.</string>
   <!-- Device authentication body -->
   <string name="UnlockScreen.touchIdPrompt.android">Desbloqueie o seu dispositivo Android para continuar.</string>
@@ -660,7 +660,7 @@
   <string name="UnlockScreen.touchIdTitle.android">Autenticação necessária</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Carteira Desbloqueada</string>
-  <!-- Update PIN caption text -->
+  <!-- Update PIN caption address -->
   <string name="UpdatePin.caption">Lembre-se deste PIN. Se o esquecer, não será capaz de aceder às suas bitcoins.</string>
   <!-- PIN creation info. -->
   <string name="UpdatePin.createInstruction">O seu PIN será usado para desbloquear a sua RVN e para enviar dinheiro.</string>
@@ -704,7 +704,7 @@
   <string name="Webview.errorMessage">Ocorreu um erro a carregar o conteúdo. Por favor, tente novamente.</string>
   <!-- Updating webview message -->
   <string name="Webview.updating">A Atualizar...</string>
-  <!-- Welcome screen text. (?) will be replaced with the help icon users should look for. -->
+  <!-- Welcome screen address. (?) will be replaced with the help icon users should look for. -->
   <string name="Welcome.body">As Breadwallets mudaram de nome para RVN, com um visual completamente novo e algumas características novas. \n\nSe precisar de ajuda, procure o (?) no canto superior direito da maioria das telas.</string>
   <!-- Top title of welcome screen -->
   <string name="Welcome.title">Bem-vindo ao RVN!</string>

@@ -14,19 +14,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.transition.TransitionManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -36,12 +32,12 @@ import android.widget.ViewFlipper;
 import com.ravencoin.R;
 import com.ravencoin.core.BRCorePeer;
 import com.ravencoin.presenter.activities.settings.WebViewActivity;
-import com.ravencoin.presenter.activities.util.BRActivity;
-import com.ravencoin.presenter.customviews.BRButton;
-import com.ravencoin.presenter.customviews.BRDialogView;
-import com.ravencoin.presenter.customviews.BRNotificationBar;
+import com.ravencoin.presenter.activities.util.ActivityUTILS;
+import com.ravencoin.presenter.activities.util.RActivity;
+import com.ravencoin.presenter.customviews.RButton;
+import com.ravencoin.presenter.customviews.RNotificationBar;
 import com.ravencoin.presenter.customviews.BRSearchBar;
-import com.ravencoin.presenter.customviews.BRText;
+import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.BRDialog;
 import com.ravencoin.tools.manager.BRSharedPrefs;
@@ -51,7 +47,6 @@ import com.ravencoin.tools.manager.SyncManager;
 import com.ravencoin.tools.manager.TxManager;
 import com.ravencoin.tools.sqlite.CurrencyDataSource;
 import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
@@ -74,22 +69,22 @@ import static com.ravencoin.tools.animation.BRAnimator.t2Size;
  * <p>
  * <p>
  * This activity will display pricing and transaction information for any currency the user has access to
- * (RVN, BTC, ETH)
+ * (RVN)
  */
 
-public class WalletActivity extends BRActivity implements InternetManager.ConnectionReceiverListener, OnTxListModified, SyncManager.OnProgressUpdate {
+public class WalletActivity extends RActivity implements InternetManager.ConnectionReceiverListener, OnTxListModified, SyncManager.OnProgressUpdate {
     private static final String TAG = WalletActivity.class.getName();
-    BRText mCurrencyTitle;
-    BRText mCurrencyPriceUsd;
-    BRText mBalancePrimary;
-    BRText mBalanceSecondary;
+    RText mCurrencyTitle;
+    RText mCurrencyPriceUsd;
+    RText mBalancePrimary;
+    RText mBalanceSecondary;
     Toolbar mToolbar;
     ImageButton mBackButton;
-    BRButton mSendButton;
-    BRButton mReceiveButton;
-    BRButton mBuyButton;
-    BRText mBalanceLabel;
-    BRText mProgressLabel;
+    RButton mSendButton;
+    RButton mReceiveButton;
+    RButton mBuyButton;
+    RText mBalanceLabel;
+    RText mProgressLabel;
     ProgressBar mProgressBar;
 
     public ViewFlipper barFlipper;
@@ -98,7 +93,7 @@ public class WalletActivity extends BRActivity implements InternetManager.Connec
     private ImageButton mSwap;
     private ConstraintLayout toolBarConstraintLayout;
 
-    private BRNotificationBar mNotificationBar;
+    private RNotificationBar mNotificationBar;
 
     private static WalletActivity app;
 
@@ -235,7 +230,6 @@ public class WalletActivity extends BRActivity implements InternetManager.Connec
         super.onDestroy();
         if (mConnectionReceiver != null)
             unregisterReceiver(mConnectionReceiver);
-
     }
 
     @Override
@@ -360,7 +354,6 @@ public class WalletActivity extends BRActivity implements InternetManager.Connec
             List<ActivityManager.RunningAppProcessInfo> processes = manager.getRunningAppProcesses();
             Log.d(TAG, "Process list count -> " + processes.size());
 
-
             String processName = "";
             for (ActivityManager.RunningAppProcessInfo processInfo : processes) {
 
@@ -370,13 +363,8 @@ public class WalletActivity extends BRActivity implements InternetManager.Connec
 
                 // Check if it matches our package name
                 if (processName.equals(packageName)) return true;
-
-
             }
-
-
         }
-
 
         // Use the UsageStats API for sdk versions greater than Lollipop
         else {
@@ -390,20 +378,12 @@ public class WalletActivity extends BRActivity implements InternetManager.Connec
                     mySortedMap.put(usageStats.getLastTimeUsed(), usageStats);
                     currentPackageName = usageStats.getPackageName();
 
-
                     if (currentPackageName.equals(packageName)) {
                         return true;
                     }
-
-
                 }
-
-
             }
-
         }
-
-
         return false;
     }
 
@@ -509,31 +489,13 @@ public class WalletActivity extends BRActivity implements InternetManager.Connec
                 }, toolBarConstraintLayout.getLayoutTransition().getDuration(LayoutTransition.CHANGE_APPEARING));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    protected void changeStatusBarColor() {
-        Window window = app.getWindow();
-
-        // clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-        // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(app, R.color.logo_gradient_end));
-
-        final int lFlags = window.getDecorView().getSystemUiVisibility();
-        // update the SystemUiVisibility depending on whether we want a Light or Dark theme.
-        window.getDecorView().setSystemUiVisibility((lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
 
         app = this;
 
-        changeStatusBarColor();
+        ActivityUTILS.changeStatusBarColor(this, R.color.logo_gradient_end);
 
         WalletsMaster.getInstance(app).initWallets(app);
 
@@ -565,7 +527,6 @@ public class WalletActivity extends BRActivity implements InternetManager.Connec
                         updateUi();
                     }
                 });
-
             }
         });
 
@@ -646,7 +607,6 @@ public class WalletActivity extends BRActivity implements InternetManager.Connec
         }
     }
 
-
     @Override
     public void onBackPressed() {
         int c = getFragmentManager().getBackStackEntryCount();
@@ -676,7 +636,7 @@ public class WalletActivity extends BRActivity implements InternetManager.Connec
     @Override
     public boolean onProgressUpdated(double progress) {
         mProgressBar.setProgress((int) (progress * 100));
-        mProgressLabel.setText(String.format("%s %d%%", getString(R.string.syncing), (int) (progress*100)));
+        mProgressLabel.setText(String.format("%s %d%%", getString(R.string.syncing), (int) (progress * 100)));
         if (progress == 1) {
             mProgressBar.setVisibility(View.GONE);
             mProgressLabel.setVisibility(View.GONE);

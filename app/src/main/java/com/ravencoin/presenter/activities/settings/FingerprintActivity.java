@@ -3,10 +3,7 @@ package com.ravencoin.presenter.activities.settings;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -14,8 +11,6 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -23,7 +18,8 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.ActivityUTILS;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRDialogView;
 import com.ravencoin.presenter.interfaces.BRAuthCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
@@ -39,7 +35,7 @@ import com.ravencoin.wallet.WalletsMaster;
 import java.math.BigDecimal;
 
 
-public class FingerprintActivity extends BRActivity {
+public class FingerprintActivity extends RActivity {
     private static final String TAG = FingerprintActivity.class.getName();
 
     public RelativeLayout layout;
@@ -128,7 +124,7 @@ public class FingerprintActivity extends BRActivity {
         };
         //start index of the last space (beginning of the last word)
         int indexOfSpace = limitInfo.getText().toString().lastIndexOf(" ");
-        // make the whole text clickable if failed to select the last word
+        // make the whole address clickable if failed to select the last word
         ss.setSpan(clickableSpan, indexOfSpace == -1 ? 0 : indexOfSpace, limitInfo.getText().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         limitInfo.setText(ss);
@@ -150,31 +146,14 @@ public class FingerprintActivity extends BRActivity {
         return String.format(getString(R.string.TouchIdSettings_spendingLimit), CurrencyUtils.getFormattedAmount(this, "RVN", amount), CurrencyUtils.getFormattedAmount(this, iso, curAmount));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    protected void changeStatusBarColor() {
-        Window window = app.getWindow();
-
-        // clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-        // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(app, R.color.logo_gradient_dark));
-
-        final int lFlags = window.getDecorView().getSystemUiVisibility();
-        // update the SystemUiVisibility depending on whether we want a Light or Dark theme.
-        window.getDecorView().setSystemUiVisibility((lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
         appVisible = true;
         app = this;
 
-        changeStatusBarColor();
+        ActivityUTILS.changeStatusBarColor(this, R.color.logo_gradient_end);
+
     }
 
     @Override

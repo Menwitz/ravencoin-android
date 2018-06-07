@@ -58,6 +58,9 @@
     <color name="hint_color">#42000000</color>
     <color name="success_color">#009688</color>
 
+    // into tutorial
+    <color name="tutorial_background">#222222</color>
+
     //the QR
     <color name="viewfinder_mask">#60000000</color>
     <color name="viewfinder_laser">#ffcc0000</color>
@@ -68,6 +71,9 @@
     <color name="currency_subheading_color">#F0E5D7</color>
     <color name="currency_subheading_color_trans">#4DF0E5D7</color>
     <color name="currency_buttons_color">#ffac26</color>
+
+    //Donation screen
+    <color name="donation_buttons_color">#394182</color>
 
     //Home screen
     <color name="total_assets_label_color">#788f9e</color>

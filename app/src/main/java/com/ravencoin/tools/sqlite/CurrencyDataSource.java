@@ -40,19 +40,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CurrencyDataSource implements BRDataSourceInterface {
+public class CurrencyDataSource implements DataSourceInterface {
     private static final String TAG = CurrencyDataSource.class.getName();
 
     List<OnDataChanged> onDataChangedListeners = new ArrayList<>();
 
     // Database fields
     private SQLiteDatabase database;
-    private final BRSQLiteHelper dbHelper;
+    private final RSQLiteHelper dbHelper;
     private final String[] allColumns = {
-            BRSQLiteHelper.CURRENCY_CODE,
-            BRSQLiteHelper.CURRENCY_NAME,
-            BRSQLiteHelper.CURRENCY_RATE,
-            BRSQLiteHelper.CURRENCY_ISO,
+            RSQLiteHelper.CURRENCY_CODE,
+            RSQLiteHelper.CURRENCY_NAME,
+            RSQLiteHelper.CURRENCY_RATE,
+            RSQLiteHelper.CURRENCY_ISO,
     };
 
     private static CurrencyDataSource instance;
@@ -65,7 +65,7 @@ public class CurrencyDataSource implements BRDataSourceInterface {
     }
 
     public CurrencyDataSource(Context context) {
-        dbHelper = BRSQLiteHelper.getInstance(context);
+        dbHelper = RSQLiteHelper.getInstance(context);
     }
 
     public void putCurrencies(Context app, String iso, Collection<CurrencyEntity> currencyEntities) {
@@ -85,11 +85,11 @@ public class CurrencyDataSource implements BRDataSourceInterface {
                     failed++;
                     continue;
                 }
-                values.put(BRSQLiteHelper.CURRENCY_CODE, c.code);
-                values.put(BRSQLiteHelper.CURRENCY_NAME, c.name);
-                values.put(BRSQLiteHelper.CURRENCY_RATE, c.rate);
-                values.put(BRSQLiteHelper.CURRENCY_ISO, iso.toUpperCase());
-                database.insertWithOnConflict(BRSQLiteHelper.CURRENCY_TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                values.put(RSQLiteHelper.CURRENCY_CODE, c.code);
+                values.put(RSQLiteHelper.CURRENCY_NAME, c.name);
+                values.put(RSQLiteHelper.CURRENCY_RATE, c.rate);
+                values.put(RSQLiteHelper.CURRENCY_ISO, iso.toUpperCase());
+                database.insertWithOnConflict(RSQLiteHelper.CURRENCY_TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
             }
             if (failed != 0) Log.e(TAG, "putCurrencies: failed:" + failed);
@@ -109,7 +109,7 @@ public class CurrencyDataSource implements BRDataSourceInterface {
     public void deleteAllCurrencies(Context app, String iso) {
         try {
             database = openDatabase();
-            database.delete(BRSQLiteHelper.CURRENCY_TABLE_NAME, BRSQLiteHelper.CURRENCY_ISO + " = ?", new String[]{iso.toUpperCase()});
+            database.delete(RSQLiteHelper.CURRENCY_TABLE_NAME, RSQLiteHelper.CURRENCY_ISO + " = ?", new String[]{iso.toUpperCase()});
             for (OnDataChanged list : onDataChangedListeners) if (list != null) list.onChanged();
         } finally {
             closeDatabase();
@@ -123,8 +123,8 @@ public class CurrencyDataSource implements BRDataSourceInterface {
         try {
             database = openDatabase();
 
-            cursor = database.query(BRSQLiteHelper.CURRENCY_TABLE_NAME, allColumns, BRSQLiteHelper.CURRENCY_ISO + " = ? COLLATE NOCASE",
-                    new String[]{iso.toUpperCase()}, null, null, "\'" + BRSQLiteHelper.CURRENCY_CODE + "\'");
+            cursor = database.query(RSQLiteHelper.CURRENCY_TABLE_NAME, allColumns, RSQLiteHelper.CURRENCY_ISO + " = ? COLLATE NOCASE",
+                    new String[]{iso.toUpperCase()}, null, null, "\'" + RSQLiteHelper.CURRENCY_CODE + "\'");
 
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -148,8 +148,8 @@ public class CurrencyDataSource implements BRDataSourceInterface {
         try {
             database = openDatabase();
 
-            cursor = database.query(BRSQLiteHelper.CURRENCY_TABLE_NAME,
-                    allColumns, BRSQLiteHelper.CURRENCY_ISO + " = ? COLLATE NOCASE", new String[]{iso.toUpperCase()},
+            cursor = database.query(RSQLiteHelper.CURRENCY_TABLE_NAME,
+                    allColumns, RSQLiteHelper.CURRENCY_ISO + " = ? COLLATE NOCASE", new String[]{iso.toUpperCase()},
                     null, null, null);
 
             cursor.moveToFirst();
@@ -175,8 +175,8 @@ public class CurrencyDataSource implements BRDataSourceInterface {
             database = openDatabase();
 //            printTest();
 //            Log.e(TAG, "getCurrencyByCode: code: " + code + ", iso: " + iso);
-            cursor = database.query(BRSQLiteHelper.CURRENCY_TABLE_NAME,
-                    allColumns, BRSQLiteHelper.CURRENCY_CODE + " = ? AND " + BRSQLiteHelper.CURRENCY_ISO + " = ? COLLATE NOCASE",
+            cursor = database.query(RSQLiteHelper.CURRENCY_TABLE_NAME,
+                    allColumns, RSQLiteHelper.CURRENCY_CODE + " = ? AND " + RSQLiteHelper.CURRENCY_ISO + " = ? COLLATE NOCASE",
                     new String[]{code, iso.toUpperCase()}, null, null, null);
 
             cursor.moveToNext();
@@ -197,7 +197,7 @@ public class CurrencyDataSource implements BRDataSourceInterface {
             database = openDatabase();
             StringBuilder builder = new StringBuilder();
 
-            cursor = database.query(BRSQLiteHelper.CURRENCY_TABLE_NAME,
+            cursor = database.query(RSQLiteHelper.CURRENCY_TABLE_NAME,
                     allColumns, null, null, null, null, null);
             builder.append("Total: " + cursor.getCount() + "\n");
             cursor.moveToFirst();

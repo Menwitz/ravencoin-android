@@ -31,11 +31,11 @@ import com.ravencoin.BuildConfig;
 import com.ravencoin.R;
 import com.ravencoin.core.BRCoreAddress;
 import com.ravencoin.core.BRCoreTransaction;
-import com.ravencoin.presenter.customviews.BRButton;
+import com.ravencoin.presenter.customviews.RButton;
 import com.ravencoin.presenter.customviews.BRDialogView;
 import com.ravencoin.presenter.customviews.BRKeyboard;
 import com.ravencoin.presenter.customviews.BRLinearLayoutWithCaret;
-import com.ravencoin.presenter.customviews.BRText;
+import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.presenter.entities.CryptoRequest;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.BRDialog;
@@ -107,12 +107,12 @@ public class FragmentSend extends Fragment {
     private LinearLayout keyboardLayout;
     private ImageButton close;
     private ConstraintLayout amountLayout;
-    private BRButton regular;
-    private BRButton economy;
+    private RButton regular;
+    private RButton economy;
     private BRLinearLayoutWithCaret feeLayout;
     private boolean feeButtonsShown = false;
-    private BRText feeDescription;
-    private BRText warningText;
+    private RText feeDescription;
+    private RText warningText;
     private boolean amountLabelOn = true;
 
     private static String savedMemo;
@@ -144,11 +144,11 @@ public class FragmentSend extends Fragment {
         keyboardLayout = (LinearLayout) rootView.findViewById(R.id.keyboard_layout);
         amountLayout = (ConstraintLayout) rootView.findViewById(R.id.amount_layout);
         feeLayout = (BRLinearLayoutWithCaret) rootView.findViewById(R.id.fee_buttons_layout);
-        feeDescription = (BRText) rootView.findViewById(R.id.fee_description);
-        warningText = (BRText) rootView.findViewById(R.id.warning_text);
+        feeDescription = (RText) rootView.findViewById(R.id.fee_description);
+        warningText = (RText) rootView.findViewById(R.id.warning_text);
 
-        regular = (BRButton) rootView.findViewById(R.id.left_button);
-        economy = (BRButton) rootView.findViewById(R.id.right_button);
+        regular = (RButton) rootView.findViewById(R.id.left_button);
+        economy = (RButton) rootView.findViewById(R.id.right_button);
         close = (ImageButton) rootView.findViewById(R.id.close_button);
         BaseWalletManager wm = WalletsMaster.getInstance(getActivity()).getCurrentWallet(getActivity());
         selectedIso = BRSharedPrefs.isCryptoPreferred(getActivity()) ? wm.getIso(getActivity()) : BRSharedPrefs.getPreferredFiatIso(getContext());
@@ -310,7 +310,6 @@ public class FragmentSend extends Fragment {
 
                 final BRCoreAddress address = new BRCoreAddress(obj.address);
 
-
                 if (address.isValid()) {
                     final Activity app = getActivity();
                     if (app == null) {
@@ -377,8 +376,7 @@ public class FragmentSend extends Fragment {
                 } else {
                     sayInvalidClipboardData();
                 }
-
-            }
+                }
         });
 
         isoButton.setOnClickListener(new View.OnClickListener() {
@@ -632,7 +630,6 @@ public class FragmentSend extends Fragment {
     public void onResume() {
         super.onResume();
         loadMetaData();
-
     }
 
     @Override
@@ -798,6 +795,13 @@ public class FragmentSend extends Fragment {
                     amountBuilder = new StringBuilder(wm.getFiatForSmallestCrypto(getActivity(), satoshiAmount, null).toPlainString());
                     updateText();
                 }
+                if(obj.pasteScanViews) {
+                    paste.setVisibility(View.GONE);
+                    scan.setVisibility(View.GONE);
+                    ViewGroup.LayoutParams params = addressEdit.getLayoutParams();
+                    params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    addressEdit.setLayoutParams(params);
+                }
             }
         }, 1000);
 
@@ -808,7 +812,6 @@ public class FragmentSend extends Fragment {
             signalLayout.removeView(feeLayout);
         } else {
             signalLayout.addView(feeLayout, signalLayout.indexOfChild(amountLayout) + 1);
-
         }
     }
 
@@ -891,8 +894,6 @@ public class FragmentSend extends Fragment {
                     updateText();
                 }
             }, 500);
-
         }
     }
-
 }

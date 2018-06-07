@@ -1,13 +1,10 @@
 package com.platform.middlewares;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.ravencoin.BreadApp;
-import com.ravencoin.tools.util.Utils;
+import com.ravencoin.RavenApp;
 import com.platform.APIClient;
-import com.platform.BRHTTPHelper;
 import com.platform.interfaces.Middleware;
 
 import org.apache.commons.io.IOUtils;
@@ -72,7 +69,7 @@ public class APIProxy implements Middleware {
             "connection"};
 
     public APIProxy() {
-        Context app = BreadApp.getBreadContext();
+        Context app = RavenApp.getBreadContext();
         if (app == null) {
             Log.e(TAG, "APIProxy: app is null!");
         }

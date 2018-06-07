@@ -36,9 +36,9 @@ import android.widget.Toolbar;
 
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRDialogView;
-import com.ravencoin.presenter.customviews.BRText;
+import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.BRDialog;
 import com.ravencoin.tools.util.Utils;
@@ -57,7 +57,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WebViewActivity extends BRActivity {
+public class WebViewActivity extends RActivity {
     private static final String TAG = WebViewActivity.class.getName();
     WebView webView;
     String theUrl;
@@ -81,7 +81,7 @@ public class WebViewActivity extends BRActivity {
 
     private Toolbar topToolbar;
     private Toolbar bottomToolbar;
-    private BRText mCloseButton;
+    private RText mCloseButton;
     private ImageButton mReloadButton;
     private ImageButton mBackButton;
     private ImageButton mForwardButton;

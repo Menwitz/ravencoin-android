@@ -166,7 +166,7 @@
   <string name="FeeSelector.regularTime">10–60 minuter</string>
   <!-- Fee Selector title -->
   <string name="FeeSelector.title">Bearbetningshastighet</string>
-  <!-- Checking private key balance progress view text -->
+  <!-- Checking private key balance progress view address -->
   <string name="Import.checking">Kontrollerar privat nyckelsaldo...</string>
   <!-- Sweep private key confirmation message -->
   <string name="Import.confirm">Skicka %1$s från denna privata nyckel till din plånbok? Bitcoins nätverk tar en avgift på %2$s.</string>
@@ -226,7 +226,7 @@
   <string name="LocationPlugin.notAuthorized">RVN har inte rätt att utnyttja platstjänster</string>
   <!-- Wallet creation date prefix -->
   <string name="ManageWallet.creationDatePrefix">Du skapade din plånbok på %1$s</string>
-  <!-- Manage wallet description text -->
+  <!-- Manage wallet description address -->
   <string name="ManageWallet.description">Din plånboks namn visas bara i din kontohistorik och kan inte ses av någon annan.</string>
   <!-- Change Wallet name textfield label -->
   <string name="ManageWallet.textFeildLabel">Plånbokens namn</string>
@@ -336,11 +336,11 @@
   <string name="Receive.request">Begär ett belopp</string>
   <!-- Share button label -->
   <string name="Receive.share">Dela</string>
-  <!-- Share via text message (SMS) -->
+  <!-- Share via address message (SMS) -->
   <string name="Receive.textButton">Textmeddelande</string>
   <!-- Receive modal title -->
   <string name="Receive.title">Ta emot</string>
-  <!-- Done button text -->
+  <!-- Done button address -->
   <string name="RecoverWallet.done">Klar</string>
   <!-- Recover wallet header -->
   <string name="RecoverWallet.header">Återupprätta plånbok</string>
@@ -516,7 +516,7 @@
   <string name="ShareData.toggleLabel">Dela anonyma uppgifter?</string>
   <!-- button label -->
   <string name="StartPaperPhrase.againButtonTitle">Skriv ner ordnyckel på nytt</string>
-  <!-- Paper key explanation text. -->
+  <!-- Paper key explanation address. -->
   <string name="StartPaperPhrase.body">Din ordnyckel  är enda sättet att återupprätta RVN om du förlorat din telefon, blivit bestulen på den eller har uppgraderat den.\n\nVi visar dig en lista över ord som du kan skriva ner på ett papper och gömma undan.</string>
   <!-- button label -->
   <string name="StartPaperPhrase.buttonTitle">Skriv ner ordnyckel</string>
@@ -524,13 +524,13 @@
   <string name="StartPaperPhrase.date">Senast skrev du ner din ordnyckel på %1$s</string>
   <!-- Start view message -->
   <string name="StartViewController.message">Det säkraste och tryggaste sättet att använda bitcoin.</string>
-  <!-- Syncing view connectiong state header text -->
+  <!-- Syncing view connectiong state header address -->
   <string name="SyncingView.connecting">Ansluter</string>
-  <!-- Syncing view header text -->
+  <!-- Syncing view header address -->
   <string name="SyncingView.header">Synkar</string>
   <!-- Retry button label -->
   <string name="SyncingView.retry">Försök igen</string>
-  <!-- Syncing view syncing state header text -->
+  <!-- Syncing view syncing state header address -->
   <string name="SyncingView.syncing">Synkroniserar</string>
   <!-- 6 d (6 days) -->
   <string name="TimeSince.days">%1$s d</string>
@@ -574,7 +574,7 @@
   <string name="TouchIdSpendingLimit.title">Touch ID utnyttjandegräns</string>
   <!-- name of spending limit when using fingerprint authorization -->
   <string name="TouchIdSpendingLimit.title.android">Maxbelopp med fingeravtrycksauktorisering</string>
-  <!-- Availability status text -->
+  <!-- Availability status address -->
   <string name="Transaction.available">Tillgängligt att utnyttja</string>
   <!-- Transaction complete label -->
   <string name="Transaction.complete">Avsluta</string>
@@ -590,9 +590,9 @@
   <string name="Transaction.invalid">OGILTIG</string>
   <!-- Timestamp label for event that just happened -->
   <string name="Transaction.justNow">just nu</string>
-  <!-- Receive status text: 'In progress: 20%' -->
+  <!-- Receive status address: 'In progress: 20%' -->
   <string name="Transaction.receivedStatus">Pågår: %1$s</string>
-  <!-- Send status text: 'In progress: 20%' -->
+  <!-- Send status address: 'In progress: 20%' -->
   <string name="Transaction.sendingStatus">Pågår: %1$s</string>
   <!-- eg. Starting balance: $50.00 -->
   <string name="Transaction.starting">Ingående saldo: %1$s</string>
@@ -650,7 +650,7 @@
   <string name="UnlockScreen.subheader">Ange PIN-kod</string>
   <!-- Instruction to touch the sensor for fingerprint authentication -->
   <string name="UnlockScreen.touchIdInstructions.android">Touchsensor</string>
-  <!-- TouchID prompt text -->
+  <!-- TouchID prompt address -->
   <string name="UnlockScreen.touchIdPrompt">Lås upp RVN.</string>
   <!-- Device authentication body -->
   <string name="UnlockScreen.touchIdPrompt.android">Lås upp din Android-enhet för att fortsätta.</string>
@@ -660,7 +660,7 @@
   <string name="UnlockScreen.touchIdTitle.android">Autentisering krävs</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Plånbok upplåst</string>
-  <!-- Update PIN caption text -->
+  <!-- Update PIN caption address -->
   <string name="UpdatePin.caption">Kom ihåg PIN-koden. Om du glömmer den, kommer du inte åt dina bitcoin.</string>
   <!-- PIN creation info. -->
   <string name="UpdatePin.createInstruction">Din PIN-kod används för att låsa upp ditt RVN och skicka pengar</string>
@@ -704,7 +704,7 @@
   <string name="Webview.errorMessage">Det blev fel vid uppladdning av innehållet. Försök igen</string>
   <!-- Updating webview message -->
   <string name="Webview.updating">Uppdaterar...</string>
-  <!-- Welcome screen text. (?) will be replaced with the help icon users should look for. -->
+  <!-- Welcome screen address. (?) will be replaced with the help icon users should look for. -->
   <string name="Welcome.body">Breadplånboken har bytt namn till RVN, med ett splitter nytt utseende och några nya funktioner.\n\nOm du behöver hjälp, leta efter (?)-tecknet i det övre högra hörnet på de flesta skärmar.</string>
   <!-- Top title of welcome screen -->
   <string name="Welcome.title">Välkommen till RVN!</string>

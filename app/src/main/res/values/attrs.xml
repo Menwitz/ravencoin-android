@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="BRText">
+    <declare-styleable name="RText">
         <attr name="customTFont" format="string"/>
     </declare-styleable>
     <declare-styleable name="BREdit">
@@ -13,7 +13,7 @@
         <attr name="withStroke" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="BRButton">
+    <declare-styleable name="RButton">
         <attr name="isBreadButton" format="boolean"/>
         <attr name="buttonType" format="integer"/>
         <attr name="customBFont" format="string"/>
@@ -24,7 +24,7 @@
         <attr name="showAlphabet" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="BRNotificationBar">
+    <declare-styleable name="RNotificationBar">
         <attr name="breadText" format="string"/>
     </declare-styleable>
 </resources>

@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.BRActivity;
-import com.ravencoin.presenter.customviews.BRText;
+import com.ravencoin.presenter.activities.util.RActivity;
+import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.BRKeyStore;
@@ -34,7 +34,7 @@ import java.util.List;
 import static com.ravencoin.tools.util.BRConstants.ONE_RAVEN;
 
 
-public class SpendLimitActivity extends BRActivity {
+public class SpendLimitActivity extends RActivity {
     private static final String TAG = SpendLimitActivity.class.getName();
     public static boolean appVisible = false;
     private static SpendLimitActivity app;
@@ -166,7 +166,7 @@ public class SpendLimitActivity extends BRActivity {
 
         private final Context mContext;
         private final int layoutResourceId;
-        private BRText textViewItem;
+        private RText textViewItem;
 
         public LimitAdaptor(Context mContext) {
 
@@ -185,10 +185,10 @@ public class SpendLimitActivity extends BRActivity {
                 LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
                 convertView = inflater.inflate(layoutResourceId, parent, false);
             }
-            // get the TextView and then set the text (item name) and tag (item ID) values
+            // get the TextView and then set the address (item name) and tag (item ID) values
             textViewItem = convertView.findViewById(R.id.currency_item_text);
             Integer item = getItem(position);
-            BaseWalletManager walletManager = RvnWalletManager.getInstance(app); //use the bitcoin wallet to show the limits
+            BaseWalletManager walletManager = RvnWalletManager.getInstance(app); //use the ravencoin wallet to show the limits
 
             String cryptoAmount = CurrencyUtils.getFormattedAmount(app, walletManager.getIso(app), new BigDecimal(item));
 

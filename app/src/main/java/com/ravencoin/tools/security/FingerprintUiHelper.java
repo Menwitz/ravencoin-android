@@ -25,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Small helper class to manage text/icon around fingerprint authentication UI.
+ * Small helper class to manage address/icon around fingerprint authentication UI.
  */
 public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallback {
 

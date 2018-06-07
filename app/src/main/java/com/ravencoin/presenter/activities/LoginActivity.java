@@ -3,22 +3,16 @@ package com.ravencoin.presenter.activities;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -26,10 +20,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.camera.ScanQRActivity;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.ActivityUTILS;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRDialogView;
 import com.ravencoin.presenter.customviews.BRKeyboard;
 import com.ravencoin.presenter.interfaces.BRAuthCompletion;
@@ -53,7 +48,7 @@ import static com.ravencoin.R.color.white;
 import static com.ravencoin.tools.util.BRConstants.PLATFORM_ON;
 import static com.ravencoin.tools.util.BRConstants.SCANNER_REQUEST;
 
-public class LoginActivity extends BRActivity {
+public class LoginActivity extends RActivity {
     private static final String TAG = LoginActivity.class.getName();
     private BRKeyboard keyboard;
     private LinearLayout pinLayout;
@@ -210,7 +205,7 @@ public class LoginActivity extends BRActivity {
             }
         }, 500);
 
-        BreadApp.addOnBackgroundedListener(new BreadApp.OnAppBackgrounded() {
+        RavenApp.addOnBackgroundedListener(new RavenApp.OnAppBackgrounded() {
             @Override
             public void onBackgrounded() {
                 //disconnect all wallets on backgrounded
@@ -222,24 +217,6 @@ public class LoginActivity extends BRActivity {
             }
         });
 
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    protected void changeStatusBarColor(Activity app) {
-        Window window = app.getWindow();
-
-        // clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-        // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(app, R.color.logo_gradient_dark));
-
-        final int lFlags = window.getDecorView().getSystemUiVisibility();
-        // update the SystemUiVisibility depending on whether we want a Light or Dark theme.
-        window.getDecorView().setSystemUiVisibility((lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
     }
 
     @Override
@@ -260,7 +237,7 @@ public class LoginActivity extends BRActivity {
         if (PLATFORM_ON)
             APIClient.getInstance(this).updatePlatform();
 
-        changeStatusBarColor(app);
+        ActivityUTILS.changeStatusBarColor(this, R.color.logo_gradient_end);
     }
 
     @Override

@@ -8,7 +8,7 @@
     android:background="@color/extra_light_blue_background"
     tools:context="com.ravencoin.presenter.activities.SetPinActivity">
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/BRText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BRText2">
 
-        <com.ravencoin.presenter.customviews.BRButton
+        <com.ravencoin.presenter.customviews.RButton
             android:id="@+id/left_button"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -78,7 +78,7 @@
             app:customBFont="CircularPro-Medium.otf"
             app:isBreadButton="false" />
 
-        <com.ravencoin.presenter.customviews.BRButton
+        <com.ravencoin.presenter.customviews.RButton
             android:id="@+id/middle_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             app:customBFont="CircularPro-Medium.otf"
             app:isBreadButton="false" />
 
-        <com.ravencoin.presenter.customviews.BRButton
+        <com.ravencoin.presenter.customviews.RButton
             android:id="@+id/right_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
             app:isBreadButton="false" />
     </LinearLayout>
 
-    <com.ravencoin.presenter.customviews.BRText
+    <com.ravencoin.presenter.customviews.RText
         android:id="@+id/exchange_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

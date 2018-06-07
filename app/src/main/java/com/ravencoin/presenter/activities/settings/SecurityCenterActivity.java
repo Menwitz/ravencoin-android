@@ -3,18 +3,13 @@ package com.ravencoin.presenter.activities.settings;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,7 +21,7 @@ import com.ravencoin.R;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
 import com.ravencoin.presenter.activities.intro.WriteDownActivity;
 import com.ravencoin.presenter.activities.UpdatePinActivity;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.entities.BRSecurityCenterItem;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.manager.BRSharedPrefs;
@@ -37,19 +32,14 @@ import com.ravencoin.tools.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecurityCenterActivity extends BRActivity {
+public class SecurityCenterActivity extends RActivity {
     private static final String TAG = SecurityCenterActivity.class.getName();
 
     public ListView mListView;
     public RelativeLayout layout;
     public List<BRSecurityCenterItem> itemList;
     public static boolean appVisible = false;
-    private static SecurityCenterActivity app;
     private ImageButton close;
-
-    public static SecurityCenterActivity getApp() {
-        return app;
-    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -83,28 +73,10 @@ public class SecurityCenterActivity extends BRActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.securityCenter);
+                BRAnimator.showSupportFragment(SecurityCenterActivity.this, BRConstants.securityCenter);
             }
         });
 
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    protected void changeStatusBarColor() {
-        Window window = app.getWindow();
-
-        // clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-        // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(app, R.color.logo_gradient_end));
-
-        final int lFlags = window.getDecorView().getSystemUiVisibility();
-        // update the SystemUiVisibility depending on whether we want a Light or Dark theme.
-        window.getDecorView().setSystemUiVisibility((lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
     }
 
     @Override
@@ -112,9 +84,9 @@ public class SecurityCenterActivity extends BRActivity {
         super.onResume();
         updateList();
         appVisible = true;
-        app = this;
 
-        changeStatusBarColor();
+        ActivityUTILS.changeStatusBarColor(this, R.color.logo_gradient_end);
+
     }
 
     @Override

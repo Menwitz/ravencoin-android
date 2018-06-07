@@ -38,18 +38,18 @@ import com.ravencoin.tools.util.BRConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RvnTransactionDataStore implements BRDataSourceInterface {
+public class RvnTransactionDataStore implements DataSourceInterface {
     private static final String TAG = RvnTransactionDataStore.class.getName();
 
     // Database fields
     private SQLiteDatabase database;
-    private final BRSQLiteHelper dbHelper;
+    private final RSQLiteHelper dbHelper;
     public static final String[] allColumns = {
-            BRSQLiteHelper.TX_COLUMN_ID,
-            BRSQLiteHelper.TX_BUFF,
-            BRSQLiteHelper.TX_BLOCK_HEIGHT,
-            BRSQLiteHelper.TX_TIME_STAMP,
-            BRSQLiteHelper.TX_ISO
+            RSQLiteHelper.TX_COLUMN_ID,
+            RSQLiteHelper.TX_BUFF,
+            RSQLiteHelper.TX_BLOCK_HEIGHT,
+            RSQLiteHelper.TX_TIME_STAMP,
+            RSQLiteHelper.TX_ISO
     };
 
     private static RvnTransactionDataStore instance;
@@ -62,7 +62,7 @@ public class RvnTransactionDataStore implements BRDataSourceInterface {
     }
 
     private RvnTransactionDataStore(Context context) {
-        dbHelper = BRSQLiteHelper.getInstance(context);
+        dbHelper = RSQLiteHelper.getInstance(context);
 
     }
 
@@ -73,15 +73,15 @@ public class RvnTransactionDataStore implements BRDataSourceInterface {
         try {
             database = openDatabase();
             ContentValues values = new ContentValues();
-            values.put(BRSQLiteHelper.TX_COLUMN_ID, transactionEntity.getTxHash());
-            values.put(BRSQLiteHelper.TX_BUFF, transactionEntity.getBuff());
-            values.put(BRSQLiteHelper.TX_BLOCK_HEIGHT, transactionEntity.getBlockheight());
-            values.put(BRSQLiteHelper.TX_ISO, iso.toUpperCase());
-            values.put(BRSQLiteHelper.TX_TIME_STAMP, transactionEntity.getTimestamp());
+            values.put(RSQLiteHelper.TX_COLUMN_ID, transactionEntity.getTxHash());
+            values.put(RSQLiteHelper.TX_BUFF, transactionEntity.getBuff());
+            values.put(RSQLiteHelper.TX_BLOCK_HEIGHT, transactionEntity.getBlockheight());
+            values.put(RSQLiteHelper.TX_ISO, iso.toUpperCase());
+            values.put(RSQLiteHelper.TX_TIME_STAMP, transactionEntity.getTimestamp());
 
             database.beginTransaction();
-            database.insert(BRSQLiteHelper.TX_TABLE_NAME, null, values);
-            cursor = database.query(BRSQLiteHelper.TX_TABLE_NAME,
+            database.insert(RSQLiteHelper.TX_TABLE_NAME, null, values);
+            cursor = database.query(RSQLiteHelper.TX_TABLE_NAME,
                     allColumns, null, null, null, null, null);
             cursor.moveToFirst();
             BRTransactionEntity transactionEntity1 = cursorToTransaction(app, iso.toUpperCase(), cursor);
@@ -109,7 +109,7 @@ public class RvnTransactionDataStore implements BRDataSourceInterface {
         try {
             database = openDatabase();
 
-            database.delete(BRSQLiteHelper.TX_TABLE_NAME, BRSQLiteHelper.TX_ISO + "=?", new String[]{iso.toUpperCase()});
+            database.delete(RSQLiteHelper.TX_TABLE_NAME, RSQLiteHelper.TX_ISO + "=?", new String[]{iso.toUpperCase()});
         } finally {
             closeDatabase();
         }
@@ -121,8 +121,8 @@ public class RvnTransactionDataStore implements BRDataSourceInterface {
         try {
             database = openDatabase();
 
-            cursor = database.query(BRSQLiteHelper.TX_TABLE_NAME,
-                    allColumns, BRSQLiteHelper.TX_ISO + "=?", new String[]{iso.toUpperCase()}, null, null, null);
+            cursor = database.query(RSQLiteHelper.TX_TABLE_NAME,
+                    allColumns, RSQLiteHelper.TX_ISO + "=?", new String[]{iso.toUpperCase()}, null, null, null);
 
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -151,11 +151,11 @@ public class RvnTransactionDataStore implements BRDataSourceInterface {
         try {
             database = openDatabase();
             ContentValues args = new ContentValues();
-            args.put(BRSQLiteHelper.TX_BLOCK_HEIGHT, tx.getBlockheight());
-            args.put(BRSQLiteHelper.TX_TIME_STAMP, tx.getTimestamp());
+            args.put(RSQLiteHelper.TX_BLOCK_HEIGHT, tx.getBlockheight());
+            args.put(RSQLiteHelper.TX_TIME_STAMP, tx.getTimestamp());
 
 //            Log.e(TAG, "updateTransaction: size before updating: " + getAllTransactions().size());
-            int r = database.update(BRSQLiteHelper.TX_TABLE_NAME, args, "_id=? AND " + BRSQLiteHelper.TX_ISO + "=?", new String[]{tx.getTxHash(), iso.toUpperCase()});
+            int r = database.update(RSQLiteHelper.TX_TABLE_NAME, args, "_id=? AND " + RSQLiteHelper.TX_ISO + "=?", new String[]{tx.getTxHash(), iso.toUpperCase()});
 //            Log.e(TAG, "updateTransaction: size after updating: " + getAllTransactions().size());
             if (r > 0)
                 Log.e(TAG, "transaction updated with id: " + tx.getTxHash());
@@ -172,8 +172,8 @@ public class RvnTransactionDataStore implements BRDataSourceInterface {
         try {
             database = openDatabase();
             Log.e(TAG, "transaction deleted with id: " + hash);
-            database.delete(BRSQLiteHelper.TX_TABLE_NAME,
-                    "_id=? AND " + BRSQLiteHelper.TX_ISO + "=?", new String[]{hash, iso.toUpperCase()});
+            database.delete(RSQLiteHelper.TX_TABLE_NAME,
+                    "_id=? AND " + RSQLiteHelper.TX_ISO + "=?", new String[]{hash, iso.toUpperCase()});
         } finally {
             closeDatabase();
         }
@@ -208,7 +208,7 @@ public class RvnTransactionDataStore implements BRDataSourceInterface {
             database = openDatabase();
             StringBuilder builder = new StringBuilder();
 
-            cursor = database.query(BRSQLiteHelper.TX_TABLE_NAME,
+            cursor = database.query(RSQLiteHelper.TX_TABLE_NAME,
                     allColumns, null, null, null, null, null);
             builder.append("Total: " + cursor.getCount() + "\n");
             cursor.moveToFirst();

@@ -2,16 +2,10 @@
 package com.ravencoin.presenter.activities.intro;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -19,7 +13,8 @@ import com.ravencoin.BuildConfig;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.HomeActivity;
 import com.ravencoin.presenter.activities.SetPinActivity;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.ActivityUTILS;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.manager.BRReportsManager;
 import com.ravencoin.tools.security.BRKeyStore;
@@ -29,7 +24,6 @@ import com.ravencoin.tools.threads.executor.BRExecutor;
 import com.ravencoin.tools.util.BRConstants;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
-import com.crashlytics.android.Crashlytics;
 import com.platform.APIClient;
 
 import java.io.Serializable;
@@ -60,7 +54,7 @@ import java.io.Serializable;
  * THE SOFTWARE.
  */
 
-public class IntroActivity extends BRActivity implements Serializable {
+public class IntroActivity extends RActivity implements Serializable {
     private static final String TAG = IntroActivity.class.getName();
     public Button newWalletButton;
     public Button recoverWalletButton;
@@ -173,31 +167,13 @@ public class IntroActivity extends BRActivity implements Serializable {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    protected void changeStatusBarColor() {
-        Window window = app.getWindow();
-
-        // clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-        // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(app, R.color.logo_gradient_dark));
-
-        final int lFlags = window.getDecorView().getSystemUiVisibility();
-        // update the SystemUiVisibility depending on whether we want a Light or Dark theme.
-        window.getDecorView().setSystemUiVisibility((lFlags & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR));
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
         appVisible = true;
         app = this;
 
-        changeStatusBarColor();
+        ActivityUTILS.changeStatusBarColor(this, R.color.logo_gradient_end);
     }
 
     @Override

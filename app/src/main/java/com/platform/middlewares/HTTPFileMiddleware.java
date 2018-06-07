@@ -3,7 +3,7 @@ package com.platform.middlewares;
 import android.content.Context;
 import android.util.Log;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.ravencoin.tools.crypto.CryptoHelper;
 import com.ravencoin.tools.util.TypesConverter;
 import com.ravencoin.tools.util.Utils;
@@ -52,7 +52,7 @@ import okhttp3.Response;
  */
 public class HTTPFileMiddleware implements Middleware {
     public static final String TAG = HTTPFileMiddleware.class.getName();
-    private final static String DEBUG_URL = "https://smartonlineorder.com/testwallet/api"; //modify for testing
+    private final static String DEBUG_URL = null; //modify for testing
 
     @Override
     public boolean handle(String target, org.eclipse.jetty.server.Request baseRequest, HttpServletRequest request, HttpServletResponse response) {
@@ -60,7 +60,7 @@ public class HTTPFileMiddleware implements Middleware {
         if (target.equals("/favicon.ico")) {
             return BRHTTPHelper.handleSuccess(200, null, baseRequest, response, null);
         }
-        Context app = BreadApp.getBreadContext();
+        Context app = RavenApp.getBreadContext();
         if (app == null) {
             Log.e(TAG, "handle: app is null!");
             return true;
@@ -199,7 +199,7 @@ public class HTTPFileMiddleware implements Middleware {
             case "jpg":
                 return "image/jpeg";
             case "css":
-                return "text/css";
+                return "address/css";
             case "js":
                 return "application/javascript";
             case "json":

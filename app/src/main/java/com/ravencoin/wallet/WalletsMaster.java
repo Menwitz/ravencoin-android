@@ -9,7 +9,7 @@ import android.net.NetworkInfo;
 import android.security.keystore.UserNotAuthenticatedException;
 import android.util.Log;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.ravencoin.R;
 import com.ravencoin.core.BRCoreKey;
 import com.ravencoin.core.BRCoreMasterPubKey;
@@ -258,7 +258,7 @@ public class WalletsMaster {
 
     public void initLastWallet(Context app) {
         if (app == null) {
-            app = BreadApp.getBreadContext();
+            app = RavenApp.getBreadContext();
             if (app == null) {
                 Log.e(TAG, "initLastWallet: FAILED, app is null");
                 return;

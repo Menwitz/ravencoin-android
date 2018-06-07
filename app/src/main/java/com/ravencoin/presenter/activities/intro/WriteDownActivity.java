@@ -7,15 +7,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.activities.util.ActivityUTILS;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.interfaces.BRAuthCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.PostAuth;
 import com.ravencoin.tools.util.BRConstants;
 
-public class WriteDownActivity extends BRActivity {
+public class WriteDownActivity extends RActivity {
     private static final String TAG = WriteDownActivity.class.getName();
     private Button writeButton;
     private ImageButton close;

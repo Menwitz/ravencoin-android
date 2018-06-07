@@ -3,7 +3,7 @@ package com.platform.middlewares.plugins;
 import android.app.Activity;
 import android.util.Log;
 
-import com.ravencoin.BreadApp;
+import com.ravencoin.RavenApp;
 import com.ravencoin.presenter.interfaces.BRAuthCompletion;
 import com.ravencoin.tools.manager.BREventManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
@@ -65,7 +65,7 @@ public class WalletPlugin implements Plugin {
     @Override
     public boolean handle(String target, final Request baseRequest, HttpServletRequest request, final HttpServletResponse response) {
         if (!target.startsWith("/_wallet")) return false;
-        Activity app = (Activity) BreadApp.getBreadContext();
+        Activity app = (Activity) RavenApp.getBreadContext();
 
         if (target.startsWith("/_wallet/info") && request.getMethod().equalsIgnoreCase("get")) {
             Log.i(TAG, "handling: " + target + " " + baseRequest.getMethod());

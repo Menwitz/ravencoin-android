@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.intro.IntroActivity;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRDialogView;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.BRDialog;
@@ -28,7 +28,7 @@ import com.ravencoin.tools.util.BRConstants;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 
-public class InputWordsActivity extends BRActivity {
+public class InputWordsActivity extends RActivity {
     private static final String TAG = InputWordsActivity.class.getName();
     private Button nextButton;
 

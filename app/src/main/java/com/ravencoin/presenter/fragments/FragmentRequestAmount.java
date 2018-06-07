@@ -20,7 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.customviews.BRButton;
+import com.ravencoin.presenter.customviews.RButton;
 import com.ravencoin.presenter.customviews.BRKeyboard;
 import com.ravencoin.presenter.customviews.BRLinearLayoutWithCaret;
 import com.ravencoin.tools.animation.BRAnimator;
@@ -78,7 +78,7 @@ public class FragmentRequestAmount extends Fragment {
     public LinearLayout backgroundLayout;
     public LinearLayout signalLayout;
     private String mReceiveAddress;
-    private BRButton shareButton;
+    private RButton shareButton;
     private Button shareEmail;
     private Button shareTextMessage;
     private boolean shareButtonsShown = true;
@@ -120,7 +120,7 @@ public class FragmentRequestAmount extends Fragment {
         mTitle = (TextView) rootView.findViewById(R.id.title);
         mAddress = (TextView) rootView.findViewById(R.id.address_text);
         mQrImage = (ImageView) rootView.findViewById(R.id.qr_image);
-        shareButton = (BRButton) rootView.findViewById(R.id.share_button);
+        shareButton = (RButton) rootView.findViewById(R.id.share_button);
         shareEmail = (Button) rootView.findViewById(R.id.share_email);
         shareTextMessage = (Button) rootView.findViewById(R.id.share_text);
         shareButtonsLayout = (BRLinearLayoutWithCaret) rootView.findViewById(R.id.share_buttons_layout);

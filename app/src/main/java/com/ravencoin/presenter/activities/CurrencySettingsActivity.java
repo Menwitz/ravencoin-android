@@ -12,9 +12,9 @@ import android.widget.RelativeLayout;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.settings.ImportActivity;
 import com.ravencoin.presenter.activities.settings.SyncBlockchainActivity;
-import com.ravencoin.presenter.activities.util.BRActivity;
+import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRDialogView;
-import com.ravencoin.presenter.customviews.BRText;
+import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.BRDialog;
 import com.ravencoin.tools.manager.BRSharedPrefs;
@@ -26,9 +26,9 @@ import com.ravencoin.wallet.abstracts.BaseWalletManager;
  * Created by byfieldj on 2/5/18.
  */
 
-public class CurrencySettingsActivity extends BRActivity {
+public class CurrencySettingsActivity extends RActivity {
 
-    private BRText mTitle;
+    private RText mTitle;
     private ImageButton mBackButton;
     private RelativeLayout mRescanBlockchainRow;
     private RelativeLayout mRedeemPrivateKeyRow;

@@ -16,12 +16,12 @@ import com.ravencoin.presenter.activities.SetPinActivity;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
 import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.security.BRKeyStore;
 import com.ravencoin.tools.security.PostAuth;
 import com.ravencoin.tools.security.SmartValidator;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.platform.APIClient;
@@ -89,14 +89,14 @@ public class IntroActivity extends RActivity implements Serializable {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.startView);
+                BRAnimator.showSupportFragment(app, RConstants.startView);
             }
         });
 
 
         if (!BuildConfig.DEBUG && BRKeyStore.AUTH_DURATION_SEC != 300) {
             Log.e(TAG, "onCreate: BRKeyStore.AUTH_DURATION_SEC != 300");
-            BRReportsManager.reportBug(new RuntimeException("AUTH_DURATION_SEC should be 300"), true);
+            RReportsManager.reportBug(new RuntimeException("AUTH_DURATION_SEC should be 300"), true);
         }
         introActivity = this;
 
@@ -126,7 +126,7 @@ public class IntroActivity extends RActivity implements Serializable {
     }
 
     private void updateBundles() {
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 Thread.currentThread().setName("updateBundle");

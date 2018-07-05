@@ -26,7 +26,7 @@ import com.ravencoin.presenter.entities.BRSecurityCenterItem;
 import com.ravencoin.presenter.entities.CryptoRequest;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.security.BRKeyStore;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +85,7 @@ public class AddressBookActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.securityCenter);
+                BRAnimator.showSupportFragment(app, RConstants.securityCenter);
             }
         });
 

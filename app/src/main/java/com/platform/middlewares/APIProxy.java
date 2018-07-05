@@ -69,7 +69,7 @@ public class APIProxy implements Middleware {
             "connection"};
 
     public APIProxy() {
-        Context app = RavenApp.getBreadContext();
+        Context app = RavenApp.getRavenContext();
         if (app == null) {
             Log.e(TAG, "APIProxy: app is null!");
         }

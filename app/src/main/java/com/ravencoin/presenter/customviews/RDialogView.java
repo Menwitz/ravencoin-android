@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -21,55 +20,31 @@ import android.widget.TextView;
 
 import com.ravencoin.R;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.util.Utils;
 
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan on <mihail@breadwallet.com> 3/15/17.
- * Copyright (c) 2017 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-public class BRDialogView extends DialogFragment {
+public class RDialogView extends DialogFragment {
 
-    private static final String TAG = BRDialogView.class.getName();
+    private static final String TAG = RDialogView.class.getName();
 
     private String title = "";
     private String message = "";
     private String posButton = "";
     private String negButton = "";
-    private BRDialogView.BROnClickListener posListener;
-    private BRDialogView.BROnClickListener negListener;
-    private BRDialogView.BROnClickListener helpListener;
+    private RDialogView.BROnClickListener posListener;
+    private RDialogView.BROnClickListener negListener;
+    private RDialogView.BROnClickListener helpListener;
     private DialogInterface.OnDismissListener dismissListener;
     private int iconRes = 0;
     private RButton negativeButton;
     private RButton positiveButton;
     private LinearLayout buttonsLayout;
     private ImageButton helpButton;
+    private LinearLayout mainLayout;
 
     //provide the way to have clickable span in the message
     private SpannableString spanMessage;
 
-    private ConstraintLayout mainLayout;
     private boolean showHelpIcon;
 
     @Override
@@ -78,13 +53,13 @@ public class BRDialogView extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.bread_alert_dialog, null);
-        TextView titleText = (TextView) view.findViewById(R.id.dialog_title);
-        TextView messageText = (TextView) view.findViewById(R.id.dialog_text);
+        TextView titleText =  view.findViewById(R.id.dialog_title);
+        TextView messageText =  view.findViewById(R.id.dialog_text);
         RButton positiveButton = view.findViewById(R.id.pos_button);
         negativeButton = view.findViewById(R.id.neg_button);
-//        ImageView icon = (ImageView) view.findViewById(R.id.dialog_icon);
-        mainLayout = (ConstraintLayout) view.findViewById(R.id.main_layout);
-        buttonsLayout = (LinearLayout) view.findViewById(R.id.linearLayout3);
+//        ImageView icon =  view.findViewById(R.id.dialog_icon);
+        mainLayout = view.findViewById(R.id.main_layout);
+        buttonsLayout =  view.findViewById(R.id.linearLayout3);
         helpButton = view.findViewById(R.id.help_icon);
 
 
@@ -113,7 +88,7 @@ public class BRDialogView extends DialogFragment {
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
                 if (posListener != null)
-                    posListener.onClick(BRDialogView.this);
+                    posListener.onClick(RDialogView.this);
             }
         });
         if (Utils.isNullOrEmpty(negButton)) {
@@ -135,7 +110,7 @@ public class BRDialogView extends DialogFragment {
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
                 if (negListener != null)
-                    negListener.onClick(BRDialogView.this);
+                    negListener.onClick(RDialogView.this);
             }
         });
 //        if (iconRes != 0)
@@ -153,7 +128,7 @@ public class BRDialogView extends DialogFragment {
                 public void onClick(View view) {
                     if (!BRAnimator.isClickAllowed()) return;
                     if (helpListener != null)
-                        helpListener.onClick(BRDialogView.this);
+                        helpListener.onClick(RDialogView.this);
                 }
             });
 
@@ -193,7 +168,7 @@ public class BRDialogView extends DialogFragment {
 
     public void setSpan(SpannableString message) {
         if (message == null) {
-            BRReportsManager.reportBug(new NullPointerException("setSpan with null message"));
+            RReportsManager.reportBug(new NullPointerException("setSpan with null message"));
             return;
         }
         this.spanMessage = message;
@@ -207,11 +182,11 @@ public class BRDialogView extends DialogFragment {
         this.negButton = negButton;
     }
 
-    public void setPosListener(BRDialogView.BROnClickListener posListener) {
+    public void setPosListener(RDialogView.BROnClickListener posListener) {
         this.posListener = posListener;
     }
 
-    public void setNegListener(BRDialogView.BROnClickListener negListener) {
+    public void setNegListener(RDialogView.BROnClickListener negListener) {
         this.negListener = negListener;
     }
 
@@ -228,11 +203,11 @@ public class BRDialogView extends DialogFragment {
     }
 
     public static interface BROnClickListener {
-        void onClick(BRDialogView brDialogView);
+        void onClick(RDialogView rDialogView);
     }
 
     public void dismissWithAnimation() {
-        BRDialogView.this.dismiss();
+        RDialogView.this.dismiss();
 
     }
 

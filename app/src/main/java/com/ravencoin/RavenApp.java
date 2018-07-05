@@ -146,7 +146,7 @@ public class RavenApp extends Application {
         return mHeaders;
     }
 
-    public static Context getBreadContext() {
+    public static Context getRavenContext() {
         Context app = currentActivity;
         if (app == null) app = SyncReceiver.app;
         if (app == null) app = mContext;

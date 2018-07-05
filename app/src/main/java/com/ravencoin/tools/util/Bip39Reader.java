@@ -3,7 +3,7 @@ package com.ravencoin.tools.util;
 import android.content.Context;
 import android.content.res.AssetManager;
 
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -86,7 +86,7 @@ public class Bip39Reader {
                 }
             }
             if (wordList.size() % WORD_LIST_SIZE != 0) {
-                BRReportsManager.reportBug(new IllegalArgumentException("The list size should divide by " + WORD_LIST_SIZE), true);
+                RReportsManager.reportBug(new IllegalArgumentException("The list size should divide by " + WORD_LIST_SIZE), true);
             }
             result.addAll(wordList);
 

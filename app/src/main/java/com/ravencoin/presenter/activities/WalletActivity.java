@@ -39,14 +39,14 @@ import com.ravencoin.presenter.customviews.RNotificationBar;
 import com.ravencoin.presenter.customviews.BRSearchBar;
 import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.manager.FontManager;
 import com.ravencoin.tools.manager.InternetManager;
 import com.ravencoin.tools.manager.SyncManager;
 import com.ravencoin.tools.manager.TxManager;
 import com.ravencoin.tools.sqlite.CurrencyDataSource;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
@@ -217,12 +217,10 @@ public class WalletActivity extends RActivity implements InternetManager.Connect
         // Check if the "Twilight" screen altering app is currently running
         if (checkIfScreenAlteringAppIsRunning("com.urbandroid.lux")) {
 
-            BRDialog.showSimpleDialog(this, getString(R.string.Dialog_screenAlteringTitle), getString(R.string.Dialog_screenAlteringMessage));
+            RDialog.showSimpleDialog(this, getString(R.string.Dialog_screenAlteringTitle), getString(R.string.Dialog_screenAlteringMessage));
 
 
         }
-
-
     }
 
     @Override
@@ -305,29 +303,34 @@ public class WalletActivity extends RActivity implements InternetManager.Connect
         mBuyButton.setColor(Color.parseColor(wallet.getUiConfiguration().colorHex));
         mReceiveButton.setColor(Color.parseColor(wallet.getUiConfiguration().colorHex));
 
-        TxManager.getInstance().updateTxList(WalletActivity.this);
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+            @Override
+            public void run() {
+                TxManager.getInstance().updateTxList(WalletActivity.this);
+            }
+        });
 
 //        if (!BRSharedPrefs.wasBchDialogShown(this)) {
-//            BRDialog.showHelpDialog(this, getString(R.string.Dialog_welcomeBchTitle), getString(R.string.Dialog_welcomeBchMessage), getString(R.string.Dialog_Home), getString(R.string.Dialog_Dismiss), new BRDialogView.BROnClickListener() {
+//            RDialog.showHelpDialog(this, getString(R.string.Dialog_welcomeBchTitle), getString(R.string.Dialog_welcomeBchMessage), getString(R.string.Dialog_Home), getString(R.string.Dialog_Dismiss), new RDialogView.BROnClickListener() {
 //                @Override
-//                public void onClick(BRDialogView brDialogView) {
+//                public void onClick(RDialogView brDialogView) {
 //                    brDialogView.dismiss();
 //                    onBackPressed();
 //                }
-//            }, new BRDialogView.BROnClickListener() {
+//            }, new RDialogView.BROnClickListener() {
 //
 //                @Override
-//                public void onClick(BRDialogView brDialogView) {
+//                public void onClick(RDialogView brDialogView) {
 //                    brDialogView.dismiss();
 //
 //                }
-//            }, new BRDialogView.BROnClickListener() {
+//            }, new RDialogView.BROnClickListener() {
 //                @Override
-//                public void onClick(BRDialogView brDialogView) {
+//                public void onClick(RDialogView brDialogView) {
 //                    Log.d(TAG, "help clicked!");
 //
 //                    brDialogView.dismiss();
-//                    BRAnimator.showSupportFragment(WalletActivity.this, BRConstants.bchFaq);
+//                    BRAnimator.showSupportFragment(WalletActivity.this, RConstants.bchFaq);
 //
 //                }
 //            });
@@ -506,7 +509,7 @@ public class WalletActivity extends RActivity implements InternetManager.Connect
         CurrencyDataSource.getInstance(this).addOnDataChangedListener(new CurrencyDataSource.OnDataChanged() {
             @Override
             public void onChanged() {
-                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
                         updateUi();
@@ -516,12 +519,12 @@ public class WalletActivity extends RActivity implements InternetManager.Connect
         });
         final BaseWalletManager wallet = WalletsMaster.getInstance(this).getCurrentWallet(this);
         wallet.addTxListModifiedListener(this);
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 long balance = wallet.getWallet().getBalance();
                 wallet.setCashedBalance(app, balance);
-                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
                         updateUi();
@@ -530,7 +533,7 @@ public class WalletActivity extends RActivity implements InternetManager.Connect
             }
         });
 
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 if (wallet.getPeerManager().getConnectStatus() != BRCorePeer.ConnectStatus.Connected)
@@ -587,7 +590,7 @@ public class WalletActivity extends RActivity implements InternetManager.Connect
                 barFlipper.setDisplayedChild(0);
             }
             final BaseWalletManager wm = WalletsMaster.getInstance(WalletActivity.this).getCurrentWallet(WalletActivity.this);
-            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+            RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                 @Override
                 public void run() {
                     final double progress = wm.getPeerManager()
@@ -624,7 +627,7 @@ public class WalletActivity extends RActivity implements InternetManager.Connect
 
     @Override
     public void txListModified(String hash) {
-        BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+        RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
             public void run() {
                 updateUi();

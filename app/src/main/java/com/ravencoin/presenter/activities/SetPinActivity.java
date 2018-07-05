@@ -13,7 +13,7 @@ import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.presenter.customviews.BRKeyboard;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.manager.BRSharedPrefs;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 
 public class SetPinActivity extends RActivity {
     private static final String TAG = SetPinActivity.class.getName();
@@ -51,7 +51,7 @@ public class SetPinActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.setPin);
+                BRAnimator.showSupportFragment(app, RConstants.setPin);
             }
         });
 

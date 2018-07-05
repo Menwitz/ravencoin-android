@@ -8,36 +8,12 @@ import android.util.Log;
 import android.widget.ProgressBar;
 
 import com.ravencoin.tools.listeners.SyncReceiver;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
 import com.crashlytics.android.Crashlytics;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan on <mihail@breadwallet.com> 9/19/17.
- * Copyright (c) 2017 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 public class SyncManager {
 
     private static final String TAG = SyncManager.class.getName();
@@ -85,14 +61,13 @@ public class SyncManager {
 
         syncTask = new SyncProgressTask(app, walletManager, listener);
         syncTask.start();
-
     }
 
     class SyncProgressTask extends Thread {
 
         private BaseWalletManager mCurrentWallet;
         private OnProgressUpdate mListener;
-        private static final int DELAY_MILLIS = 500;
+        private static final int DELAY_MILLIS = /*500*/1000; // changed to every second // Ui update on main thread.
         private Context mApp;
 
         public SyncProgressTask(Context app, BaseWalletManager currentWallet, OnProgressUpdate listener) {
@@ -103,18 +78,19 @@ public class SyncManager {
 
         @Override
         public void run() {
-//            Log.e(TAG, "SyncProgressTask: started: " + Thread.currentThread());
+            Log.e(TAG, "SyncProgressTask: started: " + Thread.currentThread());
             try {
                 mCurrentThreadName = getName();
                 while (!isInterrupted() && mCurrentThreadName.equalsIgnoreCase(getName())) {
                     final double syncProgress = mCurrentWallet.getPeerManager().getSyncProgress(BRSharedPrefs.getStartHeight(mApp, mCurrentWallet.getIso(mApp)));
                     if (!mCurrentThreadName.equalsIgnoreCase(getName()))
                         Log.e(TAG, "run: WARNING: " + getName());
-                    BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             if (mListener != null)
-                                if (!mListener.onProgressUpdated(syncProgress)) interrupt();
+                                if (!mListener.onProgressUpdated(syncProgress))
+                                    interrupt();
                         }
                     });
                     Thread.sleep(DELAY_MILLIS);
@@ -124,11 +100,12 @@ public class SyncManager {
                 Crashlytics.log("run: " + getName() + " " + e.getMessage());
                 Crashlytics.logException(e);
                 final double syncProgress = mCurrentWallet.getPeerManager().getSyncProgress(BRSharedPrefs.getStartHeight(mApp, mCurrentWallet.getIso(mApp)));
-                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
                         if (mListener != null)
-                            if (!mListener.onProgressUpdated(syncProgress)) interrupt();
+                            if (!mListener.onProgressUpdated(syncProgress))
+                                interrupt();
                     }
                 });
             }

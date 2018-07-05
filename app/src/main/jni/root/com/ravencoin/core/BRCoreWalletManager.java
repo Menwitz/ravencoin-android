@@ -24,7 +24,9 @@
  */
 package com.ravencoin.core;
 
+import java.util.Optional;
 import java.util.concurrent.Executor;
+import java.util.function.Function;
 
 /**
  * A BRCoreWalletManger instance manages a single wallet, and that wallet's individual connection
@@ -118,6 +120,7 @@ public class BRCoreWalletManager implements
     //        }
     //        return peerManager;
     //    }
+
     public synchronized BRCorePeerManager getPeerManager () {
         if (null == peerManager) {
             BRCoreWallet wallet = getWallet();

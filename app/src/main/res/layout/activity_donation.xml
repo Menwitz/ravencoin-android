@@ -76,6 +76,7 @@
         android:orientation="vertical">
 
         <com.ravencoin.presenter.customviews.BREdit
+            android:id="@+id/amountedit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -88,7 +89,22 @@
             android:textSize="20.0sp"
             app:customTFont="CircularPro-Bold.otf"/>
 
+        <com.ravencoin.presenter.customviews.RText
+            android:visibility="gone"
+            android:id="@+id/warning_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/FeeSelector.notEnough"
+            android:textColor="@color/red_text"
+            android:textSize="@dimen/paragraph" />
+
         <com.ravencoin.presenter.customviews.RButton
+            android:id="@+id/send_button"
             android:layout_width="match_parent"
             android:layout_height="65.0dp"
             android:layout_gravity="center_horizontal"

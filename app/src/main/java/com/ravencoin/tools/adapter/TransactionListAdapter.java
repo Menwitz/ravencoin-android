@@ -18,7 +18,7 @@ import com.ravencoin.R;
 import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.presenter.entities.TxUiHolder;
 import com.ravencoin.tools.manager.BRSharedPrefs;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.BRDateUtil;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.tools.util.Utils;
@@ -97,7 +97,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     public void updateData() {
         if (updatingData) return;
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 long s = System.currentTimeMillis();
@@ -321,7 +321,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         TxUiHolder item;
         for (int i = 0; i < backUpFeed.size(); i++) {
             item = backUpFeed.get(i);
-            boolean matchesHash = item.getTxHashHexReversed() != null && item.getTxHashHexReversed().contains(lowerQuery);
+            boolean matchesHash = item.getHashReversed() != null && item.getHashReversed().contains(lowerQuery);
             boolean matchesAddress = item.getFrom()[0].contains(lowerQuery) || item.getTo()[0].contains(lowerQuery);
             boolean matchesMemo = item.metaData != null && item.metaData.comment != null && item.metaData.comment.toLowerCase().contains(lowerQuery);
             if (matchesHash || matchesAddress || matchesMemo) {

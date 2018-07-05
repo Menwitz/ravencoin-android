@@ -37,10 +37,10 @@ import android.widget.Toolbar;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
 import com.ravencoin.presenter.activities.util.RActivity;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.util.Utils;
 import com.platform.HTTPServer;
 import com.platform.middlewares.plugins.LinkPlugin;
@@ -511,7 +511,7 @@ public class WebViewActivity extends RActivity {
     @Override
     public void onBackPressed() {
         if (ActivityUTILS.isLast(this)) {
-            BRAnimator.startBreadActivity(this, false);
+            BRAnimator.startRavenActivity(this, false);
         } else {
             super.onBackPressed();
         }
@@ -523,7 +523,7 @@ public class WebViewActivity extends RActivity {
         Log.d(TAG, "requestCode -> " + requestCode);
         Log.d(TAG, "resultCode -> " + resultCode);
 
-        //if (requestCode == BRConstants.UPLOAD_FILE_REQUEST) {
+        //if (requestCode == RConstants.UPLOAD_FILE_REQUEST) {
 
         if (requestCode != REQUEST_CHOOSE_IMAGE || mFilePathCallback == null) {
             super.onActivityResult(requestCode, resultCode, data);
@@ -566,10 +566,10 @@ public class WebViewActivity extends RActivity {
             // Should we show an explanation?
             if (android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale(app,
                     Manifest.permission.CAMERA)) {
-                BRDialog.showCustomDialog(app, app.getString(R.string.Send_cameraUnavailabeTitle_android), app.getString(R.string.Send_cameraUnavailabeMessage_android), app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                RDialog.showCustomDialog(app, app.getString(R.string.Send_cameraUnavailabeTitle_android), app.getString(R.string.Send_cameraUnavailabeMessage_android), app.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                     @Override
-                    public void onClick(BRDialogView brDialogView) {
-                        brDialogView.dismiss();
+                    public void onClick(RDialogView rDialogView) {
+                        rDialogView.dismiss();
                     }
                 }, null, null, 0);
             } else {
@@ -595,10 +595,10 @@ public class WebViewActivity extends RActivity {
 
                 if (android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale(app,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    BRDialog.showCustomDialog(app, app.getString(R.string.Simplex_allowFileSystemAccess), app.getString(R.string.Simplex_allowFileSystemAccess), app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                    RDialog.showCustomDialog(app, app.getString(R.string.Simplex_allowFileSystemAccess), app.getString(R.string.Simplex_allowFileSystemAccess), app.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            brDialogView.dismiss();
+                        public void onClick(RDialogView rDialogView) {
+                            rDialogView.dismiss();
                         }
                     }, null, null, 0);
                 }

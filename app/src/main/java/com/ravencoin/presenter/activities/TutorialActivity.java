@@ -49,7 +49,7 @@ public class TutorialActivity extends AppIntro {
         SliderPage sliderPage5 = new SliderPage();
         sliderPage5.setTitle("RVN Wallet doesn't store your money");
         sliderPage5.setDescription("Your money is on the network, the wallet contains keys ... a keychain.");
-        sliderPage5.setImageDrawable(R.drawable.ic_slide4);
+        sliderPage5.setImageDrawable(R.drawable.ic_slide1);
         sliderPage5.setBgColor(Color.TRANSPARENT);
         addSlide(AppIntroFragment.newInstance(sliderPage5));
     }

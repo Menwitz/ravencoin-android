@@ -20,7 +20,7 @@ import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.BRKeyStore;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static com.ravencoin.tools.util.BRConstants.ONE_RAVEN;
+import static com.ravencoin.tools.util.RConstants.ONE_RAVEN;
 
 
 public class SpendLimitActivity extends RActivity {
@@ -60,7 +60,7 @@ public class SpendLimitActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.fingerprintSpendingLimit);
+                BRAnimator.showSupportFragment(app, RConstants.fingerprintSpendingLimit);
             }
         });
 

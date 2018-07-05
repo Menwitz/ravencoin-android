@@ -24,7 +24,7 @@ import com.ravencoin.core.BRCorePeer;
 import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.manager.SyncManager;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -175,7 +175,7 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
         if (mObserverIsStarting) return;
         mObserverIsStarting = true;
 
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 try {

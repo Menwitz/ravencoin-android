@@ -25,17 +25,17 @@ import com.ravencoin.R;
 import com.ravencoin.presenter.activities.camera.ScanQRActivity;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
 import com.ravencoin.presenter.activities.util.RActivity;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.customviews.BRKeyboard;
 import com.ravencoin.presenter.interfaces.BRAuthCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.animation.SpringAnimator;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.BRKeyStore;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -45,8 +45,8 @@ import com.platform.APIClient;
 import java.util.List;
 
 import static com.ravencoin.R.color.white;
-import static com.ravencoin.tools.util.BRConstants.PLATFORM_ON;
-import static com.ravencoin.tools.util.BRConstants.SCANNER_REQUEST;
+import static com.ravencoin.tools.util.RConstants.PLATFORM_ON;
+import static com.ravencoin.tools.util.RConstants.SCANNER_REQUEST;
 
 public class LoginActivity extends RActivity {
     private static final String TAG = LoginActivity.class.getName();
@@ -149,18 +149,18 @@ public class LoginActivity extends RActivity {
                         // Should we show an expgetString(R.string.ConfirmPaperPhrase_word)lanation?
                         if (ActivityCompat.shouldShowRequestPermissionRationale(app,
                                 Manifest.permission.CAMERA)) {
-                            BRDialog.showCustomDialog(app, getString(R.string.Send_cameraUnavailabeTitle_android),
-                                    getString(R.string.Send_cameraUnavailabeMessage_android), getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                            RDialog.showCustomDialog(app, getString(R.string.Send_cameraUnavailabeTitle_android),
+                                    getString(R.string.Send_cameraUnavailabeMessage_android), getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                                         @Override
-                                        public void onClick(BRDialogView brDialogView) {
-                                            brDialogView.dismiss();
+                                        public void onClick(RDialogView rDialogView) {
+                                            rDialogView.dismiss();
                                         }
                                     }, null, null, 0);
                         } else {
                             // No explanation needed, we can request the permission.
                             ActivityCompat.requestPermissions(app,
                                     new String[]{Manifest.permission.CAMERA},
-                                    BRConstants.CAMERA_REQUEST_ID);
+                                    RConstants.CAMERA_REQUEST_ID);
                         }
                     } else {
                         // Permission is granted, open camera
@@ -228,7 +228,7 @@ public class LoginActivity extends RActivity {
         appVisible = true;
         app = this;
         inputAllowed = true;
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 WalletsMaster.getInstance(LoginActivity.this).initLastWallet(LoginActivity.this);
@@ -364,11 +364,11 @@ public class LoginActivity extends RActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         switch (requestCode) {
-            case BRConstants.CAMERA_REQUEST_ID: {
+            case RConstants.CAMERA_REQUEST_ID: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    BRAnimator.openScanner(this, BRConstants.SCANNER_REQUEST);
+                    BRAnimator.openScanner(this, RConstants.SCANNER_REQUEST);
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
 

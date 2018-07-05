@@ -10,7 +10,7 @@ import com.ravencoin.RavenApp;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
 import com.ravencoin.presenter.entities.CurrencyEntity;
 import com.ravencoin.tools.sqlite.CurrencyDataSource;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -83,6 +84,10 @@ public class BRApiManager {
     }
 
     private Set<CurrencyEntity> getCurrencies(Activity context, BaseWalletManager walletManager) {
+
+        // todo remove this test test
+        rvnToBtcRatio(context);
+
         if (ActivityUTILS.isMainThread()) {
             throw new NetworkOnMainThreadException();
         }
@@ -100,13 +105,10 @@ public class BRApiManager {
                         tmp.code = tmpObj.getString("code");
                         tmp.rate = (float) tmpObj.getDouble("rate");
                         String selectedISO = BRSharedPrefs.getPreferredFiatIso(context);
-                        Log.e(TAG, "selectedISO: " + selectedISO);
+                        Log.d(TAG, "selectedISO: " + selectedISO);
                         if (tmp.code.equalsIgnoreCase(selectedISO)) {
-//                            Log.e(TAG, "theIso : " + theIso);
-//                                Log.e(TAG, "Putting the shit in the shared prefs");
                             BRSharedPrefs.putPreferredFiatIso(context, tmp.code);
                         }
-                        Log.e("TAG", tmp.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -129,7 +131,7 @@ public class BRApiManager {
                 //use a handler to run a toast that shows the current timestamp
                 handler.post(new Runnable() {
                     public void run() {
-                        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                             @Override
                             public void run() {
                                 if (RavenApp.isAppInBackground(context)) {
@@ -235,6 +237,44 @@ public class BRApiManager {
             JSONObject obj = new JSONObject(jsonString);
 
             jsonArray = obj.getJSONArray("data");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonArray;
+    }
+
+    public static JSONArray rvnToBtcRatio(Activity app) {
+
+        String jsonString = urlGET(app, "http://api.ravenwallet.org/stats");
+
+        JSONArray jsonArray = null;
+        if (jsonString == null) return null;
+
+        try {
+            JSONObject obj = new JSONObject(jsonString);
+
+            jsonArray = obj.getJSONArray("datapoints");
+
+            int length = jsonArray.length();
+            for (int i = 0; i < length; i++) {
+                try {
+                    JSONObject tmpObj = (JSONObject) jsonArray.get(i);
+
+                    for (int k = 0; k < tmpObj.length(); k++) {
+                        double dbl = Double.parseDouble(tmpObj.getString("value"));
+                        DecimalFormat df = new DecimalFormat("#.########");
+                        Log.i("Info", "value: " + df.format(dbl) + ", date: " + tmpObj.getString("date"));
+                    }
+
+//                    double rvnRate = (float) tmpObj.getDouble("rate");
+//                    tmpObj.remove("rate");
+//                    tmpObj.put("rate", rvnRate);
+//
+//                    jsonArray.put(tmpObj);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

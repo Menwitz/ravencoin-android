@@ -213,15 +213,15 @@ public class SettingsActivity extends RActivity {
             }
         }, false));
 
-        items.add(new BRSettingsItem(getString(R.string.Settings_notification), "", null, true));
-        items.add(new BRSettingsItem(getString(R.string.Settings_statusbar), "", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, UnlinkActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-            }
-        }, false));
+//        items.add(new BRSettingsItem(getString(R.string.Settings_notification), "", null, true));
+//        items.add(new BRSettingsItem(getString(R.string.Settings_statusbar), "", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SettingsActivity.this, UnlinkActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+//            }
+//        }, false));
 
         items.add(new BRSettingsItem(getString(R.string.Settings_currencySettings), "", null, true));
 
@@ -238,7 +238,7 @@ public class SettingsActivity extends RActivity {
 
         items.add(new BRSettingsItem(getString(R.string.Settings_other), "", null, true));
 
-        items.add(new BRSettingsItem(getString(R.string.Settings_shareData), "ON", new View.OnClickListener() {
+        items.add(new BRSettingsItem(getString(R.string.Settings_shareData), BRSharedPrefs.getShareData(this) ? "ON" : "OFF", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, ShareDataActivity.class);

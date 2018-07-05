@@ -23,7 +23,7 @@ import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.manager.FontManager;
 import com.ravencoin.tools.sqlite.CurrencyDataSource;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -66,7 +66,7 @@ public class DisplayCurrencyActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.displayCurrency);
+                BRAnimator.showSupportFragment(app, RConstants.displayCurrency);
             }
         });
 
@@ -102,10 +102,10 @@ public class DisplayCurrencyActivity extends RActivity {
         });
 
         int unit = BRSharedPrefs.getCryptoDenomination(this, "RVN"); // any iso, using one for all for now
-        if (unit == BRConstants.CURRENT_UNIT_URVN) {
+        if (unit == RConstants.CURRENT_UNIT_URVN) {
             setButton(0);
         }
-        if (unit == BRConstants.CURRENT_UNIT_MRVN) {
+        if (unit == RConstants.CURRENT_UNIT_MRVN) {
             setButton(1);
         } else {
             setButton(2);
@@ -144,7 +144,7 @@ public class DisplayCurrencyActivity extends RActivity {
     private void setButton(int position) {
         switch (position) {
             case 0:
-                BRSharedPrefs.putCryptoDenomination(this, mWalletManager.getIso(this), BRConstants.CURRENT_UNIT_URVN);
+                BRSharedPrefs.putCryptoDenomination(this, mWalletManager.getIso(this), RConstants.CURRENT_UNIT_URVN);
                 leftButton.setTextColor(getColor(R.color.white));
                 leftButton.setBackground(getDrawable(R.drawable.b_half_left_blue));
                 rightButton.setTextColor(getColor(R.color.dark_blue));
@@ -153,7 +153,7 @@ public class DisplayCurrencyActivity extends RActivity {
                 middleButton.setBackground(getDrawable(R.drawable.b_middle_blue_stroke));
                 break;
             case 1:
-                BRSharedPrefs.putCryptoDenomination(this, mWalletManager.getIso(this), BRConstants.CURRENT_UNIT_MRVN);
+                BRSharedPrefs.putCryptoDenomination(this, mWalletManager.getIso(this), RConstants.CURRENT_UNIT_MRVN);
                 middleButton.setTextColor(getColor(R.color.white));
                 middleButton.setBackground(getDrawable(R.drawable.b_half_middle_blue));
                 leftButton.setTextColor(getColor(R.color.dark_blue));
@@ -162,7 +162,7 @@ public class DisplayCurrencyActivity extends RActivity {
                 rightButton.setBackground(getDrawable(R.drawable.b_half_right_blue_stroke));
                 break;
             case 2:
-                BRSharedPrefs.putCryptoDenomination(this, mWalletManager.getIso(this), BRConstants.CURRENT_UNIT_RAVENS);
+                BRSharedPrefs.putCryptoDenomination(this, mWalletManager.getIso(this), RConstants.CURRENT_UNIT_RAVENS);
                 rightButton.setTextColor(getColor(R.color.white));
                 rightButton.setBackground(getDrawable(R.drawable.b_half_right_blue));
                 leftButton.setTextColor(getColor(R.color.dark_blue));

@@ -14,7 +14,7 @@ import android.widget.EditText;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.WalletActivity;
 import com.ravencoin.tools.manager.TxManager;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 
 /**
  * BreadWallet
@@ -96,7 +96,7 @@ public class BRSearchBar extends android.support.v7.widget.Toolbar {
             }
         }, 200); //use 300 to make it run when coming back from lock screen
 
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 TxManager.getInstance().updateTxList(breadActivity);

@@ -17,11 +17,11 @@ import android.widget.TextView;
 
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.util.RActivity;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.fragments.FragmentPhraseWord;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.animation.RDialog;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.security.PostAuth;
 import com.ravencoin.tools.util.Utils;
 
@@ -86,7 +86,7 @@ public class PaperKeyActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.startBreadActivity(PaperKeyActivity.this, false);
+                BRAnimator.startRavenActivity(PaperKeyActivity.this, false);
                 if (!isDestroyed()) finish();
             }
         });
@@ -107,17 +107,17 @@ public class PaperKeyActivity extends RActivity {
         String wordArray[] = cleanPhrase.split(" ");
 
         if (cleanPhrase.charAt(cleanPhrase.length() - 1) == '\0') {
-            BRDialog.showCustomDialog(this, getString(R.string.JailbreakWarnings_title),
-                    getString(R.string.Alert_keystore_generic_android), getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+            RDialog.showCustomDialog(this, getString(R.string.JailbreakWarnings_title),
+                    getString(R.string.Alert_keystore_generic_android), getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            brDialogView.dismissWithAnimation();
+                        public void onClick(RDialogView rDialogView) {
+                            rDialogView.dismissWithAnimation();
                         }
                     }, null, null, 0);
-            BRReportsManager.reportBug(new IllegalArgumentException("Paper Key error, please contact support at breadwallet.com: " + wordArray.length), true);
+            RReportsManager.reportBug(new IllegalArgumentException("Paper Key error, please contact support at breadwallet.com: " + wordArray.length), true);
         } else {
             if (wordArray.length != 12) {
-                BRReportsManager.reportBug(new IllegalArgumentException("Wrong number of paper keys: " + wordArray.length + ", lang: " + Locale.getDefault().getLanguage()), true);
+                RReportsManager.reportBug(new IllegalArgumentException("Wrong number of paper keys: " + wordArray.length + ", lang: " + Locale.getDefault().getLanguage()), true);
             }
             WordPagerAdapter adapter = new WordPagerAdapter(getFragmentManager());
             adapter.setWords(wordArray);

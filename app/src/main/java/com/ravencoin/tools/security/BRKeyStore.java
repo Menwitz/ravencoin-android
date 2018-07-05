@@ -19,14 +19,14 @@ import android.util.Log;
 import android.view.View;
 
 import com.ravencoin.R;
+import com.ravencoin.presenter.customviews.RDialogView;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.exceptions.BRKeystoreErrorException;
-import com.ravencoin.presenter.customviews.BRDialogView;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.BytesUtil;
 import com.ravencoin.tools.util.TypesConverter;
 import com.ravencoin.tools.util.Utils;
@@ -206,7 +206,7 @@ public class BRKeyStore {
             //the key cannot still be null
             if (secretKey == null) {
                 BRKeystoreErrorException ex = new BRKeystoreErrorException("secret is null on _setData: " + alias);
-                BRReportsManager.reportBug(ex);
+                RReportsManager.reportBug(ex);
                 return false;
             }
 
@@ -230,10 +230,10 @@ public class BRKeyStore {
                 throw new UserNotAuthenticatedException(); //just to make the flow stop
             }
 
-            BRReportsManager.reportBug(ex);
+            RReportsManager.reportBug(ex);
             return false;
         } catch (Exception e) {
-            BRReportsManager.reportBug(e);
+            RReportsManager.reportBug(e);
             e.printStackTrace();
             return false;
         } finally {
@@ -300,7 +300,7 @@ public class BRKeyStore {
                     return null;/* file also not there, fine then */
                 }
                 BRKeystoreErrorException ex = new BRKeystoreErrorException("file is present but the key is gone: " + alias);
-                BRReportsManager.reportBug(ex);
+                RReportsManager.reportBug(ex);
                 return null;
             }
 
@@ -312,11 +312,11 @@ public class BRKeyStore {
                 //report it if one exists and not the other.
                 if (ivExists != aliasExists) {
                     BRKeystoreErrorException ex = new BRKeystoreErrorException("alias or iv isn't on the disk: " + alias + ", aliasExists:" + aliasExists);
-                    BRReportsManager.reportBug(ex);
+                    RReportsManager.reportBug(ex);
                     return null;
                 } else {
                     BRKeystoreErrorException ex = new BRKeystoreErrorException("!ivExists && !aliasExists: " + alias);
-                    BRReportsManager.reportBug(ex);
+                    RReportsManager.reportBug(ex);
                     return null;
                 }
             }
@@ -355,7 +355,7 @@ public class BRKeyStore {
                 throw (UserNotAuthenticatedException) e;
             } else {
                 Log.e(TAG, "_getData: InvalidKeyException", e);
-                BRReportsManager.reportBug(e);
+                RReportsManager.reportBug(e);
                 if (e instanceof KeyPermanentlyInvalidatedException)
                     showKeyInvalidated(context);
                 throw new UserNotAuthenticatedException(); //just to not go any further
@@ -363,22 +363,22 @@ public class BRKeyStore {
         } catch (IOException | CertificateException | KeyStoreException e) {
             /** keyStore.load(null) threw the Exception, meaning the keystore is unavailable */
             Log.e(TAG, "_getData: keyStore.load(null) threw the Exception, meaning the keystore is unavailable", e);
-            BRReportsManager.reportBug(e);
+            RReportsManager.reportBug(e);
             if (e instanceof FileNotFoundException) {
                 Log.e(TAG, "_getData: File not found exception", e);
 
                 RuntimeException ex = new RuntimeException("the key is present but the phrase on the disk no");
-                BRReportsManager.reportBug(ex);
+                RReportsManager.reportBug(ex);
                 throw new RuntimeException(e.getMessage());
             } else {
-                BRReportsManager.reportBug(e);
+                RReportsManager.reportBug(e);
                 throw new RuntimeException(e.getMessage());
             }
 
         } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException e) {
             /** if for any other reason the keystore fails, crash! */
             Log.e(TAG, "getData: error: " + e.getClass().getSuperclass().getName());
-            BRReportsManager.reportBug(e);
+            RReportsManager.reportBug(e);
             throw new RuntimeException(e.getMessage());
         } catch (BadPaddingException | IllegalBlockSizeException | NoSuchProviderException e) {
             e.printStackTrace();
@@ -411,10 +411,10 @@ public class BRKeyStore {
     }
 
     public static void showKeyInvalidated(final Context app) {
-        BRDialog.showCustomDialog(app, app.getString(R.string.Alert_keystore_title_android), app.getString(R.string.Alert_keystore_invalidated_android), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+        RDialog.showCustomDialog(app, app.getString(R.string.Alert_keystore_title_android), app.getString(R.string.Alert_keystore_invalidated_android), app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
             @Override
-            public void onClick(BRDialogView brDialogView) {
-                brDialogView.dismissWithAnimation();
+            public void onClick(RDialogView rDialogView) {
+                rDialogView.dismissWithAnimation();
             }
         }, null, new DialogInterface.OnDismissListener() {
             @Override
@@ -748,7 +748,7 @@ public class BRKeyStore {
                     count++;
                 }
             } else {
-                BRReportsManager.reportBug(new NullPointerException("keyStore.aliases() is null"));
+                RReportsManager.reportBug(new NullPointerException("keyStore.aliases() is null"));
                 return false;
             }
             Log.e(TAG, "resetWalletKeyStore: removed:" + count);
@@ -813,7 +813,7 @@ public class BRKeyStore {
         // Create the Confirm Credentials screen. You can customize the title and description. Or
         // we will provide a generic one for you if you leave it null
         if (!alias.equalsIgnoreCase(PHRASE_ALIAS) && !alias.equalsIgnoreCase(CANARY_ALIAS)) {
-            BRReportsManager.reportBug(new IllegalArgumentException("requesting auth for: " + alias), true);
+            RReportsManager.reportBug(new IllegalArgumentException("requesting auth for: " + alias), true);
         }
 //        Log.e(TAG, "showAuthenticationScreen: " + alias);
         if (context instanceof Activity) {
@@ -821,7 +821,7 @@ public class BRKeyStore {
             KeyguardManager mKeyguardManager = (KeyguardManager) app.getSystemService(Context.KEYGUARD_SERVICE);
             if (mKeyguardManager == null) {
                 NullPointerException ex = new NullPointerException("KeyguardManager is null in showAuthenticationScreen");
-                BRReportsManager.reportBug(ex, true);
+                RReportsManager.reportBug(ex, true);
                 return;
             }
             String message = context.getString(R.string.UnlockScreen_touchIdPrompt_android);
@@ -836,11 +836,11 @@ public class BRKeyStore {
                 app.startActivityForResult(intent, requestCode);
             } else {
                 Log.e(TAG, "showAuthenticationScreen: failed to create intent for auth");
-                BRReportsManager.reportBug(new RuntimeException("showAuthenticationScreen: failed to create intent for auth"));
+                RReportsManager.reportBug(new RuntimeException("showAuthenticationScreen: failed to create intent for auth"));
                 app.finish();
             }
         } else {
-            BRReportsManager.reportBug(new RuntimeException("showAuthenticationScreen: context is not activity!"));
+            RReportsManager.reportBug(new RuntimeException("showAuthenticationScreen: context is not activity!"));
             Log.e(TAG, "showAuthenticationScreen: context is not activity!");
         }
     }
@@ -907,10 +907,10 @@ public class BRKeyStore {
             boolean success = writeBytesToFile(path, iv);
             if (!success) {
                 Log.e(TAG, "_setOldData: " + "failed to writeBytesToFile: " + alias);
-                BRDialog.showCustomDialog(context, context.getString(R.string.Alert_keystore_title_android), "Failed to save the iv file for: " + alias, "close", null, new BRDialogView.BROnClickListener() {
+                RDialog.showCustomDialog(context, context.getString(R.string.Alert_keystore_title_android), "Failed to save the iv file for: " + alias, "close", null, new RDialogView.BROnClickListener() {
                     @Override
-                    public void onClick(BRDialogView brDialogView) {
-                        brDialogView.dismissWithAnimation();
+                    public void onClick(RDialogView rDialogView) {
+                        rDialogView.dismissWithAnimation();
                     }
                 }, null, null, 0);
                 keyStore.deleteEntry(alias);
@@ -1023,11 +1023,11 @@ public class BRKeyStore {
             @Override
             public void onClick(View textView) {
                 Log.e(TAG, "onClick: clicked on span!");
-                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
-                        BRDialog.hideDialog();
-                        BRAnimator.showSupportFragment((Activity) app, BRConstants.loopBug);
+                        RDialog.hideDialog();
+                        BRAnimator.showSupportFragment((Activity) app, RConstants.loopBug);
                     }
                 });
 
@@ -1040,10 +1040,10 @@ public class BRKeyStore {
             }
         };
         ss.setSpan(clickableSpan, mess.indexOf("[") - 1, mess.indexOf("]") - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), ss, app.getString(R.string.AccessibilityLabels_close), null,
-                new BRDialogView.BROnClickListener() {
+        RDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), ss, app.getString(R.string.AccessibilityLabels_close), null,
+                new RDialogView.BROnClickListener() {
                     @Override
-                    public void onClick(BRDialogView brDialogView) {
+                    public void onClick(RDialogView rDialogView) {
                         if (app instanceof Activity) ((Activity) app).finish();
                     }
                 }, null, new DialogInterface.OnDismissListener() {

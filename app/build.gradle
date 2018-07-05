@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion = 27
     buildToolsVersion = '27.0.3'
-
     defaultConfig {
         testInstrumentationRunner = 'android.support.test.runner.AndroidJUnitRunner'
         applicationId = 'com.ravencoin'
@@ -28,15 +27,12 @@ android {
             }
         }
     }
-
     testOptions {
         unitTests.returnDefaultValues = true
     }
-
     packagingOptions {
         pickFirst 'protobuf.meta'
     }
-
     externalNativeBuild {
         cmake {
             // When you specify a version of CMake, as shown below,
@@ -46,10 +42,8 @@ android {
 
         }
     }
-
     // Specifies two flavor dimensions.
     flavorDimensions "mode"
-
     productFlavors {
         rvn {
             applicationId = "com.ravencoin"
@@ -85,7 +79,6 @@ android {
             }
         }
     }
-
     lintOptions {
         // set to true to turn off analysis progress reporting by lint
         quiet false
@@ -100,7 +93,6 @@ android {
 
         disable 'MissingTranslation'
     }
-
     buildTypes {
 //        gitUpdateModules()
 //        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -125,6 +117,10 @@ android {
             }
         }
 
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     sourceSets { main { java.srcDirs = ['src/main/java', 'src/main/jni/root'] } }
 }
@@ -151,9 +147,9 @@ repositories {
 
 dependencies {
     implementation 'commons-io:commons-io:2.4'
-    implementation 'org.eclipse.jetty:jetty-webapp:9.2.19.v20160908'
-    implementation 'org.eclipse.jetty.websocket:websocket-server:9.2.19.v20160908'
-    implementation 'org.eclipse.jetty:jetty-continuation:9.2.19.v20160908'
+    implementation 'org.eclipse.jetty:jetty-webapp:9.4.10.RC1'
+    implementation 'org.eclipse.jetty.websocket:websocket-server:9.4.10.RC1'
+    implementation 'org.eclipse.jetty:jetty-continuation:9.4.10.RC1'
     implementation 'org.slf4j:slf4j-api:1.7.22'
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:design:27.1.0'
@@ -161,21 +157,19 @@ dependencies {
     implementation 'com.android.support:support-v13:27.1.0'
     implementation 'com.android.support:recyclerview-v7:27.1.0'
     implementation 'com.android.support:cardview-v7:27.1.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
-//    implementation 'com.google.firebase:firebase-core:11.8.0'
-//    implementation 'com.google.firebase:firebase-crash:11.8.0'
-    implementation 'com.google.firebase:firebase-core:12.0.1'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    //    implementation 'com.google.firebase:firebase-core:11.8.0'
+    //    implementation 'com.google.firebase:firebase-crash:11.8.0'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
     implementation 'io.sigpipe:jbsdiff:1.0'
     implementation 'com.google.zxing:core:3.3.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support.test:runner:1.0.1'
-    implementation 'com.android.support.test:rules:1.0.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.android.support.test:runner:1.0.2'
+    implementation 'com.android.support.test:rules:1.0.2'
     implementation 'junit:junit:4.12'
-    implementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'tools.fastlane:screengrab:1.1.0'
-
-    // Remove later
     implementation 'com.jjoe64:graphview:4.2.1'
 }
 

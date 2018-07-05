@@ -23,7 +23,7 @@ import com.ravencoin.tools.animation.DecelerateOvershootInterpolator;
 import com.ravencoin.tools.animation.SpringAnimator;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.BRKeyStore;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.Utils;
 
 /**
@@ -201,7 +201,7 @@ public class FragmentPin extends Fragment {
     }
 
     private void handleSuccess() {
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 try {

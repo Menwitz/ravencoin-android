@@ -11,7 +11,7 @@ import com.ravencoin.presenter.activities.intro.WriteDownActivity;
 import com.ravencoin.presenter.activities.settings.FingerprintActivity;
 import com.ravencoin.presenter.activities.settings.ShareDataActivity;
 import com.ravencoin.tools.security.BRKeyStore;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -143,7 +143,7 @@ public class PromptManager {
                 return new PromptInfo(app.getString(R.string.Prompts_RecommendRescan_title), app.getString(R.string.Prompts_RecommendRescan_body), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                             @Override
                             public void run() {
                                 BRSharedPrefs.putStartHeight(app, BRSharedPrefs.getCurrentWalletIso(app), 0);
@@ -158,7 +158,7 @@ public class PromptManager {
                 return new PromptInfo(app.getString(R.string.Prompts_ShareData_title), app.getString(R.string.Prompts_ShareData_body), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                             @Override
                             public void run() {
                                 Intent intent = new Intent(app, ShareDataActivity.class);

@@ -111,7 +111,7 @@ public class BREventManager implements RavenApp.OnAppBackgrounded {
 //            Log.e(TAG, "saveEvents: insert json to array: " + obj);
             array.put(obj);
         }
-        Context app = RavenApp.getBreadContext();
+        Context app = RavenApp.getRavenContext();
         if (app != null) {
             String fileName = app.getFilesDir().getAbsolutePath() + "/events/" + UUID.randomUUID().toString();
             writeEventsToDisk(fileName, array.toString());
@@ -122,7 +122,7 @@ public class BREventManager implements RavenApp.OnAppBackgrounded {
 
     private void pushToServer() {
 //        Log.d(TAG, "pushToServer");
-        Context app = RavenApp.getBreadContext();
+        Context app = RavenApp.getRavenContext();
         if (app != null) {
             List<JSONArray> arrs = getEventsFromDisk(app);
             int fails = 0;

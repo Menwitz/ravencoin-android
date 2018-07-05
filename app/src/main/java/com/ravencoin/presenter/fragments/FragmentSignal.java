@@ -48,11 +48,13 @@ public class FragmentSignal extends Fragment {
     public static final String TITLE = "title";
     public static final String ICON_DESCRIPTION = "iconDescription";
     public static final String RES_ID = "resId";
+    public static final String COLOR_ID = "colorId";
     public TextView mTitle;
     public TextView mDescription;
     public ImageView mIcon;
     private BROnSignalCompletion completion;
     private LinearLayout signalLayout;
+    private int signalColor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
@@ -77,13 +79,16 @@ public class FragmentSignal extends Fragment {
             String title = bundle.getString(TITLE, "");
             String description = bundle.getString(ICON_DESCRIPTION, "");
             int resId = bundle.getInt(RES_ID, 0);
+            int color = bundle.getInt(COLOR_ID, getActivity().getColor(R.color.logo_gradient_end));
             Assert.assertNotSame(title, "");
             Assert.assertNotSame(description, "");
             Assert.assertNotSame(resId, 0);
+            Assert.assertNotSame(color, 0);
 
             mTitle.setText(title);
             mDescription.setText(description);
             mIcon.setImageResource(resId);
+            signalLayout.setBackgroundColor(color);
         } else {
             Log.e(TAG, "onCreateView: bundle is null!");
         }

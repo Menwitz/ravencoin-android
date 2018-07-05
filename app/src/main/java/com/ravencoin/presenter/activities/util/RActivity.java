@@ -16,45 +16,21 @@ import com.ravencoin.tools.manager.BRApiManager;
 import com.ravencoin.tools.manager.InternetManager;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.BRKeyStore;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.wallet.wallets.util.CryptoUriParser;
 import com.ravencoin.tools.security.PostAuth;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
 import com.ravencoin.wallet.WalletsMaster;
 import com.platform.HTTPServer;
 import com.platform.tools.BRBitId;
 
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan on <mihail@breadwallet.com> 5/23/17.
- * Copyright (c) 2017 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 public class RActivity extends Activity {
     private static final String TAG = RActivity.class.getName();
     public static final Point screenParametersPoint = new Point();
 
 
     static {
-        System.loadLibrary(BRConstants.NATIVE_LIB_NAME);
+        System.loadLibrary(RConstants.NATIVE_LIB_NAME);
     }
 
     @Override
@@ -87,9 +63,9 @@ public class RActivity extends Activity {
         // 123 is the qrCode result
         switch (requestCode) {
 
-            case BRConstants.PAY_REQUEST_CODE:
+            case RConstants.PAY_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             PostAuth.getInstance().onPublishTxAuth(RActivity.this, true);
@@ -97,9 +73,9 @@ public class RActivity extends Activity {
                     });
                 }
                 break;
-            case BRConstants.REQUEST_PHRASE_BITID:
+            case RConstants.REQUEST_PHRASE_BITID:
                 if (resultCode == RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             PostAuth.getInstance().onBitIDAuth(RActivity.this, true);
@@ -109,9 +85,9 @@ public class RActivity extends Activity {
                 }
                 break;
 
-            case BRConstants.PAYMENT_PROTOCOL_REQUEST_CODE:
+            case RConstants.PAYMENT_PROTOCOL_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             PostAuth.getInstance().onPaymentProtocolRequest(RActivity.this, true);
@@ -121,9 +97,9 @@ public class RActivity extends Activity {
                 }
                 break;
 
-            case BRConstants.CANARY_REQUEST_CODE:
+            case RConstants.CANARY_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             PostAuth.getInstance().onCanaryCheck(RActivity.this, true);
@@ -134,9 +110,9 @@ public class RActivity extends Activity {
                 }
                 break;
 
-            case BRConstants.SHOW_PHRASE_REQUEST_CODE:
+            case RConstants.SHOW_PHRASE_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             PostAuth.getInstance().onPhraseCheckAuth(RActivity.this, true);
@@ -144,9 +120,9 @@ public class RActivity extends Activity {
                     });
                 }
                 break;
-            case BRConstants.PROVE_PHRASE_REQUEST:
+            case RConstants.PROVE_PHRASE_REQUEST:
                 if (resultCode == RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             PostAuth.getInstance().onPhraseProveAuth(RActivity.this, true);
@@ -154,9 +130,9 @@ public class RActivity extends Activity {
                     });
                 }
                 break;
-            case BRConstants.PUT_PHRASE_RECOVERY_WALLET_REQUEST_CODE:
+            case RConstants.PUT_PHRASE_RECOVERY_WALLET_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             PostAuth.getInstance().onRecoverWalletAuth(RActivity.this, true);
@@ -167,9 +143,9 @@ public class RActivity extends Activity {
                 }
                 break;
 
-            case BRConstants.SCANNER_REQUEST:
+            case RConstants.SCANNER_REQUEST:
                 if (resultCode == Activity.RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             try {
@@ -191,9 +167,9 @@ public class RActivity extends Activity {
                 }
                 break;
 
-            case BRConstants.PUT_PHRASE_NEW_WALLET_REQUEST_CODE:
+            case RConstants.PUT_PHRASE_NEW_WALLET_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             PostAuth.getInstance().onCreateWalletAuth(RActivity.this, true);
@@ -226,7 +202,7 @@ public class RActivity extends Activity {
         RavenApp.setBreadContext(app);
 
         if (!HTTPServer.isStarted())
-            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+            RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                 @Override
                 public void run() {
                     HTTPServer.startServer();
@@ -244,7 +220,7 @@ public class RActivity extends Activity {
                 && !(app instanceof DisabledActivity)) {
             if (!BRKeyStore.getPinCode(app).isEmpty()) {
                 Log.e(TAG, "lockIfNeeded: " + RavenApp.backgroundedTime);
-                BRAnimator.startBreadActivity(app, true);
+                BRAnimator.startRavenActivity(app, true);
             }
         }
 

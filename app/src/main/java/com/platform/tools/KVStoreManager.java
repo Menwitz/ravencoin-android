@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.ravencoin.core.BRCoreTransaction;
 import com.ravencoin.tools.crypto.CryptoHelper;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.sqlite.CurrencyDataSource;
 import com.ravencoin.tools.util.BRCompressor;
@@ -140,7 +140,7 @@ public class KVStoreManager {
         try {
             compressed = BRCompressor.bz2Compress(result);
         } catch (IOException e) {
-            BRReportsManager.reportBug(e);
+            RReportsManager.reportBug(e);
             return;
         }
         RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(APIClient.getInstance(app));
@@ -321,7 +321,7 @@ public class KVStoreManager {
         try {
             compressed = BRCompressor.bz2Compress(result);
         } catch (IOException e) {
-            BRReportsManager.reportBug(e);
+            RReportsManager.reportBug(e);
             return;
         }
         RemoteKVStore remoteKVStore = RemoteKVStore.getInstance(APIClient.getInstance(app));

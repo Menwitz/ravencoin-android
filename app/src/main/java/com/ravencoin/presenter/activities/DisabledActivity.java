@@ -15,7 +15,7 @@ import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.SpringAnimator;
 import com.ravencoin.tools.security.AuthManager;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 
 import java.util.Locale;
 
@@ -47,7 +47,7 @@ public class DisabledActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(DisabledActivity.this, BRConstants.walletDisabled);
+                BRAnimator.showSupportFragment(DisabledActivity.this, RConstants.walletDisabled);
             }
         });
 
@@ -76,7 +76,7 @@ public class DisabledActivity extends RActivity {
         if (AuthManager.getInstance().isWalletDisabled(DisabledActivity.this)) {
             SpringAnimator.failShakeAnimation(DisabledActivity.this, disabled);
         } else {
-            BRAnimator.startBreadActivity(DisabledActivity.this, true);
+            BRAnimator.startRavenActivity(DisabledActivity.this, true);
         }
     }
 
@@ -128,7 +128,7 @@ public class DisabledActivity extends RActivity {
         } else if (AuthManager.getInstance().isWalletDisabled(DisabledActivity.this)) {
             SpringAnimator.failShakeAnimation(DisabledActivity.this, disabled);
         } else {
-            BRAnimator.startBreadActivity(DisabledActivity.this, true);
+            BRAnimator.startRavenActivity(DisabledActivity.this, true);
         }
         overridePendingTransition(R.anim.fade_up, R.anim.fade_down);
     }

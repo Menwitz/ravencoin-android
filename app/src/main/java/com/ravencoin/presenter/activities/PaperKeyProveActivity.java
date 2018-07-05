@@ -19,12 +19,12 @@ import android.widget.TextView;
 
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.util.RActivity;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.interfaces.BROnSignalCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.animation.SpringAnimator;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.security.SmartValidator;
 import com.ravencoin.tools.util.Utils;
@@ -114,10 +114,10 @@ public class PaperKeyProveActivity extends RActivity {
                 if (isWordCorrect(true) && isWordCorrect(false)) {
                     Utils.hideKeyboard(PaperKeyProveActivity.this);
                     BRSharedPrefs.putPhraseWroteDown(PaperKeyProveActivity.this, true);
-                    BRAnimator.showBreadSignal(PaperKeyProveActivity.this, getString(R.string.Alerts_paperKeySet), getString(R.string.Alerts_paperKeySetSubheader), R.drawable.ic_check_mark_white, new BROnSignalCompletion() {
+                    BRAnimator.showSignal(PaperKeyProveActivity.this, getString(R.string.Alerts_paperKeySet), getString(R.string.Alerts_paperKeySetSubheader), R.drawable.ic_check_mark_white, new BROnSignalCompletion() {
                         @Override
                         public void onComplete() {
-                            BRAnimator.startBreadActivity(PaperKeyProveActivity.this, false);
+                            BRAnimator.startRavenActivity(PaperKeyProveActivity.this, false);
                             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
                             finishAffinity();
                         }
@@ -148,14 +148,14 @@ public class PaperKeyProveActivity extends RActivity {
         String wordArray[] = cleanPhrase.split(" ");
 
         if (wordArray.length == 12 && cleanPhrase.charAt(cleanPhrase.length() - 1) == '\0') {
-            BRDialog.showCustomDialog(this, getString(R.string.JailbreakWarnings_title),
-                    getString(R.string.Alert_keystore_generic_android), getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+            RDialog.showCustomDialog(this, getString(R.string.JailbreakWarnings_title),
+                    getString(R.string.Alert_keystore_generic_android), getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            brDialogView.dismissWithAnimation();
+                        public void onClick(RDialogView rDialogView) {
+                            rDialogView.dismissWithAnimation();
                         }
                     }, null, null, 0);
-            BRReportsManager.reportBug(new IllegalArgumentException("Paper Key error, please contact support at breadwallet.com"), false);
+            RReportsManager.reportBug(new IllegalArgumentException("Paper Key error, please contact support at breadwallet.com"), false);
         } else {
             randomWordsSetUp(wordArray);
 

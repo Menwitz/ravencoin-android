@@ -17,12 +17,12 @@ import com.ravencoin.presenter.activities.PaperKeyProveActivity;
 import com.ravencoin.presenter.activities.intro.WriteDownActivity;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
 import com.ravencoin.presenter.entities.CryptoRequest;
-import com.ravencoin.tools.animation.BRDialog;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.animation.RDialog;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.sqlite.CurrencyDataSource;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -99,9 +99,9 @@ public class PostAuth {
     public void onPhraseCheckAuth(Activity app, boolean authAsked) {
         String cleanPhrase;
         try {
-            byte[] raw = BRKeyStore.getPhrase(app, BRConstants.SHOW_PHRASE_REQUEST_CODE);
+            byte[] raw = BRKeyStore.getPhrase(app, RConstants.SHOW_PHRASE_REQUEST_CODE);
             if (raw == null) {
-                BRReportsManager.reportBug(new NullPointerException("onPhraseCheckAuth: getPhrase = null"), true);
+                RReportsManager.reportBug(new NullPointerException("onPhraseCheckAuth: getPhrase = null"), true);
                 return;
             }
             cleanPhrase = new String(raw);
@@ -121,7 +121,7 @@ public class PostAuth {
     public void onPhraseProveAuth(Activity app, boolean authAsked) {
         String cleanPhrase;
         try {
-            cleanPhrase = new String(BRKeyStore.getPhrase(app, BRConstants.PROVE_PHRASE_REQUEST));
+            cleanPhrase = new String(BRKeyStore.getPhrase(app, RConstants.PROVE_PHRASE_REQUEST));
         } catch (UserNotAuthenticatedException e) {
             if (authAsked) {
                 Log.e(TAG, "onPhraseProveAuth: WARNING!!!! LOOP");
@@ -142,7 +142,7 @@ public class PostAuth {
     public void onRecoverWalletAuth(Activity app, boolean authAsked) {
         if (Utils.isNullOrEmpty(phraseForKeyStore)) {
             Log.e(TAG, "onRecoverWalletAuth: phraseForKeyStore is null or empty");
-            BRReportsManager.reportBug(new NullPointerException("onRecoverWalletAuth: phraseForKeyStore is or empty"));
+            RReportsManager.reportBug(new NullPointerException("onRecoverWalletAuth: phraseForKeyStore is or empty"));
             return;
         }
         byte[] bytePhrase = new byte[0];
@@ -151,7 +151,7 @@ public class PostAuth {
             boolean success = false;
             try {
                 success = BRKeyStore.putPhrase(phraseForKeyStore.getBytes(),
-                        app, BRConstants.PUT_PHRASE_RECOVERY_WALLET_REQUEST_CODE);
+                        app, RConstants.PUT_PHRASE_RECOVERY_WALLET_REQUEST_CODE);
             } catch (UserNotAuthenticatedException e) {
                 if (authAsked) {
                     Log.e(TAG, "onRecoverWalletAuth: WARNING!!!! LOOP");
@@ -186,7 +186,7 @@ public class PostAuth {
 
         } catch (Exception e) {
             e.printStackTrace();
-            BRReportsManager.reportBug(e);
+            RReportsManager.reportBug(e);
         } finally {
             Arrays.fill(bytePhrase, (byte) 0);
         }
@@ -199,7 +199,7 @@ public class PostAuth {
         final BaseWalletManager walletManager = WalletsMaster.getInstance(app).getCurrentWallet(app);
         byte[] rawPhrase;
         try {
-            rawPhrase = BRKeyStore.getPhrase(app, BRConstants.PAY_REQUEST_CODE);
+            rawPhrase = BRKeyStore.getPhrase(app, RConstants.PAY_REQUEST_CODE);
         } catch (UserNotAuthenticatedException e) {
             if (authAsked) {
                 Log.e(TAG, "onPublishTxAuth: WARNING!!!! LOOP");
@@ -215,7 +215,7 @@ public class PostAuth {
                     byte[] txHash = walletManager.signAndPublishTransaction(mCryptoRequest.tx, rawPhrase);
                     if (Utils.isNullOrEmpty(txHash)) {
                         Log.e(TAG, "onPublishTxAuth: signAndPublishTransaction returned an empty txHash");
-                        BRDialog.showSimpleDialog(app, "Send failed", "signAndPublishTransaction failed");
+                        RDialog.showSimpleDialog(app, "Send failed", "signAndPublishTransaction failed");
                         //todo fix this
 //                        WalletsMaster.getInstance(app).offerToChangeTheAmount(app, new PaymentItem(paymentRequest.addresses, paymentItem.serializedTx, paymentRequest.amount, null, paymentRequest.isPaymentRequest));
                     } else {
@@ -249,7 +249,7 @@ public class PostAuth {
     public void onPaymentProtocolRequest(final Activity app, boolean authAsked) {
         final byte[] rawSeed;
         try {
-            rawSeed = BRKeyStore.getPhrase(app, BRConstants.PAYMENT_PROTOCOL_REQUEST_CODE);
+            rawSeed = BRKeyStore.getPhrase(app, RConstants.PAYMENT_PROTOCOL_REQUEST_CODE);
         } catch (UserNotAuthenticatedException e) {
             if (authAsked) {
                 Log.e(TAG, "onPaymentProtocolRequest: WARNING!!!! LOOP");
@@ -264,7 +264,7 @@ public class PostAuth {
         if (rawSeed.length < 10) return;
 
 
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 byte[] txHash = WalletsMaster.getInstance(app).getCurrentWallet(app).signAndPublishTransaction(mPaymentProtocolTx, rawSeed);
@@ -293,7 +293,7 @@ public class PostAuth {
     public void onCanaryCheck(final Activity app, boolean authAsked) {
         String canary = null;
         try {
-            canary = BRKeyStore.getCanary(app, BRConstants.CANARY_REQUEST_CODE);
+            canary = BRKeyStore.getCanary(app, RConstants.CANARY_REQUEST_CODE);
         } catch (UserNotAuthenticatedException e) {
             if (authAsked) {
                 Log.e(TAG, "onCanaryCheck: WARNING!!!! LOOP");
@@ -301,10 +301,10 @@ public class PostAuth {
             }
             return;
         }
-        if (canary == null || !canary.equalsIgnoreCase(BRConstants.CANARY_STRING)) {
+        if (canary == null || !canary.equalsIgnoreCase(RConstants.CANARY_STRING)) {
             byte[] phrase;
             try {
-                phrase = BRKeyStore.getPhrase(app, BRConstants.CANARY_REQUEST_CODE);
+                phrase = BRKeyStore.getPhrase(app, RConstants.CANARY_REQUEST_CODE);
             } catch (UserNotAuthenticatedException e) {
                 if (authAsked) {
                     Log.e(TAG, "onCanaryCheck: WARNING!!!! LOOP");
@@ -321,7 +321,7 @@ public class PostAuth {
             } else {
                 Log.e(TAG, "onCanaryCheck: Canary wasn't there, but the phrase persists, adding canary to keystore.");
                 try {
-                    BRKeyStore.putCanary(BRConstants.CANARY_STRING, app, 0);
+                    BRKeyStore.putCanary(RConstants.CANARY_STRING, app, 0);
                 } catch (UserNotAuthenticatedException e) {
                     if (authAsked) {
                         Log.e(TAG, "onCanaryCheck: WARNING!!!! LOOP");

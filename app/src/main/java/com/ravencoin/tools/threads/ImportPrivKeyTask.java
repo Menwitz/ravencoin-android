@@ -20,14 +20,14 @@ import com.ravencoin.core.BRCoreKey;
 import com.ravencoin.core.BRCoreTransaction;
 import com.ravencoin.core.BRCoreTransactionInput;
 import com.ravencoin.core.BRCoreTransactionOutput;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.customviews.BRToast;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.animation.SpringAnimator;
 import com.ravencoin.tools.manager.BRApiManager;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.tools.util.TypesConverter;
 import com.ravencoin.tools.util.Utils;
@@ -96,14 +96,14 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
         String tmpAddress = coreKey.address();
         if (Utils.isNullOrEmpty(tmpAddress)) {
             String err = "doInBackground: failed to create the address for iso " + iso;
-            BRReportsManager.reportBug(new NullPointerException(err));
+            RReportsManager.reportBug(new NullPointerException(err));
             Log.e(TAG, err);
             return null;
         }
 
         if (!iso.equalsIgnoreCase("RVN")) {
             String err = "doInBackground: Can't happen, uknown iso: " + iso;
-            BRReportsManager.reportBug(new NullPointerException(err));
+            RReportsManager.reportBug(new NullPointerException(err));
             Log.e(TAG, err);
             return null;
         }
@@ -117,11 +117,11 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
             app.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
-                            app.getString(R.string.Import_Error_empty), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+                    RDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
+                            app.getString(R.string.Import_Error_empty), app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                                 @Override
-                                public void onClick(BRDialogView brDialogView) {
-                                    brDialogView.dismissWithAnimation();
+                                public void onClick(RDialogView rDialogView) {
+                                    rDialogView.dismissWithAnimation();
                                 }
                             }, null, null, 0);
                 }
@@ -155,10 +155,10 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
         String fee = CurrencyUtils.getFormattedAmount(app, walletManager.getIso(app), bigFee.abs());
         String message = String.format(app.getString(R.string.Import_confirm), amount, fee);
         String posButton = String.format("%s (%s)", amount, formattedFiatAmount);
-        BRDialog.showCustomDialog(app, "", message, posButton, app.getString(R.string.Button_cancel), new BRDialogView.BROnClickListener() {
+        RDialog.showCustomDialog(app, "", message, posButton, app.getString(R.string.Button_cancel), new RDialogView.BROnClickListener() {
             @Override
-            public void onClick(BRDialogView brDialogView) {
-                BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+            public void onClick(RDialogView rDialogView) {
+                RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                     @Override
                     public void run() {
 
@@ -166,11 +166,11 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
                             app.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
-                                            app.getString(R.string.Import_Error_notValid), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+                                    RDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
+                                            app.getString(R.string.Import_Error_notValid), app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                                                 @Override
-                                                public void onClick(BRDialogView brDialogView) {
-                                                    brDialogView.dismissWithAnimation();
+                                                public void onClick(RDialogView rDialogView) {
+                                                    rDialogView.dismissWithAnimation();
                                                 }
                                             }, null, null, 0);
                                 }
@@ -185,7 +185,7 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
                         if (!mTransaction.isSigned()) {
                             String err = "transaction is not signed";
                             Log.e(TAG, "run: " + err);
-                            BRReportsManager.reportBug(new IllegalArgumentException(err));
+                            RReportsManager.reportBug(new IllegalArgumentException(err));
                             return;
                         }
 
@@ -193,13 +193,13 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
                     }
                 });
 
-                brDialogView.dismissWithAnimation();
+                rDialogView.dismissWithAnimation();
 
             }
-        }, new BRDialogView.BROnClickListener() {
+        }, new RDialogView.BROnClickListener() {
             @Override
-            public void onClick(BRDialogView brDialogView) {
-                brDialogView.dismissWithAnimation();
+            public void onClick(RDialogView rDialogView) {
+                rDialogView.dismissWithAnimation();
             }
         }, null, 0);
 
@@ -208,7 +208,7 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
     private BRCoreTransaction createSweepingTx(final Context app, String url) {
         if (url == null || url.isEmpty()) return null;
 
-        BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+        RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
             public void run() {
                 new Handler().postDelayed(new Runnable() {
@@ -225,7 +225,7 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
         BaseWalletManager walletManager = WalletsMaster.getInstance(app).getWalletByIso(app, iso);
         if (walletManager == null) {
             String err = "createSweepingTx: wallet is null for: " + iso;
-            BRReportsManager.reportBug(new NullPointerException(err));
+            RReportsManager.reportBug(new NullPointerException(err));
             Log.e(TAG, err);
             return null;
         }
@@ -309,7 +309,7 @@ public class ImportPrivKeyTask extends AsyncTask<String, String, String> {
                             }
 
                             final String pass = editText.getText().toString();
-                            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                            RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                                 @Override
                                 public void run() {
                                     String decryptedKey = BRCoreKey.decryptBip38Key(privKey, pass);

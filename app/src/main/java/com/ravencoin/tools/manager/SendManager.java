@@ -7,16 +7,16 @@ import android.util.Log;
 import com.ravencoin.R;
 import com.ravencoin.core.BRCoreAddress;
 import com.ravencoin.core.BRCoreTransaction;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.entities.CryptoRequest;
 import com.ravencoin.presenter.interfaces.BRAuthCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.BRKeyStore;
 import com.ravencoin.tools.security.PostAuth;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
@@ -69,7 +69,7 @@ public class SendManager {
         final String[] errTitle = {null};
         final String[] errMessage = {null};
 
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -114,15 +114,15 @@ public class SendManager {
                     long minAmount = walletManager.getWallet().getMinOutputAmount();
                     errTitle[0] = app.getString(R.string.Alerts_sendFailure);
                     errMessage[0] = String.format(Locale.getDefault(), app.getString(R.string.PaymentProtocol_Errors_smallPayment),
-                            "µ"+BRConstants.symbolRavenPrimary + new BigDecimal(minAmount).divide(new BigDecimal(100), BRConstants.ROUNDING_MODE));
+                            "µ"+ RConstants.symbolRavenPrimary + new BigDecimal(minAmount).divide(new BigDecimal(100), RConstants.ROUNDING_MODE));
                 } catch (SpendingNotAllowed spendingNotAllowed) {
                     ((Activity) app).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            BRDialog.showCustomDialog(app, app.getString(R.string.Alert_error), app.getString(R.string.Send_isRescanning), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+                            RDialog.showCustomDialog(app, app.getString(R.string.Alert_error), app.getString(R.string.Send_isRescanning), app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                                 @Override
-                                public void onClick(BRDialogView brDialogView) {
-                                    brDialogView.dismissWithAnimation();
+                                public void onClick(RDialogView rDialogView) {
+                                    rDialogView.dismissWithAnimation();
                                 }
                             }, null, null, 0);
                         }
@@ -137,13 +137,13 @@ public class SendManager {
                     //Fee is out of date, show not connected error
 //                    FirebaseCrash.report(ex);
                     Crashlytics.logException(ex);
-                    BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                         @Override
                         public void run() {
-                            BRDialog.showCustomDialog(app, app.getString(R.string.Alerts_sendFailure), app.getString(R.string.NodeSelector_notConnected), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+                            RDialog.showCustomDialog(app, app.getString(R.string.Alerts_sendFailure), app.getString(R.string.NodeSelector_notConnected), app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                                 @Override
-                                public void onClick(BRDialogView brDialogView) {
-                                    brDialogView.dismiss();
+                                public void onClick(RDialogView rDialogView) {
+                                    rDialogView.dismiss();
                                 }
                             }, null, null, 0);
                         }
@@ -153,13 +153,13 @@ public class SendManager {
                     somethingWentWrong.printStackTrace();
 //                    FirebaseCrash.report(somethingWentWrong);
                     Crashlytics.logException(somethingWentWrong);
-                    BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                         @Override
                         public void run() {
-                            BRDialog.showCustomDialog(app, app.getString(R.string.Alerts_sendFailure), "Something went wrong", app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+                            RDialog.showCustomDialog(app, app.getString(R.string.Alerts_sendFailure), "Something went wrong", app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                                 @Override
-                                public void onClick(BRDialogView brDialogView) {
-                                    brDialogView.dismiss();
+                                public void onClick(RDialogView rDialogView) {
+                                    rDialogView.dismiss();
                                 }
                             }, null, null, 0);
                         }
@@ -172,13 +172,13 @@ public class SendManager {
 
                 //show the message if we have one to show
                 if (errTitle[0] != null && errMessage[0] != null)
-                    BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                         @Override
                         public void run() {
-                            BRDialog.showCustomDialog(app, errTitle[0], errMessage[0], app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+                            RDialog.showCustomDialog(app, errTitle[0], errMessage[0], app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                                 @Override
-                                public void onClick(BRDialogView brDialogView) {
-                                    brDialogView.dismiss();
+                                public void onClick(RDialogView rDialogView) {
+                                    rDialogView.dismiss();
                                 }
                             }, null, null, 0);
                         }
@@ -199,7 +199,7 @@ public class SendManager {
         if (paymentRequest == null) {
             Log.e(TAG, "tryPay: ERROR: paymentRequest: null");
             String message = "paymentRequest is null";
-            BRReportsManager.reportBug(new RuntimeException("paymentRequest is malformed: " + message), true);
+            RReportsManager.reportBug(new RuntimeException("paymentRequest is malformed: " + message), true);
             throw new SomethingWentWrong("wrong parameters: paymentRequest");
         }
 //        long amount = paymentRequest.amount;
@@ -212,7 +212,7 @@ public class SendManager {
             if (paymentRequest.notEnoughForFee(app, walletManager)) {
                 //weird bug when the core WalletsMaster is NULL
                 if (maxOutputAmount == -1) {
-                    BRReportsManager.reportBug(new RuntimeException("getMaxOutputAmount is -1, meaning _wallet is NULL"), true);
+                    RReportsManager.reportBug(new RuntimeException("getMaxOutputAmount is -1, meaning _wallet is NULL"), true);
                     throw new SomethingWentWrong("getMaxOutputAmount is -1, meaning _wallet is NULL");
                 }
                 // max you can spend is smaller than the min you can spend
@@ -242,7 +242,7 @@ public class SendManager {
         }
 
         // payment successful
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 PostAuth.getInstance().setPaymentItem(paymentRequest);
@@ -256,35 +256,35 @@ public class SendManager {
         BaseWalletManager wm = WalletsMaster.getInstance(app).getCurrentWallet(app);
         long maxAmountDouble = walletManager.getWallet().getMaxOutputAmount();
         if (maxAmountDouble == -1) {
-            BRReportsManager.reportBug(new RuntimeException("getMaxOutputAmount is -1, meaning _wallet is NULL"));
+            RReportsManager.reportBug(new RuntimeException("getMaxOutputAmount is -1, meaning _wallet is NULL"));
             return;
         }
         if (maxAmountDouble == 0) {
-            BRDialog.showCustomDialog(app, app.getString(R.string.Alerts_sendFailure), "Insufficient amount for transaction fee", app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+            RDialog.showCustomDialog(app, app.getString(R.string.Alerts_sendFailure), "Insufficient amount for transaction fee", app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                 @Override
-                public void onClick(BRDialogView brDialogView) {
-                    brDialogView.dismissWithAnimation();
+                public void onClick(RDialogView rDialogView) {
+                    rDialogView.dismissWithAnimation();
                 }
             }, null, null, 0);
         } else {
             if (Utils.isNullOrEmpty(item.address)) throw new RuntimeException("can't happen");
             final BRCoreTransaction tx = wm.getWallet().createTransaction(maxAmountDouble, new BRCoreAddress(item.address));
             if (tx == null) {
-                BRDialog.showCustomDialog(app, app.getString(R.string.Alerts_sendFailure), "Insufficient amount for transaction fee", app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+                RDialog.showCustomDialog(app, app.getString(R.string.Alerts_sendFailure), "Insufficient amount for transaction fee", app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                     @Override
-                    public void onClick(BRDialogView brDialogView) {
-                        brDialogView.dismissWithAnimation();
+                    public void onClick(RDialogView rDialogView) {
+                        rDialogView.dismissWithAnimation();
                     }
                 }, null, null, 0);
                 return;
             }
             long fee = wm.getWallet().getTransactionFee(tx);
             if (fee <= 0) {
-                BRReportsManager.reportBug(new RuntimeException("fee is weird:  " + fee));
-                BRDialog.showCustomDialog(app, app.getString(R.string.Alerts_sendFailure), "Insufficient amount for transaction fee.", app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+                RReportsManager.reportBug(new RuntimeException("fee is weird:  " + fee));
+                RDialog.showCustomDialog(app, app.getString(R.string.Alerts_sendFailure), "Insufficient amount for transaction fee.", app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                     @Override
-                    public void onClick(BRDialogView brDialogView) {
-                        brDialogView.dismissWithAnimation();
+                    public void onClick(RDialogView rDialogView) {
+                        rDialogView.dismissWithAnimation();
                     }
                 }, null, null, 0);
                 return;
@@ -296,19 +296,19 @@ public class SendManager {
             String posButtonText = String.format("%s (%s)", formattedCrypto, formattedFiat);
 
 
-            BRDialog.showCustomDialog(app, "Insufficient amount for transaction fee", "Send max?", posButtonText, "No thanks", new BRDialogView.BROnClickListener() {
+            RDialog.showCustomDialog(app, "Insufficient amount for transaction fee", "Send max?", posButtonText, "No thanks", new RDialogView.BROnClickListener() {
                 @Override
-                public void onClick(BRDialogView brDialogView) {
-                    brDialogView.dismissWithAnimation();
+                public void onClick(RDialogView rDialogView) {
+                    rDialogView.dismissWithAnimation();
                     item.tx = tx;
                     PostAuth.getInstance().setPaymentItem(item);
                     confirmPay(app, item, walletManager);
 
                 }
-            }, new BRDialogView.BROnClickListener() {
+            }, new RDialogView.BROnClickListener() {
                 @Override
-                public void onClick(BRDialogView brDialogView) {
-                    brDialogView.dismissWithAnimation();
+                public void onClick(RDialogView rDialogView) {
+                    rDialogView.dismissWithAnimation();
                 }
             }, null, 0);
         }
@@ -338,10 +338,10 @@ public class SendManager {
             ((Activity) ctx).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    BRDialog.showCustomDialog(ctx, ctx.getString(R.string.Alerts_sendFailure), bitcoinMinMessage, ctx.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                    RDialog.showCustomDialog(ctx, ctx.getString(R.string.Alerts_sendFailure), bitcoinMinMessage, ctx.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            brDialogView.dismiss();
+                        public void onClick(RDialogView rDialogView) {
+                            rDialogView.dismiss();
                         }
                     }, null, null, 0);
                 }
@@ -365,11 +365,11 @@ public class SendManager {
         AuthManager.getInstance().authPrompt(ctx, "", message, forcePin, false, new BRAuthCompletion() {
             @Override
             public void onComplete() {
-                BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                     @Override
                     public void run() {
                         PostAuth.getInstance().onPublishTxAuth(ctx, false);
-                        BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                        RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                             @Override
                             public void run() {
                                 BRAnimator.killAllFragments((Activity) ctx);
@@ -409,13 +409,13 @@ public class SendManager {
         if (feeForTx <= 0) {
             long maxAmount = walletManager.getWallet().getMaxOutputAmount();
             if (maxAmount == -1) {
-                BRReportsManager.reportBug(new RuntimeException("getMaxOutputAmount is -1, meaning _wallet is NULL"), true);
+                RReportsManager.reportBug(new RuntimeException("getMaxOutputAmount is -1, meaning _wallet is NULL"), true);
             }
             if (maxAmount == 0) {
-                BRDialog.showCustomDialog(ctx, "", ctx.getString(R.string.Alerts_sendFailure), ctx.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                RDialog.showCustomDialog(ctx, "", ctx.getString(R.string.Alerts_sendFailure), ctx.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                     @Override
-                    public void onClick(BRDialogView brDialogView) {
-                        brDialogView.dismiss();
+                    public void onClick(RDialogView rDialogView) {
+                        rDialogView.dismiss();
                     }
                 }, null, null, 0);
 

@@ -13,13 +13,13 @@ import android.view.View;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.DisabledActivity;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.fragments.FragmentFingerprint;
 import com.ravencoin.presenter.fragments.FragmentPin;
 import com.ravencoin.presenter.interfaces.BRAuthCompletion;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.manager.BRSharedPrefs;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -89,7 +89,7 @@ public class AuthManager {
     //when pin auth success
     public void authSuccess(final Context app) {
         //put the new total limit in 3 seconds, leave some time for the core to register any new tx
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -154,7 +154,7 @@ public class AuthManager {
         if (activity == null) return;
         long limit = AuthManager.getInstance().getTotalLimit(activity);
         if (limit == 0) {
-            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+            RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                 @Override
                 public void run() {
                     BaseWalletManager wallet = WalletsMaster.getInstance(activity).getCurrentWallet(activity);
@@ -264,14 +264,14 @@ public class AuthManager {
                 }
             }
         } else {
-            BRDialog.showCustomDialog(app,
+            RDialog.showCustomDialog(app,
                     "",
                     app.getString(R.string.Prompts_NoScreenLock_body_android),
                     app.getString(R.string.AccessibilityLabels_close),
                     null,
-                    new BRDialogView.BROnClickListener() {
+                    new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
+                        public void onClick(RDialogView rDialogView) {
                             app.finish();
                         }
                     }, null, new DialogInterface.OnDismissListener() {

@@ -13,8 +13,8 @@ import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.BRKeyStore;
 import com.ravencoin.tools.security.PostAuth;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 import com.platform.APIClient;
 import com.platform.middlewares.plugins.WalletPlugin;
@@ -138,7 +138,7 @@ public class BRBitId {
 //        Log.e(TAG, "signBitID: _bitUri: " + _bitUri);
 //        Log.e(TAG, "signBitID: _strToSign: " + _strToSign);
 //        Log.e(TAG, "signBitID: _index: " + _index);
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -192,7 +192,7 @@ public class BRBitId {
         final Uri uri = Uri.parse(_bitUri);
 
         try {
-            phrase = BRKeyStore.getPhrase(app, BRConstants.REQUEST_PHRASE_BITID);
+            phrase = BRKeyStore.getPhrase(app, RConstants.REQUEST_PHRASE_BITID);
         } catch (UserNotAuthenticatedException e) {
             return;
         }
@@ -204,7 +204,7 @@ public class BRBitId {
         }
 
         //run the callback
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -257,7 +257,7 @@ public class BRBitId {
         if (!bitIdKeys.containsKey(biUri)) {
             bitIdKeys.put(biUri, true);
             Log.d(TAG, "run: saved temporary sig for key: " + biUri);
-            BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+            RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
                 @Override
                 public void run() {
                     try {

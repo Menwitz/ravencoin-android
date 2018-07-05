@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 
 
 public class ImportActivity extends RActivity {
@@ -45,7 +45,7 @@ public class ImportActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.importWallet);
+                BRAnimator.showSupportFragment(app, RConstants.importWallet);
             }
         });
 
@@ -53,7 +53,7 @@ public class ImportActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.openScanner(ImportActivity.this, BRConstants.SCANNER_REQUEST);
+                BRAnimator.openScanner(ImportActivity.this, RConstants.SCANNER_REQUEST);
             }
         });
     }
@@ -86,11 +86,11 @@ public class ImportActivity extends RActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         switch (requestCode) {
-            case BRConstants.CAMERA_REQUEST_ID: {
+            case RConstants.CAMERA_REQUEST_ID: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    BRAnimator.openScanner(this, BRConstants.SCANNER_REQUEST);
+                    BRAnimator.openScanner(this, RConstants.SCANNER_REQUEST);
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
 

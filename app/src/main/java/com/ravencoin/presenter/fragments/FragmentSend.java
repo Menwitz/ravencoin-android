@@ -32,21 +32,21 @@ import com.ravencoin.R;
 import com.ravencoin.core.BRCoreAddress;
 import com.ravencoin.core.BRCoreTransaction;
 import com.ravencoin.presenter.customviews.RButton;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.customviews.BRKeyboard;
 import com.ravencoin.presenter.customviews.BRLinearLayoutWithCaret;
 import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.presenter.entities.CryptoRequest;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.animation.SlideDetector;
 import com.ravencoin.tools.animation.SpringAnimator;
 import com.ravencoin.tools.manager.BRClipboardManager;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.manager.SendManager;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
@@ -190,7 +190,7 @@ public class FragmentSend extends Fragment {
                     Log.e(TAG, "onClick: app is null, can't start the webview with url: " + URL_SUPPORT);
                     return;
                 }
-                BRAnimator.showSupportFragment(app, BRConstants.send);
+                BRAnimator.showSupportFragment(app, RConstants.send);
             }
         });
 
@@ -316,17 +316,17 @@ public class FragmentSend extends Fragment {
                         Log.e(TAG, "paste onClick: app is null");
                         return;
                     }
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             if (wm.getWallet().containsAddress(address)) {
                                 app.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        BRDialog.showCustomDialog(getActivity(), "", getResources().getString(R.string.Send_containsAddress), getResources().getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                                        RDialog.showCustomDialog(getActivity(), "", getResources().getString(R.string.Send_containsAddress), getResources().getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                                             @Override
-                                            public void onClick(BRDialogView brDialogView) {
-                                                brDialogView.dismiss();
+                                            public void onClick(RDialogView rDialogView) {
+                                                rDialogView.dismiss();
                                             }
                                         }, null, null, 0);
                                         BRClipboardManager.putClipboard(getActivity(), "");
@@ -345,16 +345,16 @@ public class FragmentSend extends Fragment {
                                         } /*else if (walletIso.equalsIgnoreCase("BCH")) {
                                             firstLine = getString(R.string.Sendbch_UsedAddress_firstLine);
                                         }*/
-                                        BRDialog.showCustomDialog(getActivity(), firstLine, getString(R.string.Send_UsedAddress_secondLIne), "Ignore", "Cancel", new BRDialogView.BROnClickListener() {
+                                        RDialog.showCustomDialog(getActivity(), firstLine, getString(R.string.Send_UsedAddress_secondLIne), "Ignore", "Cancel", new RDialogView.BROnClickListener() {
                                             @Override
-                                            public void onClick(BRDialogView brDialogView) {
-                                                brDialogView.dismiss();
+                                            public void onClick(RDialogView rDialogView) {
+                                                rDialogView.dismiss();
                                                 addressEdit.setText(wm.decorateAddress(getActivity(), address.stringify()));
                                             }
-                                        }, new BRDialogView.BROnClickListener() {
+                                        }, new RDialogView.BROnClickListener() {
                                             @Override
-                                            public void onClick(BRDialogView brDialogView) {
-                                                brDialogView.dismiss();
+                                            public void onClick(RDialogView rDialogView) {
+                                                rDialogView.dismiss();
                                             }
                                         }, null, 0);
                                     }
@@ -398,7 +398,7 @@ public class FragmentSend extends Fragment {
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
                 saveMetaData();
-                BRAnimator.openScanner(getActivity(), BRConstants.SCANNER_REQUEST);
+                BRAnimator.openScanner(getActivity(), RConstants.SCANNER_REQUEST);
 
             }
         });
@@ -412,7 +412,7 @@ public class FragmentSend extends Fragment {
                 //get the current wallet used
                 if (wallet == null) {
                     Log.e(TAG, "onClick: Wallet is null and it can't happen.");
-                    BRReportsManager.reportBug(new NullPointerException("Wallet is null and it can't happen."), true);
+                    RReportsManager.reportBug(new NullPointerException("Wallet is null and it can't happen."), true);
                     return;
                 }
                 boolean allFilled = true;
@@ -436,10 +436,10 @@ public class FragmentSend extends Fragment {
                 if (!address.isValid()) {
                     allFilled = false;
 
-                    BRDialog.showCustomDialog(app, app.getString(R.string.Alert_error), app.getString(R.string.Send_noAddress), app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                    RDialog.showCustomDialog(app, app.getString(R.string.Alert_error), app.getString(R.string.Send_noAddress), app.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            brDialogView.dismissWithAnimation();
+                        public void onClick(RDialogView rDialogView) {
+                            rDialogView.dismissWithAnimation();
                         }
                     }, null, null, 0);
                     return;
@@ -456,9 +456,9 @@ public class FragmentSend extends Fragment {
 //                Log.e(TAG, "before createTransaction: smallestCryptoAmount.longValue: " + cryptoAmount.longValue() + ", addrs: " + address.stringify());
                 BRCoreTransaction tx = wallet.getWallet().createTransaction(cryptoAmount.longValue(), address);
 //                if (tx == null) {
-//                    BRDialog.showCustomDialog(app, app.getString(R.string.Alert_error), app.getString(R.string.Send_creatTransactionError), app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+//                    RDialog.showCustomDialog(app, app.getString(R.string.Alert_error), app.getString(R.string.Send_creatTransactionError), app.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
 //                        @Override
-//                        public void onClick(BRDialogView brDialogView) {
+//                        public void onClick(RDialogView brDialogView) {
 //                            brDialogView.dismissWithAnimation();
 //                        }
 //                    }, null, null, 0);
@@ -546,40 +546,40 @@ public class FragmentSend extends Fragment {
     }
 
     private void sayClipboardEmpty() {
-        BRDialog.showCustomDialog(getActivity(), "", getResources().getString(R.string.Send_emptyPasteboard), getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+        RDialog.showCustomDialog(getActivity(), "", getResources().getString(R.string.Send_emptyPasteboard), getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
             @Override
-            public void onClick(BRDialogView brDialogView) {
-                brDialogView.dismiss();
+            public void onClick(RDialogView rDialogView) {
+                rDialogView.dismiss();
             }
         }, null, null, 0);
         BRClipboardManager.putClipboard(getActivity(), "");
     }
 
     private void sayInvalidClipboardData() {
-        BRDialog.showCustomDialog(getActivity(), "", getResources().getString(R.string.Send_invalidAddressTitle), getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+        RDialog.showCustomDialog(getActivity(), "", getResources().getString(R.string.Send_invalidAddressTitle), getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
             @Override
-            public void onClick(BRDialogView brDialogView) {
-                brDialogView.dismiss();
+            public void onClick(RDialogView rDialogView) {
+                rDialogView.dismiss();
             }
         }, null, null, 0);
         BRClipboardManager.putClipboard(getActivity(), "");
     }
 
     private void saySomethingWentWrong() {
-        BRDialog.showCustomDialog(getActivity(), "", "Something went wrong.", getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+        RDialog.showCustomDialog(getActivity(), "", "Something went wrong.", getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
             @Override
-            public void onClick(BRDialogView brDialogView) {
-                brDialogView.dismiss();
+            public void onClick(RDialogView rDialogView) {
+                rDialogView.dismiss();
             }
         }, null, null, 0);
         BRClipboardManager.putClipboard(getActivity(), "");
     }
 
     private void sayInvalidAddress() {
-        BRDialog.showCustomDialog(getActivity(), "", getResources().getString(R.string.Send_invalidAddressMessage), getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+        RDialog.showCustomDialog(getActivity(), "", getResources().getString(R.string.Send_invalidAddressMessage), getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
             @Override
-            public void onClick(BRDialogView brDialogView) {
-                brDialogView.dismiss();
+            public void onClick(RDialogView rDialogView) {
+                rDialogView.dismiss();
             }
         }, null, null, 0);
         BRClipboardManager.putClipboard(getActivity(), "");

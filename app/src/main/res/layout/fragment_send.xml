@@ -333,8 +333,6 @@
                 android:text="@string/FeeSelector.economyWarning"
                 android:textColor="@color/red_text"
                 android:textSize="@dimen/paragraph" />
-
-
         </com.ravencoin.presenter.customviews.BRLinearLayoutWithCaret>
 
         <View
@@ -344,6 +342,7 @@
             android:background="@color/extra_light_gray" />
 
         <LinearLayout
+
             android:id="@+id/keyboard_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -382,6 +381,43 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/separator5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/extra_light_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <com.ravencoin.presenter.customviews.BREdit
+                android:enabled="false"
+                android:id="@+id/register_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="Save in Address Book"
+                android:inputType="textPersonName"
+                android:maxLength="250"
+                android:textSize="@dimen/sub_header" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:buttonTint="@color/button_primary_normal"
+                android:layout_weight="0" />
+        </LinearLayout>
+
+        <View
             android:id="@+id/separator4"
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -402,7 +438,5 @@
             android:textSize="20sp"
             app:buttonType="1"
             app:isBreadButton="true" />
-
     </LinearLayout>
-
 </ScrollView>

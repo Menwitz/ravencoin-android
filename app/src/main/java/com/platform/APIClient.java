@@ -12,11 +12,11 @@ import com.ravencoin.core.BRCoreKey;
 import com.ravencoin.presenter.activities.util.ActivityUTILS;
 import com.ravencoin.tools.crypto.Base58;
 import com.ravencoin.tools.manager.BRApiManager;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.crypto.CryptoHelper;
 import com.ravencoin.tools.security.BRKeyStore;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.Utils;
 import com.platform.kvstore.RemoteKVStore;
 import com.platform.kvstore.ReplicatedKVStore;
@@ -62,31 +62,6 @@ import okio.BufferedSink;
 
 import static com.ravencoin.tools.util.BRCompressor.gZipExtract;
 
-
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan on <mihail@breadwallet.com> 9/29/16.
- * Copyright (c) 2016 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 public class APIClient {
 
     public static final String TAG = APIClient.class.getName();
@@ -194,7 +169,7 @@ public class APIClient {
         if (ActivityUTILS.isMainThread()) {
             throw new NetworkOnMainThreadException();
         }
-        if (ctx == null) ctx = RavenApp.getBreadContext();
+        if (ctx == null) ctx = RavenApp.getRavenContext();
         if (ctx == null) return null;
         try {
             String strUtl = BASE_URL + TOKEN;
@@ -415,7 +390,7 @@ public class APIClient {
         try {
             request = modifiedRequest.header("Authorization", authValue).build();
         } catch (Exception e) {
-            BRReportsManager.reportBug(e);
+            RReportsManager.reportBug(e);
             return null;
         }
         return request;
@@ -593,7 +568,7 @@ public class APIClient {
     }
 
     public boolean tryExtractTar() {
-        Context app = RavenApp.getBreadContext();
+        Context app = RavenApp.getRavenContext();
         if (app == null) {
             Log.e(TAG, "tryExtractTar: failed to extract, app is null");
             return false;
@@ -723,7 +698,7 @@ public class APIClient {
         platformUpdating = true;
 
         //update Bundle
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 Thread.currentThread().setName("UpdateBundle");
@@ -737,7 +712,7 @@ public class APIClient {
         });
 
         //update feature flags
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -756,7 +731,7 @@ public class APIClient {
         });
 
         //update kvStore
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 Thread.currentThread().setName("updatePlatform");
@@ -770,7 +745,7 @@ public class APIClient {
         });
 
         //update fee
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 final long startTime = System.currentTimeMillis();

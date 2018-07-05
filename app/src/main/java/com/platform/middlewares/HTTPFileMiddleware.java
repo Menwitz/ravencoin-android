@@ -60,7 +60,7 @@ public class HTTPFileMiddleware implements Middleware {
         if (target.equals("/favicon.ico")) {
             return BRHTTPHelper.handleSuccess(200, null, baseRequest, response, null);
         }
-        Context app = RavenApp.getBreadContext();
+        Context app = RavenApp.getRavenContext();
         if (app == null) {
             Log.e(TAG, "handle: app is null!");
             return true;

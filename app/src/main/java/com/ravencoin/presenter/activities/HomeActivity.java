@@ -31,7 +31,7 @@ import com.ravencoin.tools.manager.InternetManager;
 import com.ravencoin.tools.manager.PromptManager;
 import com.ravencoin.tools.manager.SyncManager;
 import com.ravencoin.tools.sqlite.CurrencyDataSource;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -171,23 +171,23 @@ public class HomeActivity extends RActivity implements InternetManager.Connectio
 
 
 //        if (!BRSharedPrefs.wasBchDialogShown(this)) {
-//            BRDialog.showHelpDialog(this, getString(R.string.Dialog_welcomeBchTitle), getString(R.string.Dialog_welcomeBchMessage), getString(R.string.Dialog_Home), getString(R.string.Dialog_Dismiss), new BRDialogView.BROnClickListener() {
+//            RDialog.showHelpDialog(this, getString(R.string.Dialog_welcomeBchTitle), getString(R.string.Dialog_welcomeBchMessage), getString(R.string.Dialog_Home), getString(R.string.Dialog_Dismiss), new RDialogView.BROnClickListener() {
 //                @Override
-//                public void onClick(BRDialogView brDialogView) {
+//                public void onClick(RDialogView brDialogView) {
 //                    brDialogView.dismissWithAnimation();
 //                }
-//            }, new BRDialogView.BROnClickListener() {
+//            }, new RDialogView.BROnClickListener() {
 //
 //                @Override
-//                public void onClick(BRDialogView brDialogView) {
+//                public void onClick(RDialogView brDialogView) {
 //                    getFragmentManager().popBackStack();
 //                }
-//            }, new BRDialogView.BROnClickListener() {
+//            }, new RDialogView.BROnClickListener() {
 //                @Override
-//                public void onClick(BRDialogView brDialogView) {
+//                public void onClick(RDialogView brDialogView) {
 //                    Log.d(TAG, "help clicked!");
 //                    brDialogView.dismissWithAnimation();
-//                    BRAnimator.showSupportFragment(HomeActivity.this, BRConstants.bchFaq);
+//                    BRAnimator.showSupportFragment(HomeActivity.this, RConstants.bchFaq);
 //
 //                }
 //            });
@@ -284,7 +284,7 @@ public class HomeActivity extends RActivity implements InternetManager.Connectio
         CurrencyDataSource.getInstance(this).addOnDataChangedListener(new CurrencyDataSource.OnDataChanged() {
             @Override
             public void onChanged() {
-                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
                         updateUi();
@@ -328,7 +328,7 @@ public class HomeActivity extends RActivity implements InternetManager.Connectio
                 mNotificationBar.setVisibility(View.INVISIBLE);
             }
             final BaseWalletManager wm = WalletsMaster.getInstance(HomeActivity.this).getCurrentWallet(HomeActivity.this);
-            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+            RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                 @Override
                 public void run() {
                     final double progress = wm.getPeerManager()

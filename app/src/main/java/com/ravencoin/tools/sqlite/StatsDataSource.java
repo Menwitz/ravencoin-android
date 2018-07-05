@@ -14,8 +14,8 @@ import com.ravencoin.tools.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressDataSource implements DataSourceInterface {
-    private static final String TAG = AddressDataSource.class.getName();
+public class StatsDataSource implements DataSourceInterface {
+    private static final String TAG = StatsDataSource.class.getName();
 
     List<OnDataChanged> onDataChangedListeners = new ArrayList<>();
 
@@ -29,16 +29,16 @@ public class AddressDataSource implements DataSourceInterface {
             RSQLiteHelper.ADDRESS_ISO,
     };
 
-    private static AddressDataSource instance;
+    private static StatsDataSource instance;
 
-    public static AddressDataSource getInstance(Context context) {
+    public static StatsDataSource getInstance(Context context) {
         if (instance == null) {
-            instance = new AddressDataSource(context);
+            instance = new StatsDataSource(context);
         }
         return instance;
     }
 
-    public AddressDataSource(Context context) {
+    public StatsDataSource(Context context) {
         dbHelper = RSQLiteHelper.getInstance(context);
     }
 

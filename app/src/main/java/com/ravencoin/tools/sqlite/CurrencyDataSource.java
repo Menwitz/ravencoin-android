@@ -32,8 +32,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.ravencoin.presenter.entities.CurrencyEntity;
-import com.ravencoin.tools.manager.BRReportsManager;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.manager.RReportsManager;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 
 import java.util.ArrayList;
@@ -97,7 +97,7 @@ public class CurrencyDataSource implements DataSourceInterface {
             for (OnDataChanged list : onDataChangedListeners) if (list != null) list.onChanged();
         } catch (Exception ex) {
             Log.e(TAG, "putCurrencies: failed: ", ex);
-            BRReportsManager.reportBug(ex);
+            RReportsManager.reportBug(ex);
 
             //Error in between database transaction
         } finally {
@@ -224,7 +224,7 @@ public class CurrencyDataSource implements DataSourceInterface {
         // Opening new database
         if (database == null || !database.isOpen())
             database = dbHelper.getWritableDatabase();
-        dbHelper.setWriteAheadLoggingEnabled(BRConstants.WAL);
+        dbHelper.setWriteAheadLoggingEnabled(RConstants.WAL);
 //        }
 //        Log.d("Database open counter: ",  String.valueOf(mOpenCounter.get()));
         return database;

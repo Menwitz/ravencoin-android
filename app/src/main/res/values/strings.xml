@@ -150,6 +150,8 @@
   <string name="FeeSelector.regularTime">1-60 minutes</string>
   <!-- Fee Selector title -->
   <string name="FeeSelector.title">Processing Speed</string>
+  <!-- Fee Selector smaller balance -->
+  <string name="FeeSelector.notEnough">You don\'t have enough funds to send this amount</string>
   <!-- Checking private key balance progress view address -->
   <string name="Import.checking">Checking private key balance...</string>
   <!-- Sweep private key confirmation message -->

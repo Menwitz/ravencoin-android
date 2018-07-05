@@ -13,14 +13,14 @@ import com.ravencoin.RavenApp;
 import com.ravencoin.R;
 import com.ravencoin.core.BRCoreKey;
 import com.ravencoin.core.BRCoreMasterPubKey;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.animation.RDialog;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.security.BRKeyStore;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Bip39Reader;
 import com.ravencoin.tools.util.TrustedNode;
 import com.ravencoin.tools.util.Utils;
@@ -114,24 +114,24 @@ public class WalletsMaster {
         words = list.toArray(new String[list.size()]);
         final byte[] randomSeed = sr.generateSeed(16);
         if (words.length != 2048) {
-            BRReportsManager.reportBug(new IllegalArgumentException("the list is wrong, size: " + words.length), true);
+            RReportsManager.reportBug(new IllegalArgumentException("the list is wrong, size: " + words.length), true);
             return false;
         }
         if (randomSeed.length != 16)
             throw new NullPointerException("failed to create the seed, seed length is not 128: " + randomSeed.length);
         byte[] paperKeyBytes = BRCoreMasterPubKey.generatePaperKey(randomSeed, words);
         if (paperKeyBytes == null || paperKeyBytes.length == 0) {
-            BRReportsManager.reportBug(new NullPointerException("failed to encodeSeed"), true);
+            RReportsManager.reportBug(new NullPointerException("failed to encodeSeed"), true);
             return false;
         }
         String[] splitPhrase = new String(paperKeyBytes).split(" ");
         if (splitPhrase.length != 12) {
-            BRReportsManager.reportBug(new NullPointerException("phrase does not have 12 words:" + splitPhrase.length + ", lang: " + languageCode), true);
+            RReportsManager.reportBug(new NullPointerException("phrase does not have 12 words:" + splitPhrase.length + ", lang: " + languageCode), true);
             return false;
         }
         boolean success = false;
         try {
-            success = BRKeyStore.putPhrase(paperKeyBytes, ctx, BRConstants.PUT_PHRASE_NEW_WALLET_REQUEST_CODE);
+            success = BRKeyStore.putPhrase(paperKeyBytes, ctx, RConstants.PUT_PHRASE_NEW_WALLET_REQUEST_CODE);
         } catch (UserNotAuthenticatedException e) {
             return false;
         }
@@ -148,14 +148,14 @@ public class WalletsMaster {
         if (seed == null || seed.length == 0) throw new RuntimeException("seed is null");
         byte[] authKey = BRCoreKey.getAuthPrivKeyForAPI(seed);
         if (authKey == null || authKey.length == 0) {
-            BRReportsManager.reportBug(new IllegalArgumentException("authKey is invalid"), true);
+            RReportsManager.reportBug(new IllegalArgumentException("authKey is invalid"), true);
         }
         BRKeyStore.putAuthKey(authKey, ctx);
         int walletCreationTime = (int) (System.currentTimeMillis() / 1000);
         BRKeyStore.putWalletCreationTime(walletCreationTime, ctx);
         final WalletInfo info = new WalletInfo();
         info.creationDate = walletCreationTime;
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 KVStoreManager.getInstance().putWalletInfo(ctx, info); //push the creation time to the kv store
@@ -227,7 +227,7 @@ public class WalletsMaster {
 
     public void wipeWalletButKeystore(final Context ctx) {
         Log.d(TAG, "wipeWalletButKeystore");
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 for (BaseWalletManager wallet : mWallets) {
@@ -258,7 +258,7 @@ public class WalletsMaster {
 
     public void initLastWallet(Context app) {
         if (app == null) {
-            app = RavenApp.getBreadContext();
+            app = RavenApp.getRavenContext();
             if (app == null) {
                 Log.e(TAG, "initLastWallet: FAILED, app is null");
                 return;
@@ -291,10 +291,10 @@ public class WalletsMaster {
         final WalletsMaster m = WalletsMaster.getInstance(app);
         if (!m.isPasscodeEnabled(app)) {
             //Device passcode/password should be enabled for the app to work
-            BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), app.getString(R.string.Prompts_NoScreenLock_body_android),
-                    app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+            RDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), app.getString(R.string.Prompts_NoScreenLock_body_android),
+                    app.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
+                        public void onClick(RDialogView rDialogView) {
                             app.finish();
                         }
                     }, null, new DialogInterface.OnDismissListener() {
@@ -305,7 +305,7 @@ public class WalletsMaster {
                     }, 0);
         } else {
             if (!m.noWallet(app)) {
-                BRAnimator.startBreadActivity(app, true);
+                BRAnimator.startRavenActivity(app, true);
             }
             //else just sit in the intro screen
 

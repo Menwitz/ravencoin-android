@@ -29,8 +29,8 @@ import com.ravencoin.tools.animation.SlideDetector;
 import com.ravencoin.tools.manager.BRClipboardManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.qrcode.QRUtils;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -136,7 +136,7 @@ public class FragmentReceive extends Fragment {
                     return;
                 }
 
-                BRAnimator.showSupportFragment(app, BRConstants.receive);
+                BRAnimator.showSupportFragment(app, RConstants.receive);
             }
         });
 
@@ -278,7 +278,7 @@ public class FragmentReceive extends Fragment {
             mTitle.setText(getString(R.string.UnlockScreen_myAddress));
         }
 
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 updateQr();
@@ -288,13 +288,13 @@ public class FragmentReceive extends Fragment {
     }
 
     private void updateQr() {
-        final Context ctx = getContext() == null ? RavenApp.getBreadContext() : (Activity) getContext();
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        final Context ctx = getContext() == null ? RavenApp.getRavenContext() : (Activity) getContext();
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 WalletsMaster.getInstance(ctx).getCurrentWallet(ctx).refreshAddress(ctx);
                 final BaseWalletManager wallet = WalletsMaster.getInstance(ctx).getCurrentWallet(ctx);
-                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
                         mReceiveAddress = BRSharedPrefs.getReceiveAddress(ctx, wallet.getIso(ctx));

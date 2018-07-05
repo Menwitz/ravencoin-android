@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  * THE SOFTWARE.
  */
 
-public class BRConstants {
+public class RConstants {
 
     /**
      * Native library name
@@ -114,7 +114,7 @@ public class BRConstants {
     public static final String wipeWallet = "wipe-wallet";
     public static final String loopBug = "android-loop-bug";
 
-    private BRConstants() {
+    private RConstants() {
     }
 
 }

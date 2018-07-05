@@ -36,8 +36,8 @@ import java.util.concurrent.TimeUnit;
 /*
 * Singleton class for default executor supplier
 */
-public class BRExecutor implements RejectedExecutionHandler {
-    private static final String TAG = BRExecutor.class.getName();
+public class RExecutor implements RejectedExecutionHandler {
+    private static final String TAG = RExecutor.class.getName();
     /*
     * Number of cores to decide the number of threads
     */
@@ -60,17 +60,17 @@ public class BRExecutor implements RejectedExecutionHandler {
     */
     private final Executor mMainThreadExecutor;
     /*
-    * an instance of BRExecutor
+    * an instance of RExecutor
     */
-    private static BRExecutor sInstance;
+    private static RExecutor sInstance;
 
     /*
-    * returns the instance of BRExecutor
+    * returns the instance of RExecutor
     */
-    public static BRExecutor getInstance() {
+    public static RExecutor getInstance() {
         if (sInstance == null) {
-            synchronized (BRExecutor.class) {
-                sInstance = new BRExecutor();
+            synchronized (RExecutor.class) {
+                sInstance = new RExecutor();
             }
         }
         return sInstance;
@@ -79,9 +79,9 @@ public class BRExecutor implements RejectedExecutionHandler {
 
 
     /*
-    * constructor for  BRExecutor
+    * constructor for  RExecutor
     */
-    private BRExecutor() {
+    private RExecutor() {
 
         ThreadFactory backgroundPriorityThreadFactory = new
                 PriorityThreadFactory(android.os.Process.THREAD_PRIORITY_BACKGROUND);

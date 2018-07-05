@@ -26,7 +26,7 @@ import com.ravencoin.presenter.entities.BRSecurityCenterItem;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.security.BRKeyStore;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class SecurityCenterActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(SecurityCenterActivity.this, BRConstants.securityCenter);
+                BRAnimator.showSupportFragment(SecurityCenterActivity.this, RConstants.securityCenter);
             }
         });
 
@@ -93,7 +93,7 @@ public class SecurityCenterActivity extends RActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (ActivityUTILS.isLast(this)) {
-            BRAnimator.startBreadActivity(this, false);
+            BRAnimator.startRavenActivity(this, false);
         } else {
             super.onBackPressed();
         }

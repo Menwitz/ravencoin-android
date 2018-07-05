@@ -15,16 +15,16 @@ import android.widget.TextView;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.intro.IntroActivity;
 import com.ravencoin.presenter.activities.util.RActivity;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.animation.SpringAnimator;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.PostAuth;
 import com.ravencoin.tools.security.SmartValidator;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 
@@ -77,18 +77,18 @@ public class InputWordsActivity extends RActivity {
         nextButton = findViewById(R.id.send_button);
 
         if (Utils.isUsingCustomInputMethod(this)) {
-            BRDialog.showCustomDialog(this, getString(R.string.JailbreakWarnings_title), getString(R.string.Alert_customKeyboard_android),
-                    getString(R.string.Button_ok), getString(R.string.JailbreakWarnings_close), new BRDialogView.BROnClickListener() {
+            RDialog.showCustomDialog(this, getString(R.string.JailbreakWarnings_title), getString(R.string.Alert_customKeyboard_android),
+                    getString(R.string.Button_ok), getString(R.string.JailbreakWarnings_close), new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
+                        public void onClick(RDialogView rDialogView) {
                             InputMethodManager imeManager = (InputMethodManager) getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
                             imeManager.showInputMethodPicker();
-                            brDialogView.dismissWithAnimation();
+                            rDialogView.dismissWithAnimation();
                         }
-                    }, new BRDialogView.BROnClickListener() {
+                    }, new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            brDialogView.dismissWithAnimation();
+                        public void onClick(RDialogView rDialogView) {
+                            rDialogView.dismissWithAnimation();
                         }
                     }, null, 0);
         }
@@ -99,7 +99,7 @@ public class InputWordsActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.paperKey);
+                BRAnimator.showSupportFragment(app, RConstants.paperKey);
             }
         });
 
@@ -168,7 +168,7 @@ public class InputWordsActivity extends RActivity {
                 }
                 String cleanPhrase = SmartValidator.cleanPaperKey(app, phraseToCheck);
                 if (Utils.isNullOrEmpty(cleanPhrase)) {
-                    BRReportsManager.reportBug(new NullPointerException("cleanPhrase is null or empty!"));
+                    RReportsManager.reportBug(new NullPointerException("cleanPhrase is null or empty!"));
                     return;
                 }
                 if (SmartValidator.isPaperKeyValid(app, cleanPhrase)) {
@@ -179,20 +179,20 @@ public class InputWordsActivity extends RActivity {
                             clearWords();
 
                             if (restore) {
-                                BRDialog.showCustomDialog(InputWordsActivity.this, getString(R.string.WipeWallet_alertTitle), getString(R.string.WipeWallet_alertMessage), getString(R.string.WipeWallet_wipe), getString(R.string.Button_cancel), new BRDialogView.BROnClickListener() {
+                                RDialog.showCustomDialog(InputWordsActivity.this, getString(R.string.WipeWallet_alertTitle), getString(R.string.WipeWallet_alertMessage), getString(R.string.WipeWallet_wipe), getString(R.string.Button_cancel), new RDialogView.BROnClickListener() {
                                     @Override
-                                    public void onClick(BRDialogView brDialogView) {
-                                        brDialogView.dismissWithAnimation();
+                                    public void onClick(RDialogView rDialogView) {
+                                        rDialogView.dismissWithAnimation();
                                         WalletsMaster m = WalletsMaster.getInstance(InputWordsActivity.this);
                                         m.wipeWalletButKeystore(app);
                                         m.wipeKeyStore(app);
                                         Intent intent = new Intent(app, IntroActivity.class);
                                         finalizeIntent(intent);
                                     }
-                                }, new BRDialogView.BROnClickListener() {
+                                }, new RDialogView.BROnClickListener() {
                                     @Override
-                                    public void onClick(BRDialogView brDialogView) {
-                                        brDialogView.dismissWithAnimation();
+                                    public void onClick(RDialogView rDialogView) {
+                                        rDialogView.dismissWithAnimation();
                                     }
                                 }, null, 0);
 
@@ -205,10 +205,10 @@ public class InputWordsActivity extends RActivity {
 
 
                         } else {
-                            BRDialog.showCustomDialog(app, "", getString(R.string.RecoverWallet_invalid), getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                            RDialog.showCustomDialog(app, "", getString(R.string.RecoverWallet_invalid), getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                                 @Override
-                                public void onClick(BRDialogView brDialogView) {
-                                    brDialogView.dismissWithAnimation();
+                                public void onClick(RDialogView rDialogView) {
+                                    rDialogView.dismissWithAnimation();
                                 }
                             }, null, null, 0);
                         }
@@ -226,10 +226,10 @@ public class InputWordsActivity extends RActivity {
                     }
 
                 } else {
-                    BRDialog.showCustomDialog(app, "", getResources().getString(R.string.RecoverWallet_invalid), getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                    RDialog.showCustomDialog(app, "", getResources().getString(R.string.RecoverWallet_invalid), getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            brDialogView.dismissWithAnimation();
+                        public void onClick(RDialogView rDialogView) {
+                            rDialogView.dismissWithAnimation();
                         }
                     }, null, null, 0);
 

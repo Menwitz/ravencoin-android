@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 
 import org.json.JSONArray;
 
@@ -372,7 +372,7 @@ public class BRSharedPrefs {
 
     public static int getCryptoDenomination(Context context, String iso) {
         SharedPreferences settingsToGet = context.getSharedPreferences(PREFS_NAME, 0);
-        return settingsToGet.getInt("currencyUnit", BRConstants.CURRENT_UNIT_RAVENS);
+        return settingsToGet.getInt("currencyUnit", RConstants.CURRENT_UNIT_RAVENS);
     }
 
     public static void putCryptoDenomination(Context context, String iso, int unit) {

@@ -10,7 +10,7 @@ import com.ravencoin.R;
 import com.ravencoin.presenter.activities.InputWordsActivity;
 import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 
 
 public class UnlinkActivity extends RActivity {
@@ -37,7 +37,7 @@ public class UnlinkActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.wipeWallet);
+                BRAnimator.showSupportFragment(app, RConstants.wipeWallet);
             }
         });
 

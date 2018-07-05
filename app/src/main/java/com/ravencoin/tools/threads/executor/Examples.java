@@ -31,7 +31,7 @@ public class Examples {
  * Using it for Background Tasks
  */
     public void doSomeBackgroundWork() {
-        BRExecutor.getInstance().forBackgroundTasks()
+        RExecutor.getInstance().forBackgroundTasks()
                 .execute(new Runnable() {
                     @Override
                     public void run() {
@@ -44,7 +44,7 @@ public class Examples {
     * Using it for Light-Weight Background Tasks
     */
     public void doSomeLightWeightBackgroundWork() {
-        BRExecutor.getInstance().forLightWeightBackgroundTasks()
+        RExecutor.getInstance().forLightWeightBackgroundTasks()
                 .execute(new Runnable() {
                     @Override
                     public void run() {
@@ -57,7 +57,7 @@ public class Examples {
     * Using it for MainThread Tasks
     */
     public void doSomeMainThreadWork() {
-        BRExecutor.getInstance().forMainThreadTasks()
+        RExecutor.getInstance().forMainThreadTasks()
                 .execute(new Runnable() {
                     @Override
                     public void run() {
@@ -70,7 +70,7 @@ public class Examples {
 * do some task at high priority
 */
     public void doSomeTaskAtHighPriority(){
-        BRExecutor.getInstance().forBackgroundTasks()
+        RExecutor.getInstance().forBackgroundTasks()
                 .submit(new PriorityRunnable(Priority.HIGH) {
                     @Override
                     public void run() {

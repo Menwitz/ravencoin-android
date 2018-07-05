@@ -121,7 +121,7 @@ public class AboutActivity extends RActivity {
     @Override
     public void onBackPressed() {
         if (ActivityUTILS.isLast(this)) {
-            BRAnimator.startBreadActivity(this, false);
+            BRAnimator.startRavenActivity(this, false);
         } else {
             super.onBackPressed();
         }

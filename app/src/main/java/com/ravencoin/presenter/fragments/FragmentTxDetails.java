@@ -30,12 +30,6 @@ import com.platform.tools.KVStoreManager;
 
 import java.math.BigDecimal;
 
-/**
- * Created by byfieldj on 2/26/18.
- * <p>
- * Reusable dialog fragment that display details about a particular transaction
- */
-
 public class FragmentTxDetails extends DialogFragment {
 
     private static final String EXTRA_TX_ITEM = "tx_item";
@@ -256,7 +250,7 @@ public class FragmentTxDetails extends DialogFragment {
             mTxDate.setText(BRDateUtil.getLongDate(mTransaction.getTimeStamp() == 0 ? System.currentTimeMillis() : (mTransaction.getTimeStamp() * 1000)));
 
             // Set the transaction id
-            mTransactionId.setText(mTransaction.getTxHashHexReversed());
+            mTransactionId.setText(mTransaction.getHashReversed());
 
             // Allow the transaction id to be copy-able
             mTransactionId.setOnClickListener(new View.OnClickListener() {
@@ -267,7 +261,7 @@ public class FragmentTxDetails extends DialogFragment {
                     final int color = mTransactionId.getCurrentTextColor();
 
                     mTransactionId.setTextColor(getContext().getColor(R.color.light_gray));
-                    String id = mTransaction.getTxHashHexReversed();
+                    String id = mTransaction.getHashReversed();
                     BRClipboardManager.putClipboard(getContext(), id);
                     Toast.makeText(getContext(), getString(R.string.Receive_copied), Toast.LENGTH_LONG).show();
 
@@ -288,13 +282,10 @@ public class FragmentTxDetails extends DialogFragment {
 
             Toast.makeText(getContext(), "Error getting transaction data", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
     }
 }

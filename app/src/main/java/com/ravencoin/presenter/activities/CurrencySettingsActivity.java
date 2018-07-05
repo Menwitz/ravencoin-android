@@ -13,12 +13,12 @@ import com.ravencoin.R;
 import com.ravencoin.presenter.activities.settings.ImportActivity;
 import com.ravencoin.presenter.activities.settings.SyncBlockchainActivity;
 import com.ravencoin.presenter.activities.util.RActivity;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.customviews.RText;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.manager.BRSharedPrefs;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
 
@@ -76,27 +76,27 @@ public class CurrencySettingsActivity extends RActivity {
             public void onClick(View view) {
                 if (!BRAnimator.isClickAllowed()) return;
                 Log.d("CurrencySettings", "Rescan tapped!");
-                BRDialog.showCustomDialog(CurrencySettingsActivity.this, getString(R.string.ReScan_alertTitle),
+                RDialog.showCustomDialog(CurrencySettingsActivity.this, getString(R.string.ReScan_alertTitle),
                         getString(R.string.ReScan_footer), getString(R.string.ReScan_alertAction), getString(R.string.Button_cancel),
-                        new BRDialogView.BROnClickListener() {
+                        new RDialogView.BROnClickListener() {
                             @Override
-                            public void onClick(BRDialogView brDialogView) {
-                                brDialogView.dismissWithAnimation();
-                                BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                            public void onClick(RDialogView rDialogView) {
+                                rDialogView.dismissWithAnimation();
+                                RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                                     @Override
                                     public void run() {
                                         BRSharedPrefs.putStartHeight(CurrencySettingsActivity.this, BRSharedPrefs.getCurrentWalletIso(CurrencySettingsActivity.this), 0);
                                         BRSharedPrefs.putAllowSpend(CurrencySettingsActivity.this, BRSharedPrefs.getCurrentWalletIso(CurrencySettingsActivity.this), false);
                                         WalletsMaster.getInstance(CurrencySettingsActivity.this).getCurrentWallet(CurrencySettingsActivity.this).getPeerManager().rescan();
-                                        BRAnimator.startBreadActivity(CurrencySettingsActivity.this, false);
+                                        BRAnimator.startRavenActivity(CurrencySettingsActivity.this, false);
 
                                     }
                                 });
                             }
-                        }, new BRDialogView.BROnClickListener() {
+                        }, new RDialogView.BROnClickListener() {
                             @Override
-                            public void onClick(BRDialogView brDialogView) {
-                                brDialogView.dismissWithAnimation();
+                            public void onClick(RDialogView rDialogView) {
+                                rDialogView.dismissWithAnimation();
                             }
                         }, null, 0);
             }

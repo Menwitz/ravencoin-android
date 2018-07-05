@@ -22,7 +22,7 @@ import com.ravencoin.core.BRCorePeer;
 import com.ravencoin.presenter.activities.util.RActivity;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.manager.BRSharedPrefs;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.TrustedNode;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
@@ -91,12 +91,12 @@ public class NodesActivity extends RActivity {
                     if (!updatingNode) {
                         updatingNode = true;
                         BRSharedPrefs.putTrustNode(app, wm.getIso(app), "");
-                        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                             @Override
                             public void run() {
                                 WalletsMaster.getInstance(app).updateFixedPeer(app, wm);
                                 updatingNode = false;
-                                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                                RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                                     @Override
                                     public void run() {
                                         updateButtonText();
@@ -182,12 +182,12 @@ public class NodesActivity extends RActivity {
                     if (!updatingNode) {
                         updatingNode = true;
                         customTitle.setText(getString(R.string.Webview_updating));
-                        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                             @Override
                             public void run() {
                                 WalletsMaster.getInstance(app).updateFixedPeer(app, wm);
                                 updatingNode = false;
-                                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                                RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                                     @Override
                                     public void run() {
                                         customTitle.setText(getString(R.string.RecoverWallet_done));

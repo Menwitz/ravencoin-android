@@ -30,7 +30,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 
 public class PlatformSqliteHelper extends SQLiteOpenHelper {
     private static final String TAG = PlatformSqliteHelper.class.getName();
@@ -75,7 +75,7 @@ public class PlatformSqliteHelper extends SQLiteOpenHelper {
 
     private PlatformSqliteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        setWriteAheadLoggingEnabled(BRConstants.WAL);
+        setWriteAheadLoggingEnabled(RConstants.WAL);
     }
 
     @Override

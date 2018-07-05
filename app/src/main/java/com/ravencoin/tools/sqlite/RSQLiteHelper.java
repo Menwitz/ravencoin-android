@@ -6,31 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan <mihail@breadwallet.com> on 9/25/15.
- * Copyright (c) 2016 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
 public class RSQLiteHelper extends SQLiteOpenHelper {
     private static final String TAG = RSQLiteHelper.class.getName();
     private static RSQLiteHelper instance;
@@ -125,8 +100,8 @@ public class RSQLiteHelper extends SQLiteOpenHelper {
 
     public static final String ADDRESS_TABLE_NAME = "addressTable";
     public static final String ADDRESS_COLUMN_ID = "_id";
-    public static final String ADDRESS_TITLE = "transactionBuff";
-    public static final String ADDRESS = "transactionBlockHeight";
+    public static final String ADDRESS_TITLE = "title";
+    public static final String ADDRESS = "address";
     public static final String ADDRESS_TIME_STAMP = "addressTimeStamp";
     public static final String ADDRESS_ISO = "addressISO";
 
@@ -138,6 +113,27 @@ public class RSQLiteHelper extends SQLiteOpenHelper {
             ADDRESS_ISO + " text DEFAULT 'RVN' );";
 
 
+    /**
+     * Stats table
+     */
+
+    public static final String STATS_TABLE_NAME = "statsTable";
+    public static final String STATS_COLUMN_ID = "_id";
+    public static final String STATS_VOLUME = "volume";
+    public static final String STATS_ASK = "ask";
+    public static final String STATS_BID = "bid";
+    public static final String STATS_TIME_STAMP = "statsTimeStamp";
+    public static final String STATS_ISO = "addressISO";
+
+    private static final String STATS_DATABASE_CREATE = "create table if not exists " + STATS_TABLE_NAME + " (" +
+            STATS_COLUMN_ID + " text, " +
+            STATS_VOLUME + " integer, " +
+            STATS_ASK + " integer, " +
+            STATS_BID + " integer, " +
+            STATS_TIME_STAMP + " integer, " +
+            STATS_ISO + " text DEFAULT 'RVN_BTC' );";
+
+
     @Override
     public void onCreate(SQLiteDatabase database) {
         //drop peers table due to multiple changes
@@ -147,11 +143,13 @@ public class RSQLiteHelper extends SQLiteOpenHelper {
         Log.e(TAG, "onCreate: " + PEER_DATABASE_CREATE);
         Log.e(TAG, "onCreate: " + CURRENCY_DATABASE_CREATE);
         Log.e(TAG, "onCreate: " + ADDRESS_DATABASE_CREATE);
+        Log.e(TAG, "onCreate: " + STATS_DATABASE_CREATE);
         database.execSQL(MB_DATABASE_CREATE);
         database.execSQL(TX_DATABASE_CREATE);
         database.execSQL(PEER_DATABASE_CREATE);
         database.execSQL(CURRENCY_DATABASE_CREATE);
         database.execSQL(ADDRESS_DATABASE_CREATE);
+        database.execSQL(STATS_DATABASE_CREATE);
 
 //        printTableStructures(database, MB_TABLE_NAME);
 //        printTableStructures(database, TX_TABLE_NAME);

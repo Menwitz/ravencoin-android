@@ -16,7 +16,7 @@ import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.SpringAnimator;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.BRKeyStore;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 
 public class UpdatePinActivity extends RActivity {
     private static final String TAG = UpdatePinActivity.class.getName();
@@ -72,7 +72,7 @@ public class UpdatePinActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.setPin);
+                BRAnimator.showSupportFragment(app, RConstants.setPin);
             }
         });
 
@@ -173,10 +173,10 @@ public class UpdatePinActivity extends RActivity {
             case RE_ENTER_NEW_PIN:
                 if (curNewPin.equalsIgnoreCase(pin.toString())) {
                     AuthManager.getInstance().setPinCode(pin.toString(), this);
-                    BRAnimator.showBreadSignal(this, getString(R.string.Alerts_pinSet), getString(R.string.UpdatePin_caption), R.drawable.ic_check_mark_white, new BROnSignalCompletion() {
+                    BRAnimator.showSignal(this, getString(R.string.Alerts_pinSet), getString(R.string.UpdatePin_caption), R.drawable.ic_check_mark_white, new BROnSignalCompletion() {
                         @Override
                         public void onComplete() {
-                            BRAnimator.startBreadActivity(UpdatePinActivity.this, false);
+                            BRAnimator.startRavenActivity(UpdatePinActivity.this, false);
                         }
                     });
                 } else {

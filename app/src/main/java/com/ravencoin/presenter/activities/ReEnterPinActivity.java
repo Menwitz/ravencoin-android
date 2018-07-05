@@ -16,7 +16,7 @@ import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.animation.SpringAnimator;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.PostAuth;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 
 public class ReEnterPinActivity extends RActivity {
@@ -56,7 +56,7 @@ public class ReEnterPinActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.setPin);
+                BRAnimator.showSupportFragment(app, RConstants.setPin);
             }
         });
 
@@ -169,9 +169,9 @@ public class ReEnterPinActivity extends RActivity {
             }, 200);
             AuthManager.getInstance().setPinCode(pin.toString(), this);
             if (getIntent().getBooleanExtra("noPin", false)) {
-                BRAnimator.startBreadActivity(this, false);
+                BRAnimator.startRavenActivity(this, false);
             } else {
-                BRAnimator.showBreadSignal(this, getString(R.string.Alerts_pinSet), getString(R.string.UpdatePin_createInstruction), R.drawable.ic_check_mark_white, new BROnSignalCompletion() {
+                BRAnimator.showSignal(this, getString(R.string.Alerts_pinSet), getString(R.string.UpdatePin_createInstruction), R.drawable.ic_check_mark_white, new BROnSignalCompletion() {
                     @Override
                     public void onComplete() {
                         PostAuth.getInstance().onCreateWalletAuth(ReEnterPinActivity.this, false);

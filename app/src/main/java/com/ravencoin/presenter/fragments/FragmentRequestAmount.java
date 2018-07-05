@@ -28,8 +28,8 @@ import com.ravencoin.tools.animation.SlideDetector;
 import com.ravencoin.tools.manager.BRClipboardManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.qrcode.QRUtils;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.CurrencyUtils;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
@@ -139,7 +139,7 @@ public class FragmentRequestAmount extends Fragment {
                     return;
                 }
 
-                BRAnimator.showSupportFragment(app, BRConstants.requestAmount);
+                BRAnimator.showSupportFragment(app, RConstants.requestAmount);
             }
         });
 
@@ -310,7 +310,7 @@ public class FragmentRequestAmount extends Fragment {
             }
         });
 
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 final BaseWalletManager wallet = WalletsMaster.getInstance(getActivity()).getCurrentWallet(getActivity());
@@ -318,7 +318,7 @@ public class FragmentRequestAmount extends Fragment {
                 wallet.refreshAddress(getActivity());
                 mReceiveAddress = BRSharedPrefs.getReceiveAddress(getActivity(), wallet.getIso(getActivity()));
 
-                BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+                RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                     @Override
                     public void run() {
                         mAddress.setText(mWallet.decorateAddress(getActivity(), mReceiveAddress));

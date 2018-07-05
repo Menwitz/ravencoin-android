@@ -35,8 +35,8 @@ import android.util.Log;
 import com.ravencoin.RavenApp;
 import com.ravencoin.core.BRCoreKey;
 import com.ravencoin.tools.security.BRKeyStore;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 import com.platform.interfaces.KVStoreAdaptor;
 import com.platform.sqlite.KVItem;
@@ -103,7 +103,7 @@ public class ReplicatedKVStore {
 //        if (ActivityUTILS.isMainThread()) throw new NetworkOnMainThreadException();
         if (mDatabase == null || !mDatabase.isOpen())
             mDatabase = dbHelper.getWritableDatabase();
-        dbHelper.setWriteAheadLoggingEnabled(BRConstants.WAL);
+        dbHelper.setWriteAheadLoggingEnabled(RConstants.WAL);
 //        }
 //        Log.d(TAG, "getWritable open counter: " + String.valueOf(mOpenCounter.get()));
         return mDatabase;
@@ -449,7 +449,7 @@ public class ReplicatedKVStore {
                 _syncKey(key, completionObject.version, completionObject.time, completionObject.err);
 
             } else {
-//                BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+//                RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
 //                    @Override
 //                    public void run() {
                 _syncKey(key, remoteVersion, remoteTime, err);
@@ -611,6 +611,7 @@ public class ReplicatedKVStore {
         // 2. for kvs that we don't have, add em
         // 3. for kvs that we do have, sync em
         // 4. for kvs that they don't have that we do, upload em
+
         if (syncRunning) {
             Log.e(TAG, "syncAllKeys: already syncing");
             return false;
@@ -854,7 +855,7 @@ public class ReplicatedKVStore {
             Log.e(TAG, "encrypt: data is null");
             return null;
         }
-        if (app == null) app = RavenApp.getBreadContext();
+        if (app == null) app = RavenApp.getRavenContext();
         if (app == null) {
             Log.e(TAG, "encrypt: app is null");
             return null;
@@ -894,7 +895,7 @@ public class ReplicatedKVStore {
             Log.e(TAG, "decrypt: failed to decrypt: " + (data == null ? null : data.length));
             return null;
         }
-        if (app == null) app = RavenApp.getBreadContext();
+        if (app == null) app = RavenApp.getRavenContext();
         if (app == null) return null;
         if (tempAuthKey == null)
             retrieveAuthKey(app);
@@ -908,7 +909,7 @@ public class ReplicatedKVStore {
         if (Utils.isNullOrEmpty(tempAuthKey)) {
             tempAuthKey = BRKeyStore.getAuthKey(context);
             if (tempAuthKey == null) Log.e(TAG, "retrieveAuthKey: FAILED, still null!");
-            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+            RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                 @Override
                 public void run() {
                     try {

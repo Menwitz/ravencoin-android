@@ -29,7 +29,7 @@ import com.ravencoin.presenter.activities.LoginActivity;
 import com.ravencoin.presenter.activities.WalletActivity;
 import com.ravencoin.presenter.activities.camera.ScanQRActivity;
 import com.ravencoin.presenter.activities.intro.IntroActivity;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.entities.CryptoRequest;
 import com.ravencoin.presenter.entities.TxUiHolder;
 import com.ravencoin.presenter.fragments.FragmentGreetings;
@@ -41,8 +41,8 @@ import com.ravencoin.presenter.fragments.FragmentSend;
 import com.ravencoin.presenter.fragments.FragmentSupport;
 import com.ravencoin.presenter.fragments.FragmentTxDetails;
 import com.ravencoin.presenter.interfaces.BROnSignalCompletion;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 
 
 /**
@@ -79,7 +79,7 @@ public class BRAnimator {
     public static float t2Size;
     public static boolean supportIsShowing;
 
-    public static void showBreadSignal(Activity activity, String title, String iconDescription, int drawableId, BROnSignalCompletion completion) {
+    public static void showSignal(Activity activity, String title, String iconDescription, int drawableId, BROnSignalCompletion completion) {
         fragmentSignal = new FragmentSignal();
         Bundle bundle = new Bundle();
         bundle.putString(FragmentSignal.TITLE, title);
@@ -257,17 +257,17 @@ public class BRAnimator {
                 // Should we show an explanation?
                 if (ActivityCompat.shouldShowRequestPermissionRationale(app,
                         Manifest.permission.CAMERA)) {
-                    BRDialog.showCustomDialog(app, app.getString(R.string.Send_cameraUnavailabeTitle_android), app.getString(R.string.Send_cameraUnavailabeMessage_android), app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                    RDialog.showCustomDialog(app, app.getString(R.string.Send_cameraUnavailabeTitle_android), app.getString(R.string.Send_cameraUnavailabeMessage_android), app.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                         @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            brDialogView.dismiss();
+                        public void onClick(RDialogView rDialogView) {
+                            rDialogView.dismiss();
                         }
                     }, null, null, 0);
                 } else {
                     // No explanation needed, we can request the permission.
                     ActivityCompat.requestPermissions(app,
                             new String[]{Manifest.permission.CAMERA},
-                            BRConstants.CAMERA_REQUEST_ID);
+                            RConstants.CAMERA_REQUEST_ID);
                 }
             } else {
                 // Permission is granted, open camera
@@ -371,7 +371,7 @@ public class BRAnimator {
     public static boolean isClickAllowed() {
         if (clickAllowed) {
             clickAllowed = false;
-            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+            RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -393,12 +393,12 @@ public class BRAnimator {
 
     public static void startBreadIfNotStarted(Activity app) {
         if (!(app instanceof HomeActivity))
-            startBreadActivity(app, false);
+            startRavenActivity(app, false);
     }
 
-    public static void startBreadActivity(Activity from, boolean auth) {
+    public static void startRavenActivity(Activity from, boolean auth) {
         if (from == null) return;
-        Log.e(TAG, "startBreadActivity: " + from.getClass().getName());
+        Log.e(TAG, "startRavenActivity: " + from.getClass().getName());
         Class toStart = auth ? LoginActivity.class : WalletActivity.class;
         Intent intent = new Intent(from, toStart);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -424,8 +424,6 @@ public class BRAnimator {
                             listener.onAnimationEnd();
                     }
                 });
-
-
     }
 
     public static void animateBackgroundDim(final ViewGroup backgroundLayout, boolean reverse) {

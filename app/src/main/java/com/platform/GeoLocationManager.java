@@ -12,8 +12,8 @@ import android.util.Log;
 
 
 import com.ravencoin.RavenApp;
-import com.ravencoin.tools.manager.BRReportsManager;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.manager.RReportsManager;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.ravencoin.tools.util.Utils;
 
 import org.eclipse.jetty.continuation.Continuation;
@@ -26,30 +26,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan on <mihail@breadwallet.com> 1/12/17.
- * Copyright (c) 2017 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 public class GeoLocationManager {
     private static final String TAG = GeoLocationManager.class.getName();
     private Session session;
@@ -67,7 +43,7 @@ public class GeoLocationManager {
     public void getOneTimeGeoLocation(Continuation cont, Request req) {
         this.continuation = cont;
         this.baseRequest = req;
-        final Context app = RavenApp.getBreadContext();
+        final Context app = RavenApp.getRavenContext();
         if (app == null)
             return;
         locationManager = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
@@ -75,14 +51,14 @@ public class GeoLocationManager {
             Log.e(TAG, "getOneTimeGeoLocation: locationManager is null!");
             return;
         }
-        BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+        RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
             public void run() {
                 if (ActivityCompat.checkSelfPermission(app, Manifest.permission.ACCESS_FINE_LOCATION) !=
                         PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(app, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     RuntimeException ex = new RuntimeException("getOneTimeGeoLocation, can't happen");
                     Log.e(TAG, "run: getOneTimeGeoLocation, can't happen");
-                    BRReportsManager.reportBug(ex);
+                    RReportsManager.reportBug(ex);
                     return;
                 }
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
@@ -95,18 +71,18 @@ public class GeoLocationManager {
     public void startGeoSocket(Session sess) {
         session = sess;
 
-        final Context app = RavenApp.getBreadContext();
+        final Context app = RavenApp.getRavenContext();
         if (app == null)
             return;
         final LocationManager locationManager = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 
-        BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+        RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
             public void run() {
                 if (ActivityCompat.checkSelfPermission(app, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(app, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     RuntimeException ex = new RuntimeException("startGeoSocket, can't happen");
                     Log.e(TAG, "run: startGeoSocket, can't happen");
-                    BRReportsManager.reportBug(ex);
+                    RReportsManager.reportBug(ex);
                     return;
                 }
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, socketLocationListener);
@@ -116,17 +92,17 @@ public class GeoLocationManager {
     }
 
     public void stopGeoSocket() {
-        final Context app = RavenApp.getBreadContext();
+        final Context app = RavenApp.getRavenContext();
         if (app == null)
             return;
         final LocationManager locationManager = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
-        BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+        RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
             public void run() {
                 if (ActivityCompat.checkSelfPermission(app, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(app, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     Log.e(TAG, "stopGeoSocket, can't happen");
                     RuntimeException ex = new RuntimeException("stopGeoSocket, can't happen");
-                    BRReportsManager.reportBug(ex);
+                    RReportsManager.reportBug(ex);
                     throw ex;
                 }
                 locationManager.removeUpdates(socketLocationListener);
@@ -144,7 +120,7 @@ public class GeoLocationManager {
             sending = true;
             if (session != null && session.isOpen()) {
                 final String jsonLocation = getJsonLocation(location);
-                BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+                RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
                     @Override
                     public void run() {
                         try {
@@ -178,7 +154,7 @@ public class GeoLocationManager {
         public void onLocationChanged(final Location location) {
             if (processing) return;
             processing = true;
-            BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+            RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
                 @Override
                 public void run() {
                     // Called when a new location is found by the network location provider.
@@ -205,7 +181,7 @@ public class GeoLocationManager {
                                     e.printStackTrace();
                                 }
                                 Log.e(TAG, "onLocationChanged: WARNING respStr is null or empty: " + jsonLocation);
-                                BRReportsManager.reportBug(new NullPointerException("onLocationChanged: " + jsonLocation));
+                                RReportsManager.reportBug(new NullPointerException("onLocationChanged: " + jsonLocation));
 
                             }
                         } catch (Exception e) {
@@ -213,7 +189,7 @@ public class GeoLocationManager {
                         } finally {
 
                             processing = false;
-                            Context app = RavenApp.getBreadContext();
+                            Context app = RavenApp.getRavenContext();
                             if (app == null || ActivityCompat.checkSelfPermission(app, Manifest.permission.ACCESS_FINE_LOCATION)
                                     != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(app,
                                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

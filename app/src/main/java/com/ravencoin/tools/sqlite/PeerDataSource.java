@@ -33,8 +33,8 @@ import android.util.Log;
 
 import com.ravencoin.presenter.entities.BRPeerEntity;
 import com.ravencoin.presenter.entities.PeerEntity;
-import com.ravencoin.tools.manager.BRReportsManager;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.manager.RReportsManager;
+import com.ravencoin.tools.util.RConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +84,7 @@ public class PeerDataSource implements DataSourceInterface {
 
             database.setTransactionSuccessful();
         } catch (Exception ex) {
-            BRReportsManager.reportBug(ex);
+            RReportsManager.reportBug(ex);
             Log.e(TAG, "Error inserting into SQLite", ex);
             //Error in between database transaction
         } finally {
@@ -155,7 +155,7 @@ public class PeerDataSource implements DataSourceInterface {
         // Opening new database
         if (database == null || !database.isOpen())
             database = dbHelper.getWritableDatabase();
-        dbHelper.setWriteAheadLoggingEnabled(BRConstants.WAL);
+        dbHelper.setWriteAheadLoggingEnabled(RConstants.WAL);
 //        }
 //        Log.d("Database open counter: ",  String.valueOf(mOpenCounter.get()));
         return database;

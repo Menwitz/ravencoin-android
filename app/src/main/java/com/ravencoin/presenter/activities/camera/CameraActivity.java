@@ -45,7 +45,7 @@ import android.widget.Toast;
 import com.ravencoin.RavenApp;
 import com.ravencoin.R;
 import com.ravencoin.presenter.activities.util.RActivity;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.tools.threads.executor.RExecutor;
 import com.platform.middlewares.plugins.CameraPlugin;
 
 import java.io.File;
@@ -887,15 +887,15 @@ public class CameraActivity extends RActivity implements View.OnClickListener, A
             ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
             final byte[] bytes = new byte[buffer.remaining()];
             buffer.get(bytes);
-            BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+            RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                 @Override
                 public void run() {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                    RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 Thread.sleep(1000);
-                                CameraPlugin.handleCameraImageTaken(RavenApp.getBreadContext(), bytes);
+                                CameraPlugin.handleCameraImageTaken(RavenApp.getRavenContext(), bytes);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }

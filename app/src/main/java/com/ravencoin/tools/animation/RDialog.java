@@ -8,36 +8,12 @@ import android.text.SpannableString;
 import android.util.Log;
 
 import com.ravencoin.R;
-import com.ravencoin.presenter.customviews.BRDialogView;
-import com.ravencoin.tools.threads.executor.BRExecutor;
+import com.ravencoin.presenter.customviews.RDialogView;
+import com.ravencoin.tools.threads.executor.RExecutor;
 
-/**
- * BreadWallet
- * <p/>
- * Created by Mihail Gutan on <mihail@breadwallet.com> 3/15/17.
- * Copyright (c) 2017 breadwallet LLC
- * <p/>
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * <p/>
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * <p/>
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-public class BRDialog {
-    private static final String TAG = BRDialog.class.getName();
-    private static BRDialogView dialog;
+public class RDialog {
+    private static final String TAG = RDialog.class.getName();
+    private static RDialogView dialog;
 
     /**
      * Safe from any threads
@@ -45,17 +21,17 @@ public class BRDialog {
      * @param app needs to be activity
      */
     public static void showCustomDialog(@NonNull final Context app, @NonNull final String title, @NonNull final String message,
-                                        @NonNull final String posButton, final String negButton, final BRDialogView.BROnClickListener posListener,
-                                        final BRDialogView.BROnClickListener negListener, final DialogInterface.OnDismissListener dismissListener, final int iconRes) {
+                                        @NonNull final String posButton, final String negButton, final RDialogView.BROnClickListener posListener,
+                                        final RDialogView.BROnClickListener negListener, final DialogInterface.OnDismissListener dismissListener, final int iconRes) {
         if (((Activity) app).isDestroyed()) {
             Log.e(TAG, "showCustomDialog: FAILED, context is destroyed");
             return;
         }
 
-        BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+        RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
             public void run() {
-                dialog = new BRDialogView();
+                dialog = new RDialogView();
                 dialog.setTitle(title);
                 dialog.setMessage(message);
                 dialog.setPosButton(posButton);
@@ -71,17 +47,17 @@ public class BRDialog {
 
     }
 
-    public static void showHelpDialog(@NonNull final Context app, @NonNull final String title, @NonNull final String message, @NonNull final String posButton, @NonNull final String negButton, final BRDialogView.BROnClickListener posListener, final BRDialogView.BROnClickListener negListener, final BRDialogView.BROnClickListener helpListener) {
+    public static void showHelpDialog(@NonNull final Context app, @NonNull final String title, @NonNull final String message, @NonNull final String posButton, @NonNull final String negButton, final RDialogView.BROnClickListener posListener, final RDialogView.BROnClickListener negListener, final RDialogView.BROnClickListener helpListener) {
 
         if (((Activity) app).isDestroyed()) {
             Log.e(TAG, "showCustomDialog: FAILED, context is destroyed");
             return;
         }
 
-        BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+        RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
             public void run() {
-                dialog = new BRDialogView();
+                dialog = new RDialogView();
                 dialog.setTitle(title);
                 dialog.setMessage(message);
                 dialog.setPosButton(posButton);
@@ -97,27 +73,27 @@ public class BRDialog {
     }
 
     public static void showSimpleDialog(@NonNull final Context app, @NonNull final String title, @NonNull final String message) {
-        showCustomDialog(app, title, message, app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+        showCustomDialog(app, title, message, app.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
             @Override
-            public void onClick(BRDialogView brDialogView) {
-                brDialogView.dismissWithAnimation();
+            public void onClick(RDialogView rDialogView) {
+                rDialogView.dismissWithAnimation();
             }
         }, null, null, 0);
     }
 
     //same but with a SpannableString as message to be able to click on a portion of the address with a listener
     public static void showCustomDialog(@NonNull final Context app, @NonNull final String title, @NonNull final SpannableString message,
-                                        @NonNull final String posButton, final String negButton, final BRDialogView.BROnClickListener posListener,
-                                        final BRDialogView.BROnClickListener negListener, final DialogInterface.OnDismissListener dismissListener, final int iconRes) {
+                                        @NonNull final String posButton, final String negButton, final RDialogView.BROnClickListener posListener,
+                                        final RDialogView.BROnClickListener negListener, final DialogInterface.OnDismissListener dismissListener, final int iconRes) {
         if (((Activity) app).isDestroyed()) {
             Log.e(TAG, "showCustomDialog: FAILED, context is destroyed");
             return;
         }
 
-        BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
+        RExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
             @Override
             public void run() {
-                dialog = new BRDialogView();
+                dialog = new RDialogView();
                 dialog.setTitle(title);
                 dialog.setSpan(message);//setting Span instead of String
                 dialog.setPosButton(posButton);

@@ -9,18 +9,18 @@ import com.ravencoin.R;
 import com.ravencoin.core.BRCoreAddress;
 import com.ravencoin.core.BRCoreKey;
 import com.ravencoin.core.BRCoreTransaction;
-import com.ravencoin.presenter.customviews.BRDialogView;
+import com.ravencoin.presenter.customviews.RDialogView;
 import com.ravencoin.presenter.entities.CryptoRequest;
 import com.ravencoin.tools.animation.BRAnimator;
-import com.ravencoin.tools.animation.BRDialog;
+import com.ravencoin.tools.animation.RDialog;
 import com.ravencoin.tools.manager.BRClipboardManager;
 import com.ravencoin.tools.manager.BREventManager;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.manager.SendManager;
 import com.ravencoin.tools.threads.ImportPrivKeyTask;
 import com.ravencoin.tools.threads.PaymentProtocolTask;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.ravencoin.wallet.abstracts.BaseWalletManager;
@@ -76,11 +76,11 @@ public class CryptoUriParser {
 
         if (requestObject == null) {
             if (app != null) {
-                BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
-                        app.getString(R.string.Send_invalidAddressTitle), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+                RDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
+                        app.getString(R.string.Send_invalidAddressTitle), app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                             @Override
-                            public void onClick(BRDialogView brDialogView) {
-                                brDialogView.dismissWithAnimation();
+                            public void onClick(RDialogView rDialogView) {
+                                rDialogView.dismissWithAnimation();
                             }
                         }, null, null, 0);
             }
@@ -92,11 +92,11 @@ public class CryptoUriParser {
             return tryCryptoUrl(requestObject, app);
         } else {
             if (app != null) {
-                BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
-                        app.getString(R.string.Send_remoteRequestError), app.getString(R.string.Button_ok), null, new BRDialogView.BROnClickListener() {
+                RDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title),
+                        app.getString(R.string.Send_remoteRequestError), app.getString(R.string.Button_ok), null, new RDialogView.BROnClickListener() {
                             @Override
-                            public void onClick(BRDialogView brDialogView) {
-                                brDialogView.dismissWithAnimation();
+                            public void onClick(RDialogView rDialogView) {
+                                rDialogView.dismissWithAnimation();
                             }
                         }, null, null, 0);
             }
@@ -218,7 +218,7 @@ public class CryptoUriParser {
 
             switch (host) {
                 case "scanqr":
-                    BRAnimator.openScanner((Activity) app, BRConstants.SCANNER_REQUEST);
+                    BRAnimator.openScanner((Activity) app, RConstants.SCANNER_REQUEST);
                     break;
                 case "addressList":
                     //todo implement
@@ -256,7 +256,7 @@ public class CryptoUriParser {
             app = (Activity) ctx;
         } else {
             Log.e(TAG, "tryCryptoUrl: " + "app isn't activity: " + ctx.getClass().getSimpleName());
-            BRReportsManager.reportBug(new NullPointerException("app isn't activity: " + ctx.getClass().getSimpleName()));
+            RReportsManager.reportBug(new NullPointerException("app isn't activity: " + ctx.getClass().getSimpleName()));
             return false;
         }
         if (requestObject == null || requestObject.address == null || requestObject.address.isEmpty())
@@ -264,10 +264,10 @@ public class CryptoUriParser {
         BaseWalletManager wallet = WalletsMaster.getInstance(app).getCurrentWallet(app);
         if (requestObject.iso != null && !requestObject.iso.equalsIgnoreCase(wallet.getIso(ctx))) {
 
-            BRDialog.showCustomDialog(app, app.getString(R.string.Alert_error), "Not a valid " + wallet.getName(ctx) + " address", app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+            RDialog.showCustomDialog(app, app.getString(R.string.Alert_error), "Not a valid " + wallet.getName(ctx) + " address", app.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                 @Override
-                public void onClick(BRDialogView brDialogView) {
-                    brDialogView.dismiss();
+                public void onClick(RDialogView rDialogView) {
+                    rDialogView.dismiss();
                 }
             }, null, null, 0);
             return true; //true since it's a crypto url but different iso than the currently chosen one
@@ -284,15 +284,15 @@ public class CryptoUriParser {
         } else {
             BRAnimator.killAllFragments(app);
             if (Utils.isNullOrEmpty(requestObject.address) || !new BRCoreAddress(requestObject.address).isValid()) {
-                BRDialog.showSimpleDialog(app, app.getString(R.string.Send_invalidAddressTitle), "");
+                RDialog.showSimpleDialog(app, app.getString(R.string.Send_invalidAddressTitle), "");
                 return true;
             }
             BRCoreTransaction tx = wallet.getWallet().createTransaction(requestObject.amount.longValue(), new BRCoreAddress(requestObject.address));
             if (tx == null) {
-                BRDialog.showCustomDialog(app, app.getString(R.string.Alert_error), "Insufficient amount for transaction", app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                RDialog.showCustomDialog(app, app.getString(R.string.Alert_error), "Insufficient amount for transaction", app.getString(R.string.AccessibilityLabels_close), null, new RDialogView.BROnClickListener() {
                     @Override
-                    public void onClick(BRDialogView brDialogView) {
-                        brDialogView.dismiss();
+                    public void onClick(RDialogView rDialogView) {
+                        rDialogView.dismiss();
                     }
                 }, null, null, 0);
                 return true;
@@ -316,7 +316,7 @@ public class CryptoUriParser {
         if (!Utils.isNullOrEmpty(cleanAddress))
             builder = builder.appendPath(cleanAddress);
         if (satoshiAmount != 0)
-            builder = builder.appendQueryParameter("amount", new BigDecimal(satoshiAmount).divide(new BigDecimal(100000000), 8, BRConstants.ROUNDING_MODE).toPlainString());
+            builder = builder.appendQueryParameter("amount", new BigDecimal(satoshiAmount).divide(new BigDecimal(100000000), 8, RConstants.ROUNDING_MODE).toPlainString());
         if (label != null && !label.isEmpty())
             builder = builder.appendQueryParameter("label", label);
         if (message != null && !message.isEmpty())

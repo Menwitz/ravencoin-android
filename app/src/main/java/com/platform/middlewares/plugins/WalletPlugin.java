@@ -8,8 +8,8 @@ import com.ravencoin.presenter.interfaces.BRAuthCompletion;
 import com.ravencoin.tools.manager.BREventManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.security.AuthManager;
-import com.ravencoin.tools.threads.executor.BRExecutor;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.threads.executor.RExecutor;
+import com.ravencoin.tools.util.RConstants;
 import com.ravencoin.tools.util.Utils;
 import com.ravencoin.wallet.WalletsMaster;
 import com.platform.BRHTTPHelper;
@@ -65,7 +65,7 @@ public class WalletPlugin implements Plugin {
     @Override
     public boolean handle(String target, final Request baseRequest, HttpServletRequest request, final HttpServletResponse response) {
         if (!target.startsWith("/_wallet")) return false;
-        Activity app = (Activity) RavenApp.getBreadContext();
+        Activity app = (Activity) RavenApp.getRavenContext();
 
         if (target.startsWith("/_wallet/info") && request.getMethod().equalsIgnoreCase("get")) {
             Log.i(TAG, "handling: " + target + " " + baseRequest.getMethod());
@@ -83,7 +83,7 @@ public class WalletPlugin implements Plugin {
                 jsonResp.put("receive_address", BRSharedPrefs.getReceiveAddress(app, "RVN"));
 
                 /**how digits after the decimal point. 2 = bits 8 = btc 6 = mbtc*/
-                jsonResp.put("btc_denomiation_digits", BRSharedPrefs.getCryptoDenomination(app, wm.getCurrentWallet(app).getIso(app)) == BRConstants.CURRENT_UNIT_RAVENS ? 8 : 2);
+                jsonResp.put("btc_denomiation_digits", BRSharedPrefs.getCryptoDenomination(app, wm.getCurrentWallet(app).getIso(app)) == RConstants.CURRENT_UNIT_RAVENS ? 8 : 2);
 
                 /**the users native fiat currency as an ISO 4217 code. Should be uppercased */
                 jsonResp.put("local_currency_code", Currency.getInstance(Locale.getDefault()).getCurrencyCode().toUpperCase());
@@ -207,7 +207,7 @@ public class WalletPlugin implements Plugin {
                 AuthManager.getInstance().authPrompt(app, authText, "", false, false, new BRAuthCompletion() {
                     @Override
                     public void onComplete() {
-                        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                             @Override
                             public void run() {
                                 JSONObject obj = new JSONObject();
@@ -225,7 +225,7 @@ public class WalletPlugin implements Plugin {
 
                     @Override
                     public void onCancel() {
-                        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                        RExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
                             @Override
                             public void run() {
                                 JSONObject obj = new JSONObject();
@@ -255,7 +255,7 @@ public class WalletPlugin implements Plugin {
 
 
     public static void sendBitIdResponse(final JSONObject restJson, final boolean authenticated) {
-        BRExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
+        RExecutor.getInstance().forBackgroundTasks().execute(new Runnable() {
             @Override
             public void run() {
                 try {

@@ -85,7 +85,7 @@ public class CurrencyUtils {
         currencyFormat.setRoundingMode(RoundingMode.DOWN);
         currencyFormat.setDecimalFormatSymbols(decimalFormatSymbols);
         // 88 and 90 lines order makes a huge difference
-        currencyFormat.setMaximumFractionDigits(/*8*/currency != null ? /*currency.getDefaultFractionDigits()*/ BRConstants.DEFAULT_FRACTION_DIGITS : wallet.getMaxDecimalPlaces(app));
+        currencyFormat.setMaximumFractionDigits(/*8*/currency != null ? /*currency.getDefaultFractionDigits()*/ RConstants.DEFAULT_FRACTION_DIGITS : wallet.getMaxDecimalPlaces(app));
         currencyFormat.setNegativePrefix(decimalFormatSymbols.getCurrencySymbol() + "-");
         currencyFormat.setNegativeSuffix("");
         return currencyFormat.format(amount.doubleValue());

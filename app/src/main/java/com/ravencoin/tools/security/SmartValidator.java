@@ -5,7 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.ravencoin.core.BRCoreMasterPubKey;
-import com.ravencoin.tools.manager.BRReportsManager;
+import com.ravencoin.tools.manager.RReportsManager;
 import com.ravencoin.tools.manager.BRSharedPrefs;
 import com.ravencoin.tools.util.Bip39Reader;
 
@@ -65,7 +65,7 @@ public class SmartValidator {
         String[] words = list.toArray(new String[list.size()]);
         if (words.length % Bip39Reader.WORD_LIST_SIZE != 0) {
             Log.e(TAG, "isPaperKeyValid: " + "The list size should divide by " + Bip39Reader.WORD_LIST_SIZE);
-            BRReportsManager.reportBug(new IllegalArgumentException("words.length is not dividable by " + Bip39Reader.WORD_LIST_SIZE), true);
+            RReportsManager.reportBug(new IllegalArgumentException("words.length is not dividable by " + Bip39Reader.WORD_LIST_SIZE), true);
         }
         return BRCoreMasterPubKey.validateRecoveryPhrase(words, paperKey);
     }
@@ -81,7 +81,7 @@ public class SmartValidator {
             pubKeyFromKeyStore = BRKeyStore.getMasterPublicKey(activity);
         } catch (Exception e) {
             e.printStackTrace();
-            BRReportsManager.reportBug(e);
+            RReportsManager.reportBug(e);
         }
         Arrays.fill(rawPhrase, (byte) 0);
         return Arrays.equals(pubKey, pubKeyFromKeyStore);

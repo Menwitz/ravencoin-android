@@ -12,7 +12,7 @@ import com.ravencoin.presenter.interfaces.BRAuthCompletion;
 import com.ravencoin.tools.animation.BRAnimator;
 import com.ravencoin.tools.security.AuthManager;
 import com.ravencoin.tools.security.PostAuth;
-import com.ravencoin.tools.util.BRConstants;
+import com.ravencoin.tools.util.RConstants;
 
 public class WriteDownActivity extends RActivity {
     private static final String TAG = WriteDownActivity.class.getName();
@@ -43,7 +43,7 @@ public class WriteDownActivity extends RActivity {
             @Override
             public void onClick(View v) {
                 if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.paperKey);
+                BRAnimator.showSupportFragment(app, RConstants.paperKey);
             }
         });
         writeButton.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +90,7 @@ public class WriteDownActivity extends RActivity {
 
     private void close() {
         Log.e(TAG, "close: ");
-        BRAnimator.startBreadActivity(this, false);
+        BRAnimator.startRavenActivity(this, false);
         overridePendingTransition(R.anim.fade_up, R.anim.exit_to_bottom);
         if (!isDestroyed()) finish();
         //additional code
